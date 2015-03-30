@@ -1,0 +1,309 @@
+\listfiles
+%% ----------------------------------------------------------------
+%% Thesis.tex -- MAIN FILE (the one that you compile with LaTeX)
+%% ---------------------------------------------------------------- 
+
+% Set up the document
+\documentclass[logos]{orsay-thesis}  % Use the "Thesis" style, based on the ECS Thesis style by Steve Gunn
+\usepackage{natbib}
+\usepackage{times}
+\usepackage{url}
+\usepackage[hyphenbreaks]{breakurl}
+\usepackage{latexsym}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{stmaryrd}
+%added by li
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[draft,nomargin,footnote,marginclue]{fixme}
+\usepackage{multirow}
+\usepackage{algorithm, algorithmic}
+\usepackage{xspace}
+\usepackage[table]{xcolor}
+\usepackage{CJKutf8}
+\usepackage{multicol}
+\usepackage[titletoc]{appendix}
+
+\newcommand{\needcorrect}[1]{\textbf{\textcolor{red}{#1}}}
+% For the figure
+\newcommand{\colhead}[1]{\multicolumn{1}{c}{#1}}
+\newcommand{\rb}[1]{\multicolumn{1}{@{}c@{ }|@{ }}{#1}}
+\newcommand{\nrb}[1]{\multicolumn{1}{c}{#1}}
+\newcommand{\e}{$\epsilon$}
+\newcommand{\be}{$\mbox{\boldmath$\epsilon$}$}
+%\setlength\titlebox{5cm}
+
+% You can expand the titlebox if you need extra space
+% to show all the authors. Please do not make the titlebox
+% smaller than 5cm (the original size); we will check this
+% in the camera-ready version and ask you to change it back.
+
+\newcommand{\argmax}{\operatornamewithlimits{argmax}}
+\newcommand{\argmin}{\operatornamewithlimits{argmin}}
+
+
+%%%% Translation text
+\newcommand{\corpus}{\ensuremath{\mathbf{C}\xspace}}
+\newcommand{\scorpus}{\ensuremath{\mathbf{C_{|s}}}\xspace}
+\newcommand{\tcorpus}{\ensuremath{\mathbf{C_{|t}}}\xspace}
+\newcommand{\sentset}{\ensuremath{\mathbf{c}\xspace}}
+\newcommand{\corpusAlign}{\ensuremath{\mathbf{A}\xspace}}
+
+\newcommand{\aseq}{\ensuremath{\mathbf{a}\xspace}} % alignment sentence
+\newcommand{\sseq}{\ensuremath{\mathbf{s}\xspace}} % source sentence
+\newcommand{\tseq}{\ensuremath{\mathbf{t}\xspace}} % target sentence
+\newcommand{\sentpair}{\ensuremath{\sseq ,\tseq}} % target sentence
+\newcommand{\ls}{\ensuremath{I}} % source sentence length 
+\newcommand{\lt}{\ensuremath{J}} % target sentence length 
+
+%\newcommand{\sseg}{\ensuremath{\boldsymbol{\sigma}\xspace}} % source phrase
+%\newcommand{\tseg}{\ensuremath{\boldsymbol{\tau}\xspace}} % target phrase
+\newcommand{\sseg}{\ensuremath{\bar{s}\xspace}} % source phrase
+\newcommand{\tseg}{\ensuremath{\bar{t}\xspace}} % target phrase
+\newcommand{\phrasepair}{\ensuremath{\sseg ,\tseg}} % target sentence
+\newcommand{\params}{\ensuremath{\boldsymbol{\theta}\xspace}} %parameters, models
+
+\newcommand{\substr}{\ensuremath{{\sqsubset}}}
+
+\newcommand{\ssymb}{\ensuremath{s}} % symbol of *one* element of the source
+\newcommand{\tsymb}{\ensuremath{t}} % symbol of *one* element of the target
+\newcommand{\ssymbindex}{\ensuremath{i}} % source sentence length 
+\newcommand{\tsymbindex}{\ensuremath{j}} % target sentence length 
+\newcommand{\symbpair}{\ensuremath{\ssymb ,\tsymb}} % target sentence
+\newcommand{\asymb}{\ensuremath{a}} % symbol of *one* element of the align
+
+%\newcommand{\tuple}{\ensuremath{u}} % symbol of *one* tuple%
+\newcommand{\tuple}{\ensuremath{(\stuple, \ttuple)}} % full tuple
+%\newcommand{\stuple}{\ensuremath{\overline{\ssymb}}} % source side of a tuple
+%\newcommand{\ttuple}{\ensuremath{\overline{\tsymb} }} %  targetside of a tuple 
+%\newcommand{\atuple}{\ensuremath{\overline{\asymb} }} %  align of a tuple 
+
+\newcommand{\lentuple}[1]{\ensuremath{|#1|}} 
+
+\newcommand{\sample}{\ensuremath{\mathbf{S}\xspace}}
+\newcommand{\ssample}{\ensuremath{\mathbf{S_{|s}}}\xspace}
+\newcommand{\tsample}{\ensuremath{\mathbf{S_{|t}}}\xspace}
+
+
+\newcommand{\cache}{\ensuremath{\mathbf{K}\xspace}}
+\newcommand{\doc}{\ensuremath{\mathbf{d}}\xspace}
+
+
+\newcommand{\tvoc}{\ensuremath{\mathcal{V}_{tsymb}}} % Target vocab
+\newcommand{\svoc}{\ensuremath{\mathcal{V}_{ssymb}}} % Source vocab
+
+\newcommand{\samplesize}{\ensuremath{M}\xspace}
+
+\newcommand{\maincorpusenfr}{\texttt{WMT}}
+\newcommand{\cochrane}{\texttt{Cochrane}}
+\newcommand{\newstest}{\texttt{Newstest}}
+\newcommand{\wmtmedic}{\texttt{WMT'14-med}}
+%\newcommand{\sbaiteration}{\ensuremath{A}\xspace}
+
+%%%% Names
+\newcommand{\moses}{\texttt{moses}}
+\newcommand{\mert}{\texttt{MERT}}
+\newcommand{\kbmira}{\texttt{KBMIRA}}
+\newcommand{\anymalign}{\texttt{Anymalign}}
+\newcommand{\giza}{\texttt{giza++}}
+\newcommand{\mgiza}{\texttt{mgiza++}}
+\newcommand{\fastalign}{\texttt{FastAlign}}
+\newcommand{\otf}{\texttt{owa}}
+\newcommand{\rnd}{\texttt{rnd}}
+\newcommand{\tfidf}{\texttt{TF-IDF}}
+\newcommand{\ppl}{\texttt{perplexity}}
+\newcommand{\ngp}{\texttt{NGP}}
+\newcommand{\ctx}{\texttt{ctx}}
+\newcommand{\ngram}{\ensuremath{n\textnormal{-gram}}\xspace}
+\newcommand{\bleu}{\textnormal{BLEU}}
+\newcommand{\ter}{\textnormal{TER}}
+\newcommand{\hter}{\textnormal{HTER}}
+
+\newcommand{\sota}{state-of-the-art}
+\newcommand{\Sota}{State-of-the-art}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\title{Fast Adaptation for Context-Aware Statistical Machine Translation}
+\title{On-demand Development and Incremental Adaptation of Statistical Machine Translation}
+\title{Dynamic Development of Statistical Machine Translation Systems}
+\title{On-demand Development of Statistical Machine Translation Systems}
+
+%\subtitle{Ph.D. dissertation submitted to reviewers}
+
+\author{Weiya Chen}
+
+%Title for main language (french)
+%\title[french]{Bayesian Multi-Energy Computed Tomography reconstruction approaches based on decomposition models}
+%Titles for other languages
+%\title[english]{Tomographie par rayons X multi-énergétiques pour l'analyse de la structure interne de l'objet}
+
+%Keywords for main language (french)
+% \keywords[french]{Bayesian Multi-Energy Computed Tomography reconstruction approaches based on decomposition models}
+%Keywords for other languages languages
+% \keywords[english]{X-ray, Multi-Energy Computed Tomography (MECT), Bayesian estimation, Basis material decomposition, Energy Selective Computed Tomography, Spectral Computed Tomography}
+
+%Order number of the thesis
+\ordernumber{}
+
+%Date of defense
+%\date{23 octobre 2013}
+
+%You define the commission member list using \addcommissionmember (mandatory) with an optional role (eg: president, supervisor, etc...)
+
+%\addcommissionmember[Rapporteur]{M.}{DEFRISE}{Michel}
+%\addcommissionmember[Rapporteur]{Mme.}{PEYRIN}{Françoise}
+%\addcommissionmember[Rapporteur]{M.}{SAUER}{Ken}
+%\addcommissionmember[Directeur de thèse]{M.}{MOHAMMAD-DJAFARI}{Ali}
+%\addcommissionmember[Président]{Mme.}{NGUYEN-VERGER}{Mai}
+%\addcommissionmember[Co-encadrant]{M.}{LEGOUPIL}{Samuel}%Pr\'esident du jury
+%\addcommissionmember[Co-encadrant]{M.}{RODET}{Thomas}%Pr\'esident du jury
+%\addcommissionmember[Invité]{M.}{VABRE}{Alexandre}%Pr\'esident du jury
+%
+%\ecoledoctorale{Sciences et Technologies de l'Information, des T\'el\'ecommunications et des Syst\`emes (STITS)}
+%\specialty{Traitement du Signal et des Images}
+%\def\LSS{Laboratoire des Signaux et Syst\'emes}
+%\def\UMR{UMR8506: Univ Paris-Sud -- CNRS -- SUPELEC}
+%\def\LSSadr{3, rue Joliot curie }
+%\def\LSSadc{91191, GIF SUR YVETTE, France }
+%\def\LITT{Laboratoire Images, Tomographie \& Traitement}
+%\def\DISC{D\'epartement Imagerie Simulation pour le Contr\^ole}
+%\def\LIST{Laboratoire d’Int\'egration des Syst\`emes et des Technologies}
+%\def\CEA{Commisrriat \`A l'Energie Atomique}
+%\def\CEAadr{CEA Saclay}
+%\def\CEAadc{91191, GIF-SUR-YVETTE, France }
+%\def\DGA{Direction Générale de l'Armement}
+%\def\MRES{Mission pour la Recherche et l'Innovation Scientifique}
+%\def\DP{Département Photonique}
+%\affil{\LIST}{CEA/LIST/DISC/LITT}{\CEAadr}{\CEAadc}
+%\affiladd{\LSS}{\UMR}{\LSSadr}{\LSSadc}
+%\affiladdd{\MRES}{\DGA}
+%\affiladd{\LSS}{\UMR}{\LSSadr}{\LSSadc}
+
+
+
+% define fixed table cell with centered text
+\newcolumntype{C}[1]{>{\centering}m{#1}}
+
+%% ----------------------------------------------------------------
+\begin{document}
+\input{titlepage}
+%Print title NOW
+%\maketitle
+%Disable page numbering
+\pagestyle{empty}
+% Reset page style into roman numbers
+\pagenumbering{Roman}
+%\pagebreak
+
+%########################################################################
+% Acknowledgments
+%########################################################################
+
+\iffalse
+\pagebreak\strut
+ \newpage
+\chapter*{Acknowledgement}
+\input{acknowledgement}
+\clearpage
+
+\chapter*{}
+\thispagestyle{empty}
+\textit{\hfill To supertudou.}
+\fi
+%\phantomsection
+%\addcontentsline{toc}{chapter}{Acknowledgements}
+%\chapter*{Acknowledgements}
+%\input{acknowledgements}
+
+% \input{titlepage_english}
+
+%########################################################################
+% Multilingual abstracts
+%########################################################################
+
+%%French abstract:
+%\begin{abstract}
+%
+%\end{abstract}
+% \newpage
+
+% \phantomsection
+%\addcontentsline{toc}{chapter}{Abstract}
+%\chapter*{Abstract}
+% \begin{abstract}[english] %one page
+% \addcontentsline{toc}{chapter}{\numberline{}Abstract}
+%\input{abstract_english}
+% \end{abstract}
+
+%########################################################################
+% french resume one page
+%########################################################################
+%\addcontentsline{toc}{chapter}{Résumé}
+%\chapter*{Résumé}
+%\input{abstract_french}
+
+%########################################################################
+% Contents
+%########################################################################
+
+%\strut\newpage
+%\printglossaries
+
+%% Glossary display styles
+%%   type=\acronymtype  : dislay acronyms on separate page
+%%   style=listdotted   : displayed in form <acronym> ------ description
+%%         more styles see http://get-software.net/macros/latex/contrib/glossaries/glossaries-user.html#sec:styles
+%\cleardoublepage
+%\addcontentsline{toc}{chapter}{Acronyms}
+%\printglossary[type=\acronymtype,style=altlist] %listdotted]
+%\printglossary
+%\cleardoublepage
+%\addcontentsline{toc}{chapter}{Notations}
+%\renewcommand{\nomname}{Notations}
+%\printnomenclature[1.0in]
+%% \addcontentsline{toc}{chapter}{\numberline{}Resume}%
+\tableofcontents
+ %\cleardoublepage
+ %\addcontentsline{toc}{chapter}{\listfigurename}
+\iffalse
+\listoffigures
+\listoftables
+\fi
+\pagenumbering{arabic}
+
+%Enable page numbering
+\pagestyle{fancy}
+
+\renewcommand{\labelitemi}{$\bullet$}
+
+\input{introduction}
+\input{chapter_1}
+\input{chapter_2}
+\input{chapter_3}
+\input{chapter_4}
+\input{chapter_5}
+\input{conclusion}
+\input{appendix}
+
+%\bibliographystyle{alpha}
+%\bibliographystyle{named}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+%
+%%% ----------------------------------------------------------------
+%% \singlespacing
+%\label{Bibliography}
+%\lhead{\emph{Bibliography}}  % Change the left side page header to "Bibliography"
+%\bibliographystyle{unsrtnat}  % Use the "unsrtnat" BibTeX style for formatting the Bibliography
+%\bibliography{ref}  % The references (bibliography) information are storedv in the file named "ref.bib"
+%
+\clearpage
+%\newpage
+\newpage
+\thispagestyle{empty}
+%\input{Resume}
+\end{document}  % The End
+%% ----------------------------------------------------------------
