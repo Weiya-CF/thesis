@@ -24,7 +24,7 @@
 \LoadClass[a4paper,twoside,12pt]{book}
 \usepackage[plainpages=false,pdfpagelabels,colorlinks=true]{hyperref}
 \hypersetup{
-    citecolor=green,%
+    citecolor=blue,%
     filecolor=blue,%
     linkcolor=blue,%
     urlcolor=blue
