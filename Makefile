@@ -41,7 +41,7 @@ $(TRG)	: %.pdf : %.tex $(DEP) $(PDFPICS) $(BIBFILE)
 	  @$(run-latex)
 
 clean	:
-	  -rm -f $(TRG) $(PSF) $(PDF) $(TRG:%.pdf=%.aux) $(TRG:%.pdf=%.bbl) $(TRG:%.pdf=%.blg) $(TRG:%.pdf=%.log) $(TRG:%.pdf=%.out) $(TRG:%.pdf=%.lot) $(TRG:%.pdf=%.lof)  $(TRG:%.pdf=%.toc)
+	  -rm -f $(TRG) $(PSF) $(PDF) $(TRG:%.pdf=%.aux) $(TRG:%.pdf=%.bbl) $(TRG:%.pdf=%.blg) $(TRG:%.pdf=%.log) $(TRG:%.pdf=%.out) $(TRG:%.pdf=%.lot) $(TRG:%.pdf=%.lof)  $(TRG:%.pdf=%.toc) $(TRG:%.pdf=%.maf) $(TRG:%.pdf=%.mtc*) $(TRG:%.pdf=%.fls) $(TRG:%.pdf=%.fdb_latexmk)
 
 .PHONY	: all show clean ps pdf showps
 

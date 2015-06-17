@@ -1,5 +1,6 @@
 \chapter{Perceptual Conflicts in Multi-stereoscopic IVE}
 \label{chapter:perception}
+\minitoc
 
 \section{Introduction}
 With multi-stereoscopy technology, novel projection-based immersive systems now can support multiple users by providing each one with an independent stereoscopic view of the virtual scene. When users work face-to-face, they may have an incorrect view if objects are located between them. In this case, avatars can be introduced to enable face-to-face interaction in the virtual world whereas they are side-by-side in the real device. As a consequence, such multi-user systems provide the users with a new kind of perceptual immersion and related cognitive experiences, because users must handle both information from the real world (i.e., other users' bodies) and those from the virtual scene (i.e., other users' avatars) at the same time.
@@ -82,15 +83,16 @@ Instruction type: Interaction between users usually involves verbal and gestural
 \caption{All six types of deictic instructions given by the experimenter for the object-picking task.}
 \label{tab:metrics}
 \centering
-\begin{tabular}{l | l | l }
-   No. & Type & Example \\
-   \hline
-   1 & Gesture-only & Point to the crown on the left. \\
-   2 & Gesture-only & Point to the crown on the right. \\
-   3 & Verbal-only & ``Go to the crown on my left." \\
-   4 & Verbal-only & ``Go to the crown on my right." \\
-   5 & Multimodal & ``Go to the crown on my left" (point to the left). \\
-   6 & Multimodal & ``Go to the crown on my left" (point to the left). \\
+\begin{tabular}{l l l}
+	\hline
+	No. & Type & Example \\
+	\hline
+    1 & Gesture-only & Point to the crown on the left. \\
+    2 & Gesture-only & Point to the crown on the right. \\
+    3 & Verbal-only & ``Go to the crown on my left." \\
+    4 & Verbal-only & ``Go to the crown on my right." \\
+    5 & Multimodal & ``Go to the crown on my left" (point to the left). \\
+    6 & Multimodal & ``Go to the crown on my left" (point to the left). \\ \hline
 \end{tabular}
 \end{table*}
 
@@ -165,21 +167,24 @@ Regarding task efficiency (RT – Reaction Time, ET - Execution Time, TT – Tot
 \caption{Mean value and standard deviation of reaction time (RT), execution time (ET) and total time (TT) for each delocalization angle.}
 \label{tab:metrics}
 \centering
-\begin{tabular}{l | l | l | l | l | l | l}
-   Delocalization Angle (degree) & \multicolumn{2}{|c|}{Reaction Time (millisecond)} & \multicolumn{2}{|c|}{Execution Time (millisecond)} & \multicolumn{2}{|c|}{Total Time (millisecond)} \\
-   \hline
-    & Mean & SD & Mean & SD & Mean & SD \\
+\begin{tabular}{p{2.5cm} l l l l l l}
+	\hline
+     & \multicolumn{2}{p{3cm}}{Reaction Time} & \multicolumn{2}{p{3cm}}{Execution Time} & \multicolumn{2}{p{3cm}}{Total Time} \\
+     Delocalization Angle & \multicolumn{2}{p{2.5cm}}{(millisecond)} & \multicolumn{2}{p{2.5cm}}{(millisecond)} & \multicolumn{2}{p{2.5cm}}{(millisecond)} \\
+    (degree) & Mean & SD & Mean & SD & Mean & SD \\
+    \hline
     0 & 1482 & 1062 & 1592 & 607 & 3074 & 1263 \\
    	30 & 1779 & 1543 & 1646 & 755 & 3425 & 1905 \\
 	60 & 1570 & 966 & 1698 & 784 & 3268 & 1271 \\
 	90 & 1633 & 1188 & 1599 & 629 & 3232 & 1520 \\
 	120 & 1764 & 1746 & 1606 & 613 & 3370 & 1949 \\
 	150 & 1946 & 1901 & 1852 & 1000 & 3798 & 2336 \\
-	180 & 1770 & 1508 & 1891 & 972 & 3661 & 1754 \\
+	180 & 1770 & 1508 & 1891 & 972 & 3661 & 1754 \\ \hline
 \end{tabular}
 \end{table*}
 
 Second we checked the relationship between task efficiency and instruction type, and we found a main effect on RT (H (2, N = 1078) = 86.98551, p = 0.00001) and TT (H (2, N = 1079) = 41.48673, p = 0.00001). Post hoc comparisons showed that gesture-only instructions required the most time and the results were intermediate with multimodal instructions (Figure 10).
+
 Figure [10] here
 
 \begin{table*}[!t]
@@ -187,13 +192,15 @@ Figure [10] here
 \caption{Mean value and standard deviation of reaction time (RT), execution time (ET) and total time (TT) for each type of instruction.}
 \label{tab:metrics}
 \centering
-\begin{tabular}{l | l | l | l | l | l | l}
-   Instruction Type & \multicolumn{2}{|c|}{Reaction Time (millisecond)} & \multicolumn{2}{|c|}{Execution Time (millisecond)} & \multicolumn{2}{|c|}{Total Time (millisecond)} \\
-   \hline
+\begin{tabular}{l l l l l l l}
+	\hline
+    & \multicolumn{2}{p{3cm}}{Reaction Time} & \multicolumn{2}{p{3cm}}{Execution Time} & \multicolumn{2}{p{3cm}}{Total Time} \\
+    Instruction Type & \multicolumn{2}{p{3cm}}{(millisecond)} & \multicolumn{2}{p{3cm}}{(millisecond)} & \multicolumn{2}{p{3cm}}{(millisecond)} \\
+    \hline
     & Mean & SD & Mean & SD & Mean & SD \\
     Verbal & 1384 & 1157 & 1682 & 785 & 3065 & 1481 \\
 	Multimodal & 1627 & 1306 & 1731 & 789 & 3358 & 1658 \\
-	Gesture & 2113 & 1755 & 1677 & 785 & 3790 & 2036 \\
+	Gesture & 2113 & 1755 & 1677 & 785 & 3790 & 2036 \\ \hline
 \end{tabular}
 \end{table*}
 
@@ -218,14 +225,15 @@ From the subjective questionnaire, we found that the participants were moderatel
 \caption{Global result of the subjective questionnaire for all participants.}
 \label{tab:sub_qn}
 \centering
-\begin{tabular}{l | l | l | l}
-	Item & Mean & SD & Range \\
+\begin{tabular}{l l l l}
+	\hline
+	Item & Mean & SD & Range \\ \hline
 	Confidence of task success & 29.00 & 5.46 & [0, 40] \\
 	Instruction understanding & 15.76 & 6.39 & [0, 28] \\
 	Ease of dual-presence & 16.92 & 5.32 & [0, 36] \\
 	Experience with virtual environment (VE) & 1.76 & 1.36 & [0, 4] \\
 	Experience with Virtual Reality (VR) & 1.24 & 1.27 & [0, 4] \\
-	Experience with video games & 2.08 & 1.00 & [0, 4] \\
+	Experience with video games & 2.08 & 1.00 & [0, 4] \\ \hline
 \end{tabular}
 \end{table*}
 
@@ -242,16 +250,16 @@ Figure [11] here
 \caption{Mean value and standard deviation of the result of subjective questionnaire and result of Student test between the Real group and Virtual group.}
 \label{tab:inter_gp_sub_qn}
 \centering
-\begin{tabular}{l | l | l | l | l | l | l}
-   Item & \multicolumn{2}{|c|}{Real group} & \multicolumn{2}{|c|}{Virtual group} & \multicolumn{2}{|c|}{Between groups} \\
-   \hline
-    & Mean & SD & Mean & SD & Student test & p-value \\
+\begin{tabular}{l l l l l l l}
+	\hline
+    Item & \multicolumn{2}{p{2.8cm}}{Real group} & \multicolumn{2}{p{2.8cm}}{Virtual group} & \multicolumn{2}{p{3cm}}{Between groups} \\ \cline{6-7}
+    & Mean & SD & Mean & SD & Student test & p-value \\ \hline
     Confidence of success & 29.44 & 6.54 & 28.75 & 4.97 & t(23) = -0.30 & 0.77 \\
 	Instruction understanding & 9.22 & 4.32 & 19.44 & 3.90 & t(23) = 6.05 & \textbf{0.000004} \\
 	Ease of dual-presence & 19.44 & 6.00 & 15.50 & 4.49 & t(23) = -1.87 & 0.07 \\
 	VE experience & 1.22 & 0.97 & 2.06 & 1.48 & t(23) = 1.52 & 0.14 \\
 	VR experience & 1.11 & 1.05 & 1.31 & 1.40 & t(23) = 0.37 & 0.71 \\
-	Video game experience & 1.56 & 0.73 & 2.38 & 1.02 & t(23) = 2.11 & \textbf{0.046} \\
+	Video game experience & 1.56 & 0.73 & 2.38 & 1.02 & t(23) = 2.11 & \textbf{0.046} \\ \hline
 \end{tabular}
 \end{table*}
 
