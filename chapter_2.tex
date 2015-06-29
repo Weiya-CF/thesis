@@ -1,5 +1,5 @@
-\chapter{Perceptual Conflicts in Multi-stereoscopic IVE}
-\label{chapter:perception}
+\chapter{Immersive Projection Technology: from Stereoscopy to Multi-stereoscopic}
+\label{chapter:multistereo}
 \minitoc
 
 \section{Introduction}
@@ -15,11 +15,11 @@ Large projection-based displays can be an effective solution to support co-locat
 
 Thus a possible solution is to introduce an avatar animated by real-time body motion capture for each user, and let each user work with the other users' avatars instead of the real person. In this case users' spatial relationship (relative position and orientation) in the virtual world is no longer constrained by the one in the physical workspace, they can be facing each other in the virtual world while physically side-by-side. This avatar-based approach enables complicated tasks that require both face-to-face and side-by-side interactions in projection-based multi-user system. For example, a car assembly task may contain two phases: during the first phase, users are on the same side of the model. They discuss and work together to repair a specific part of the car. Then in the second phase, they need to be at opposite sides of the car, and consequently have different viewpoints in the virtual world. Within this scenario one user can guide the other to properly fix a seat within the car cockpit. So with our avatar-based approach, they can switch between different spatial configurations without interrupting the ongoing task by using virtual navigation techniques.
 
-However, with the solution proposed above, sometimes users may still enter each other's field of view when they work with the avatars. What is more, during a collaborative task, the communications between collaborators are usually conducted in a multimodal way \citep{Paggio2005Multimodal, Ennis2010Seeing} including verbal and non-verbal modalities \citep{Bailenson2002Gaze, Dodds2011Talk}, especially deictic gestures to refer to objects or places. So during a two-user co-located collaboration scenario, with the dual-presence of virtual and real information, users having multimodal interactions may encounter different perceptual conflicts both in the visual and audio modalities. For example (see Figure~\ref{fig:2_inconsistency}(a), if user B points to an object for user A (from user B's viewpoint, he/she is pointing at a cube), user A may be confused by seeing both user B and his/her avatar doing the pointing gesture, and it may be problematic when there is another virtual object in the pointing direction of user B. Furthermore, normally the verbal communication between co-located users is conveyed by direct conversation without using headphones. As shown in Figure~\ref{fig:2_inconsistency}(b), user A is interacting with user B's avatar, but the vocal information comes from the real user B in a different direction. This kind of visual-audio inconsistency \citep{Di2009Recalibration, Spence2013Just} may be disturbing for users to concentrate on their collaboration.
+However, with the solution proposed above, sometimes users may still enter each other's field of view when they work with the avatars. What is more, during a collaborative task, the communications between collaborators are usually conducted in a multimodal way \citep{Paggio2005Multimodal, Ennis2010Seeing} including verbal and non-verbal modalities \citep{Bailenson2002Gaze, Dodds2011Talk}, especially deictic gestures to refer to objects or places. So during a two-user co-located collaboration scenario, with the dual-presence of virtual and real information, users having multimodal interactions may encounter different perceptual conflicts both in the visual and audio modalities. For example (see Figure~\ref{fig:2_inconsistency}(a)), if user B points to an object for user A (from user B's viewpoint, he/she is pointing at a cube), user A may be confused by seeing both user B and his/her avatar doing the pointing gesture, and it may be problematic when there is another virtual object in the pointing direction of user B. Furthermore, normally the verbal communication between co-located users is conveyed by direct conversation without using headphones. As shown in Figure~\ref{fig:2_inconsistency}(b), user A is interacting with user B's avatar, but the vocal information comes from the real user B in a different direction. This kind of visual-audio inconsistency \citep{Di2009Recalibration, Spence2013Just} may be disturbing for users to concentrate on their collaboration.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=\columnwidth]{figures/2_inconsistency}
+  \includegraphics[width=\textwidth]{figures/2_inconsistency}
   \caption{\label{fig:2_inconsistency}Illustration of perceptual conflicts with a two-user scenario; user A interacts with avatar of user B: (a) Visual conflict occurs when user A simultaneously perceives the real user B and B's avatar pointing to different virtual objects. (b) Visual-audio conflict occurs when user B and the avatar are not at the same position.}
 \end{figure}
 
@@ -29,7 +29,7 @@ In a two-user scenario, we asked the participants to complete an object-picking 
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.9\columnwidth]{figures/2_demo}
+  \includegraphics[width=0.9\textwidth]{figures/2_demo}
   \caption{\label{fig:2_demo}The 3D view of the participant and that of the experimenter were superimposed on the multi-stereoscopic display. The participant faced the dual-presence of the experimenter and her avatar, while from the experimenter's viewpoint, the avatar was co-localized with her physical body.}
 \end{figure}
 
@@ -37,6 +37,19 @@ Two independent variables were chosen: the angular distance between the real exp
 
 
 \section{Stereoscopic, Human's Visual System}
+
+\section{Immersive Virtual Environment}
+
+
+\subsection{Immersive Projection Display}
+
+Nowadays, immersive CVEs can mainly be supported by two different display technologies: Projection-based displays, such as workbench, Dome, or CAVE \citep{CruzNeira1993SPV}, and Head-Mounted Displays (HMDs) \citep{Melzer1997HMD}. HMDs can give separate stereoscopic views for each user, and users are visually immersed in the virtual world since the real environment is completely occluded by the screen in front of the eyes. This characteristic has both advantages and inconveniences for co-located collaboration. First of all, users can be co-located either side-by-side or face-to-face with the help of avatars, and they can also talk directly without computer mediation. Additionally, tangible props can be used to improve interaction with virtual content \citep{Salzmann2008TUS}. However, the fact that the perception of physical environment is completely blocked hinders direct communication between users including gestural and postural information. See-through HMDs seem to be a promising option to avoid drawbacks of non-see-through HMD for collaboration between multiple co-located users. For example, in the Studierstube project \citep{Schmalstieg2002Studierstube}, users wear tracked see-through HMDs to perceive both the physical environment and synthetic images at the same time.
+
+Compared with HMDs, projection-based VR displays, especially systems with Immersive Projected Technologies (IPT) like stereoscopic image walls or CAVEs, provide a natural place for teamwork \citep{Johanson2002IWP}, because they are usually shared by a group of people rather than a single user \citep{Benford1996SST}. However, most projection-based displays can only support one fully tracked active user, other co-located users can only share the same point of view with distorted images and participate passively in the collaborative task \citep{Bayon2006Multiple}. This visual distortion impedes users’ collaborative spatial judgments by impacting the perception of depth and direction in the virtual world \citep{Pollock2012Right}.
+
+To avoid visual distortion, different approaches have been explored to provide individual stereoscopic views for multiple co-located users with projection-based display. For example, Simon proposed a multi-viewpoint images technique \citep{Simon2007MVI} which projects different images from multiple viewpoints corresponding to the viewing positions of multiple users, and combines them to a single image on the screen. Users can only get a correct stereoscopic view from predefined position without head tracking, so with static images the interactions that they can have are limited. Other display solutions can also provide individual stereoscopic views like the volumetric display \citep{Grossman2008Volum} and holographic display \citep{Lucente1997Holo}. However, these techniques can only be applied to non-immersive context with limited workspace.
+
+\subsection{Head Mounted Display}
 
 \section{Multi-stereoscopy}
 Nowadays, immersive CVEs can mainly be supported by two different display technologies: Projection-based displays, such as CAVE \citep{CruzNeira1993SPV}, and Head-Mounted Displays (HMDs) \citep{Melzer1997HMD}. HMDs can give separate stereoscopic views for each user, and users are visually immersed in the virtual world since the real environment is completely occluded by the screen in front of the eyes. This characteristic has both advantages and inconveniences for co-located collaboration. First of all, users can be co-located either side-by-side or face-to-face with the help of avatars, and they can also talk directly without computer mediation. Additionally, tangible props can be used to improve interaction with virtual content \citep{Salzmann2008TUS}. However, the fact that the perception of physical environment is completely blocked hinders direct communication between users including gestural and postural information. See-through HMDs seem to be a promising option to avoid drawbacks of non-see-through HMD for collaboration between multiple co-located users. For example, in the Studierstube project \citep{Schmalstieg2002Stube}, users wear tracked see-through HMDs to perceive both the physical environment and synthetic images at the same time.
@@ -65,7 +78,7 @@ During a two-user scenario of a collaborative task, the participant and an exper
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\columnwidth]{figures/2_virtual_room}
+  \includegraphics[width=0.8\textwidth]{figures/2_virtual_room}
   \caption{\label{fig:2_virtual_room}Front view of the virtual scene used for the experiment.}
 \end{figure}
 
@@ -73,20 +86,33 @@ During a two-user scenario of a collaborative task, the participant and an exper
 27 participants (23 men and 4 women) passed our experiment. The average age is 26 years (standard deviation 4.8 years).
 A large number (23) of the participants were people with a computer science background. All participants filled out a background questionnaire, which was used to gather demographic information such as their level of computer skills, experience with video games and with virtual reality devices, and some other personal statistics (e.g., age, dominant hand, etc). Among these participants, 26 were right-handed and one person was left-handed. All participants used their dominant hand to perform the designation task and were naive with respect to the experimental setup and purpose of the experiment.
 
-A specific avatar was designed to match the experimenter's profile like the height, the clothes and the face (without facial expression) so that the real and virtual visual stimuli were comparable (see Figure 5[a]). In order to make the avatar follow user's physical body movements, we used a full-body motion capture system to map the experimenter's upper body motions to her avatar. A flystick was also provided for the experimenter to trigger the timer for task performance measurements (see Figure 5[b]).
+A specific avatar was designed to match the experimenter's profile like the height, the clothes and the face (without facial expression) so that the real and virtual visual stimuli were comparable (see Figure~\ref{fig:2_avatar}(a)). In order to make the avatar follow user's physical body movements, we used a full-body motion capture system to map the experimenter's upper body motions to her avatar. A flystick was also provided for the experimenter to trigger the timer for task performance measurements (see Figure~\ref{fig:2_avatar}(b)).
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\textwidth]{figures/2_avatar_photo}
+  \caption{\label{fig:2_avatar}(a) The avatar of the experimenter used in the experiment. (b) The experimenter wore a motion-tracking suit to map upper body movements to the avatar.}
+\end{figure}
 
 No avatar was provided for the participants since we did not study the visual perception of the experimenter. The participants wore a pair of tracked shutter glasses to see stereoscopic images and a tracker on one hand to enable direct interaction with virtual targets by hand movements.
 
 \subsection{Experimental Condition}
 In this experiment, we manipulated two independent variables to study their impact on participants' choice of collaborator and task performance. Here is a detailed description of these independent variables:
 
-Delocalization angle: As shown in Figure 6(a), at the beginning of each trial, the participant should stand at a given point (the white square at the center of the circle) to wait for the experimenter's instruction. Around this starting point, seven predefined positions were distributed on a half circle with a radius of two meters symmetrically from the left to the right of the CAVE workspace (smaller white squares). For each trial, the experimenter and her avatar were located on one of these seven positions which were equidistant to participant's standing point, so the delocalization level between the real collaborator and her avatar can be measured by the angle between two segments started from the center of the circle (where the participant stood) and ended respectively at the positions of the experimenter and her avatar (see Figure 6[b]). This delocalization angle has seven different values from 0° to 180° with an interval of 30° given the configuration of the chosen seven locations.
-Instruction type: Interaction between users usually involves verbal and gestural modalities. In order to inspect their impact on co-located collaboration with dual-presence, we defined three deictic instruction groups: verbal-only instruction, gesture-only instruction, and multimodal (gesture and verbal) instruction. Each instruction group was then divided into two sub-groups to take into consideration the possible left-right effect. Finally we got 6 different instruction groups as indicated in Table 1. To be more precise, the target object (the crown) indicated by the experimenter was the nearest one (e.g., “Go to the crown on my left'' indicated the closest crown on the left side of the experimenter when there were more than one presented target). To make sure that ambiguities were present no matter the actual spatial configuration, there was always one crown on the left-hand side and one on the right for each of the seven predefined positions of the experimenter.
+Delocalization angle: As shown in Figure~\ref{fig:2_floor}(a), at the beginning of each trial, the participant should stand at a given point (the white square at the center of the circle) to wait for the experimenter's instruction. Around this starting point, seven predefined positions were distributed on a half circle with a radius of two meters symmetrically from the left to the right of the CAVE workspace (smaller white squares). For each trial, the experimenter and her avatar were located on one of these seven positions which were equidistant to participant's standing point, so the delocalization level between the real collaborator and her avatar can be measured by the angle between two segments started from the center of the circle (where the participant stood) and ended respectively at the positions of the experimenter and her avatar (see Figure~\ref{fig:2_floor}(b)). This delocalization angle has seven different values from 0$^\circ$ to 180$^\circ$ with an interval of 30$^\circ$ given the configuration of the chosen seven locations.
+
+Instruction type: Interaction between users usually involves verbal and gestural modalities. In order to inspect their impact on co-located collaboration with dual-presence, we defined three deictic instruction groups: verbal-only instruction, gesture-only instruction, and multimodal (gesture and verbal) instruction. Each instruction group was then divided into two sub-groups to take into consideration the possible left-right effect. Finally we got 6 different instruction groups as indicated in Table~\ref{tab:instruction_type}. To be more precise, the target object (the crown) indicated by the experimenter was the nearest one (e.g., ``Go to the crown on my left" indicated the closest crown on the left side of the experimenter when there were more than one presented target). To make sure that ambiguities were present no matter the actual spatial configuration, there was always one crown on the left-hand side and one on the right for each of the seven predefined positions of the experimenter.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\textwidth]{figures/2_floor}
+  \caption{\label{fig:2_floor}(a) The top view of the virtual scene indicates the configuration of the virtual room and predefined positions for participants and their collaborator. (b) An example of the delocalization angle due to the separation of the real experimenter and the associated avatar.}
+\end{figure}
 
 \begin{table*}[!t]
 \renewcommand{\arraystretch}{1.3}
 \caption{All six types of deictic instructions given by the experimenter for the object-picking task.}
-\label{tab:metrics}
+\label{tab:instruction_type}
 \centering
 \begin{tabular}{l l l}
 	\hline
@@ -101,7 +127,8 @@ Instruction type: Interaction between users usually involves verbal and gestural
 \end{tabular}
 \end{table*}
 
-We defined the combination of the experimenter's position and her avatar's position as the spatial configuration of the trial. Since there were seven possibilities for both positions (Figure 6[a]), this resulted in 49 different spatial configurations in total. Due to time limitation, there were too many spatial configurations for each participant to test all of them, so we distributed these configurations among all the participants with each person testing a subset and covered all the conditions at a global level. We grouped the spatial configurations by the delocalization angle that they formed, and each participant passed one configuration for each delocalization angle with all six types of instructions. In order to offset the interaction affect between the delocalization level and the instruction type, all the trials for each participant were presented in a randomized order.
+We defined the combination of the experimenter's position and her avatar's position as the spatial configuration of the trial. Since there were seven possibilities for both positions (Figure~\ref{fig:2_floor}(a)), this resulted in 49 different spatial configurations in total. Due to time limitation, there were too many spatial configurations for each participant to test all of them, so we distributed these configurations among all the participants with each person testing a subset and covered all the conditions at a global level. We grouped the spatial configurations by the delocalization angle that they formed, and each participant passed one configuration for each delocalization angle with all six types of instructions. In order to offset the interaction affect between the delocalization level and the instruction type, all the trials for each participant were presented in a randomized order.
+
 Finally, in this experiment, participants moved directly in the virtual scene through natural walking with a scale of one to reach the target object. This choice was taken in order to make the evaluation independent with any navigation paradigm to avoid warping the results because some participants may be more familiar than others with virtual interactive navigation techniques.
 
 
@@ -113,7 +140,7 @@ First, each participant was invited to sign an informed consent and then an over
 \item Learning stage: Six randomized trials were given for the participants to get familiar with the experimental setup.
 \item Experimental stage: The participant accomplished collaborative tasks under the instructions of the experimenter. The experimental stage for each participant was the same except each one of them tested a subset of all the spatial configurations. Each participant tested seven spatial configurations with all six types of instructions, so in total 42 trials. The working scenario was the following:
 
-At the beginning of trial, the virtual scene was covered by a blue curtain (virtual one). We set up the curtain and asked the participant to lower the head in order to avoid the participant from seeing the experimenter and her avatar before the trial began. The participant should stay at his/her departure position and look at his/her feet until the curtain disappeared. Once the experimenter reached the required position indicated by the square on the floor (Figure 6[a]), the system then put the experimenter's avatar at another required position to form a delocalization angle (from 0$^\circ$ to 180$^\circ$) and hid the curtain.
+At the beginning of trial, the virtual scene was covered by a blue curtain (virtual one). We set up the curtain and asked the participant to lower the head in order to avoid the participant from seeing the experimenter and her avatar before the trial began. The participant should stay at his/her departure position and look at his/her feet until the curtain disappeared. Once the experimenter reached the required position indicated by the square on the floor (Figure~\ref{fig:floor}(a)), the system then put the experimenter's avatar at another required position to form a delocalization angle (from 0$^\circ$ to 180$^\circ$) and hid the curtain.
 
 The experimenter read the instruction showed on a piece of virtual paper in her left hand and then indicated the target (one of the crowns) the participant should travel to by giving verbal and/or gestural instruction, and then started the timer by pushing a button on the flystick. Then a beep was delivered by a loudspeaker to inform the participant to respond. Participants were not supposed to start before the beep, otherwise the trial was not counted.
 
@@ -124,8 +151,8 @@ The selected crown ID (from 1 to 8) was recorded in order to know the participan
 \item Questionnaire stage: First, a post-questionnaire to evaluate the level of cybersickness was conducted. Then we tested the participants with a detailed subjective questionnaire for the collaborative task (see Appendix) and finally another questionnaire to get participants' personal information.
 \end{itemize}
 
-\subsection{Measures}
 
+\subsection{Measures}
 \subsubsection{Performance measures}
 For each trial, we recorded reaction time (noted as RT), execution time (ET) and the total time (TT, sum of the reaction and execution time) to finish the task. Moreover, we recorded participant's choice of reference frame for each trial using the crown ID.
 
@@ -135,27 +162,36 @@ The questionnaire used for cybersickness evaluation is Simulator Sickness Questi
 \subsubsection{Subjective measures}
 Data were collected using a subjective evaluation questionnaire with a 4-point rating scale, ranging from 0 (do not agree at all), 1 (do not agree), 2 (neutral), 3 (agree), to 4 (fully agree). We regrouped the items into three categories according to three measured dimensions. Nine items measured the participant's confidence on the success of the task, 11 items estimated the participant's understanding of instructions, and 15 items measured participant's reaction to the dual-presence of the experimenter.
 
-In order to avoid directing participants in an affirmative direction (Dillman, 2000), all categories contained indicative items (e.g., “I chose targets randomly.”) and counter-indicative items (e.g., ``I easily identified the targets."). As an indication of how well a set of items measures a latent construct, we used Cronbach's alpha. In other words, Cronbach's alpha indicates whether a set of items is a homogeneous set that covers the meaning of the theoretical construct. The higher the Cronbach's alpha, the more reliable the generated scale. The American Psychological Association considers a questionnaire as acceptable when the alpha coefficient is above 0.7. We computed Cronbach's alpha for the dimensions related to the feeling of confidence, the understanding of the instruction and the reaction of dual-presence. The values were satisfactory (between 0.71 and 0.82).
+In order to avoid directing participants in an affirmative direction (Dillman, 2000), all categories contained indicative items (e.g., ``I chose targets randomly.") and counter-indicative items (e.g., ``I easily identified the targets."). As an indication of how well a set of items measures a latent construct, we used Cronbach's alpha. In other words, Cronbach's alpha indicates whether a set of items is a homogeneous set that covers the meaning of the theoretical construct. The higher the Cronbach's alpha, the more reliable the generated scale. The American Psychological Association considers a questionnaire as acceptable when the alpha coefficient is above 0.7. We computed Cronbach's alpha for the dimensions related to the feeling of confidence, the understanding of the instruction and the reaction of dual-presence. The values were satisfactory (between 0.71 and 0.82).
 
-\subsubsection{Hypotheses}
+\subsection{Hypotheses}
 H1: Participants would naturally interact with the avatar of the experimenter rather than the real person to accomplish collaborative task in an immersive virtual environment.
 H2: It should take participants longer time to accomplish the task when the real experimenter and the avatar are close to each other than when they are far away (the proximity of the two forms of collaborator should induce stronger visual conflicts for the participants).
 H3: Participants should be more efficient with verbal-only instructions than with gestural or multimodal instructions, even when the audio and visual information do not occur at the same location (i.e., the participant listens to the real experimenter, but visually focuses on the avatar which is at a different position).
 
 \subsection{Results}
-The results presented in this section were considered statistically significant when p\textless{} 0.05. All the analyses were performed with Statistica 9.
+The results presented in this section were considered statistically significant when p \textless{} 0.05. All the analyses were performed with Statistica 9.
 
 \subsubsection{Collaborator choice}
-First we gathered all trials to see which collaborator the participants chose as a reference frame for the object-picking task. Among all trials, 4.9\% were recorded as failure (either the participant gave up or he/she picked a wrong object) and 13.6\% of all trials could not give us useful information on participants' choices because in these trials the experimenter and her avatar were superposed (delocalization angle was 0°). Then in 50.2\% of all trials participants chose the target indicated by the avatar, and in 31.3\% of all trials participants picked the target indicated by the real experimenter.
+First we gathered all trials to see which collaborator the participants chose as a reference frame for the object-picking task. Among all trials, 4.9\% were recorded as failure (either the participant gave up or he/she picked a wrong object) and 13.6\% of all trials could not give us useful information on participants' choices because in these trials the experimenter and her avatar were superposed (delocalization angle was 0$^\circ$). Then in 50.2\% of all trials participants chose the target indicated by the avatar, and in 31.3\% of all trials participants picked the target indicated by the real experimenter.
 
 Chi-square ($\chi^2$) test on all successful trials (81.5\%) revealed that there was no association between the delocalization angle and the choices made by the participants. Chi-squared ($\chi^2$) test also showed that there was no association between the instruction type and participants' choices. In order to have a better understanding of these results, we regrouped trials by participant and then counted for each participant how many times one chose the real experimenter and how many times the avatar. We found that most participants had an a priori choice of reference frame. This result, observed on the behavior of the participants during the task phase, was also confirmed by their answers to the subjective questionnaire for statements like ``I only interacted with the virtual assistant".
 
-Based on this result, we decided to divide the participants into subgroups to get a closer look on the impact of individual characteristics on their behavior. To define a criterion for clustering, we used the k-means method that took each participant's number of choices for the real experimenter and the avatar as input. The best estimate using DBI (Davies-Bouldin index) as metric was obtained for a number of clusters k = 3 (tested for 2 \textless{} k \textless{} 27). Thus we created three groups: the Real, Virtual and Mixed groups with respectively 9, 16 and 2 participants (see Figure 7). The Real group corresponded to the participants who mainly chose to interact with the real experimenter and the Virtual group for those who mainly relied on the avatar. The Mixed group contained participants who kept changing their collaborator choice throughout different trials during the experiment.
+Based on this result, we decided to divide the participants into subgroups to get a closer look on the impact of individual characteristics on their behavior. To define a criterion for clustering, we used the k-means method that took each participant's number of choices for the real experimenter and the avatar as input. The best estimate using DBI (Davies-Bouldin index) as metric was obtained for a number of clusters k = 3 (tested for 2 \textless{} k \textless{} 27). Thus we created three groups: the Real, Virtual and Mixed groups with respectively 9, 16 and 2 participants (see Figure~\ref{fig:2_clustering}). The Real group corresponded to the participants who mainly chose to interact with the real experimenter and the Virtual group for those who mainly relied on the avatar. The Mixed group contained participants who kept changing their collaborator choice throughout different trials during the experiment.
 
-Figure [7] here 
-Figure [8] here
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\textwidth]{figures/2_clustering}
+  \caption{\label{fig:2_clustering}The distribution of participants according to their number of choices on the virtual (avatar) and real (the experimenter) reference frames.}
+\end{figure}
 
-From Figure 8, we can get a global view of the difference between the three groups by counting the number of referential choice transitions in each trial. A referential choice transition occurs when a participant modifies his/her reference frame (Real to Virtual, or vice versa). For each trial, the number of transitions corresponds to the number of participants having such transition.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\textwidth]{figures/2_transition}
+  \caption{\label{fig:2_transition}Distribution of the number of collaborator choice transitions for each group.}
+\end{figure}
+
+From Figure~\ref{fig:2_transition}, we can get a global view of the difference between the three groups by counting the number of referential choice transitions in each trial. A referential choice transition occurs when a participant modifies his/her reference frame (Real to Virtual, or vice versa). For each trial, the number of transitions corresponds to the number of participants having such transition.
 
 In the Virtual and Real groups, participants chose, from time to time, a reference frame which was not relevant for their group: the experimenter for the Virtual group, her avatar for the Real group. In these groups, the number of transitions was quite low if we compare it with the maximum value that it could reach (group size). For the Mixed group, we chose as baseline the virtual referential, so that what was shown in the graph was the number of participants who switched from the avatar toward the experimenter.
 
@@ -165,12 +201,12 @@ Anyway, since there were only two participants in the Mixed group, this group wa
 We applied the Kolmogorov-Smirnov test to verify if variables satisfy normality assumptions. All three behavioral variables failed the test: Reaction time (RT), K-S d = 0.21467, p \textless{} 0.01; Execution time (ET) K-S d = 0.17533, p \textless{} 0.01; Total time (TT) K-S d = 0.16585, p \textless{} 0.01. Therefore we used a non-parametric Kruskal–Wallis ANOVA test with delocalization angle and instruction type as inter-trial factors. For Post hoc analyses, we used multiple comparisons of mean ranks for all groups.
 
 \paragraph{Global analyses}
-Regarding task efficiency (RT – Reaction Time, ET - Execution Time, TT – Total Time), first we examined the influence of delocalization angle (Table 2) and we found a main effect on the ET (H (6, N = 1079) = 20.51355, p = 0.002) and TT (H (6, N = 1079) = 18.68352, p = 0.004). Post hoc comparisons showed that participants spent more time to execute the task with angle 180$^{\circ}$ than with 0$^{\circ}$, 30$^{\circ}$ and 90$^{\circ}$. For TT, participants spent more time to complete the task with angle 180$^{\circ}$ than with angle 0$^{\circ}$ (Figure 9).
+Regarding task efficiency (RT – Reaction Time, ET - Execution Time, TT – Total Time), first we examined the influence of delocalization angle (Table~\ref{tab:angles}) and we found a main effect on the ET (H (6, N=1079) = 20.51355, p = 0.002) and TT (H (6, N=1079) = 18.68352, p = 0.004). Post hoc comparisons showed that participants spent more time to execute the task with angle 180$^{\circ}$ than with 0$^{\circ}$, 30$^{\circ}$ and 90$^{\circ}$. For TT, participants spent more time to complete the task with angle 180$^{\circ}$ than with angle 0$^{\circ}$ (Figure~\ref{fig:2_angles}).
 
 \begin{table*}[!t]
 \renewcommand{\arraystretch}{1.3}
 \caption{Mean value and standard deviation of reaction time (RT), execution time (ET) and total time (TT) for each delocalization angle.}
-\label{tab:metrics}
+\label{tab:angles}
 \centering
 \begin{tabular}{p{2.5cm} l l l l l l}
 	\hline
@@ -188,9 +224,19 @@ Regarding task efficiency (RT – Reaction Time, ET - Execution Time, TT – Tot
 \end{tabular}
 \end{table*}
 
-Second we checked the relationship between task efficiency and instruction type, and we found a main effect on RT (H (2, N = 1078) = 86.98551, p = 0.00001) and TT (H (2, N = 1079) = 41.48673, p = 0.00001). Post hoc comparisons showed that gesture-only instructions required the most time and the results were intermediate with multimodal instructions (Figure 10).
+Second we checked the relationship between task efficiency and instruction type, and we found a main effect on RT (H (2, N=1078) = 86.98551, p = 0.00001) and TT (H (2, N=1079) = 41.48673, p = 0.00001). Post hoc comparisons showed that gesture-only instructions required the most time and the results were intermediate with multimodal instructions (Figure~\ref{fig:2_instruction}).
 
-Figure [10] here
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\textwidth]{figures/2_angles}
+  \caption{\label{fig:2_angles}Mean value and standard deviation of reaction time (RT), execution time (ET), and total time (TT) for each delocalization angle.}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\textwidth]{figures/2_instruction}
+  \caption{\label{fig:2_instruction}Mean value and standard deviation of reaction time (RT), execution time (ET), and total time (TT) for each type of instruction.}
+\end{figure}
 
 \begin{table*}[!t]
 \renewcommand{\arraystretch}{1.3}
@@ -212,12 +258,11 @@ Figure [10] here
 \paragraph{Inter-group analysis}
 We measured the influence of delocalization angle and instruction type in each group separately to see if they had an effect on a certain population.
 
-For the Real group, we got a main effect of instruction type on RT (H (2, N = 364) = 27.10793, p \textless{} 0.000001) and TT (H (2, N = 364) = 10.5341, p = 0.005). Post hoc comparisons showed that participants spent more time to react and to finish the task with gesture-only instructions than with the other two types of instruction while multimodal instructions were at a medium level.
+For the Real group, we got a main effect of instruction type on RT (H (2, N=364) = 27.10793, p \textless{} 0.000001) and TT (H (2, N=364) = 10.5341, p = 0.005). Post hoc comparisons showed that participants spent more time to react and to finish the task with gesture-only instructions than with the other two types of instruction while multimodal instructions were at a medium level.
 
-For the Virtual group, a main effect of instruction type was also found on RT (H (2, N = 640) = 60.62227, p \textless{} 0.000001) and TT (H (2, N = 641) = 32.36614, p \textless{} 0.000001). Post hoc comparisons showed the same result as for the Real group.
+For the Virtual group, a main effect of instruction type was also found on RT (H (2, N = 640) = 60.62227, p \textless{} 0.000001) and TT (H (2, N=641) = 32.36614, p \textless{} 0.000001). Post hoc comparisons showed the same result as for the Real group.
 
 \subsubsection{Subjective data}
-
 \paragraph{Global analyses}
 We gathered participants' subjective feelings as a complement to performance measures. First we used the SSQ to see possible occurrence of cybersickness after the exposure to the experimental perceptual conflicts. Then we extracted some descriptive results (e.g., confidence feeling, etc) from the subjective questionnaire.
 
@@ -246,9 +291,13 @@ From the subjective questionnaire, we found that the participants were moderatel
 \paragraph{Inter-group analyses}
 We conducted inter-group comparison to check the relationship between the participants' collaborator choice and their individual characteristics. Regarding the simulator sickness, with Wilcoxon signed rank test on two paired samples, no matter in which group, participants did not experience cybersickness (Virtual group: N = 16, T = 20.5, Z = 0.236939551, p = 0.812703838; Real group: N = 9, T = 11.5, Z = 0.422577127, p = 0.672604101).
 
-We used the Student's t-test with subjective questionnaire responses as inter-subject variables to compare the Real and Virtual group. We found a main effect on instruction understanding between participants in the Virtual group and those in the Real group (Table~\ref{tab:inter_gp_sub_qn}). Participants in the Real group declared weaker instruction understanding than participants in the Virtual group (Figure 11). We also found an effect on user's video game experience. Participants in the Virtual group played video games more often than those in the Real group (Table~\ref{tab:inter_gp_sub_qn}).
+We used the Student's t-test with subjective questionnaire responses as inter-subject variables to compare the Real and Virtual group. We found a main effect on instruction understanding between participants in the Virtual group and those in the Real group (Table~\ref{tab:inter_gp_sub_qn}). Participants in the Real group declared weaker instruction understanding than participants in the Virtual group (Figure~\ref{fig:2_subjective_qn}). We also found an effect on user's video game experience. Participants in the Virtual group played video games more often than those in the Real group (Table~\ref{tab:inter_gp_sub_qn}).
 
-Figure [11] here 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\textwidth]{figures/2_subjective_qn}
+  \caption{\label{fig:2_subjective_qn}Comparison of Real and Virtual groups according to the result of the subjective questionnaire.}
+\end{figure}
 
 \begin{table*}[!t]
 \renewcommand{\arraystretch}{1.3}
@@ -271,9 +320,9 @@ Figure [11] here
 \subsection{Discussion}
 In the absence of instructions to impose the participants to collaborate with the avatar in our experiment, we left the participants to choose between the real or virtual collaborator. In the experimental scenario that we created, a virtual object was always present in the pointing direction of the real experimenter so the real pointing gesture became meaningful. According to the result, the physical presence of the experimenter both in the visual and audio modalities appeared to cause a significant proportion of participants to choose the real person instead of the avatar. In fact, 33\% of all participants chose to work with the real experimenter and ignored the animated avatar. Meanwhile the rest (59\%) interacted successfully with the avatar. So our hypothesis on participants' choice of collaborator (H1) was rejected. Three of those who finally chose the avatar have asked ``Whom should I work with?" and we told them ``Do as you like". However, none of the participants in the Real or Mixed group asked this question.
 
-Moreover, almost all users made their choice in the early stage of the experiment, which either stayed stable during all trials or was gradually stabilized from trial to trial (especially participants V1 and V2 in Figure 7). Only the two users from the Mixed group (the participants M1 and M2 oscillated between the real experimenter and the avatar from the beginning to the end of the experiment (Figure 8). This result was corroborated by the fact that the collaborator choice was not significantly impacted by delocalization angle or by the instruction type. However, inter-group comparisons showed that participants' familiarization with video games had a significant impact on their collaborator choice. Participants who chose the avatar were those who played more video games. The results of the subjective questionnaire also indicated that participants in the Real group had problems understanding the instructions compared to those in the Virtual group.
+Moreover, almost all users made their choice in the early stage of the experiment, which either stayed stable during all trials or was gradually stabilized from trial to trial (especially participants V1 and V2 in Figure~\ref{fig:2_clustering}). Only the two users from the Mixed group (the participants M1 and M2 oscillated between the real experimenter and the avatar from the beginning to the end of the experiment (Figure~\ref{fig:2_transition}). This result was corroborated by the fact that the collaborator choice was not significantly impacted by delocalization angle or by the instruction type. However, inter-group comparisons showed that participants' familiarization with video games had a significant impact on their collaborator choice. Participants who chose the avatar were those who played more video games. The results of the subjective questionnaire also indicated that participants in the Real group had problems understanding the instructions compared to those in the Virtual group.
 
-Regarding the impact of different experimental conditions on task performance, we first assumed that the spatial proximity of the collaborator and the avatar should provide stronger visual conflicts and thus would take the participants longer time to accomplish the task. Actually, this hypothesis (H2) was also rejected. There were no significant results confirming that small angle were more disturbing than larger ones. The distance between the real experimenter and her avatar did not seem to have an influence on participants' decision making. This may be the result of the co-effect of visual conflicts (Figure 1[a]) and audio-visual inconsistency (Figure 1[b]). Larger delocalization angle may cause weaker visual conflicts, but the audio-visual inconsistency will become stronger. Further studies are needed to separate these two factors (e.g., spatialized audio can be used to map the audio source to the avatar) and to investigate their individual influence on task performance.
+Regarding the impact of different experimental conditions on task performance, we first assumed that the spatial proximity of the collaborator and the avatar should provide stronger visual conflicts and thus would take the participants longer time to accomplish the task. Actually, this hypothesis (H2) was also rejected. There were no significant results confirming that small angle were more disturbing than larger ones. The distance between the real experimenter and her avatar did not seem to have an influence on participants' decision making. This may be the result of the co-effect of visual conflicts (Figure~\ref{fig:2_inconsistency}(a)) and audio-visual inconsistency (Figure~\ref{fig:2_inconsistency}(b)). Larger delocalization angle may cause weaker visual conflicts, but the audio-visual inconsistency will become stronger. Further studies are needed to separate these two factors (e.g., spatialized audio can be used to map the audio source to the avatar) and to investigate their individual influence on task performance.
 
 Then for the comparison of different instruction types, overall participants had the best performance with verbal-only instruction (M = 1384, SD = 1157), and the weakest performance with gesture-only instruction (M = 2113, SD = 1755), while the multimodal instruction was medium (M = 1627, SD = 1306). This result confirmed our hypothesis on the influence of instruction modality on task performance (H3) that participants should be more efficient with verbal-only instructions than with instructions that involve gestural information when facing the dual-presence of the experimenter.
 
