@@ -9,7 +9,7 @@ We carried out an experiment to examine users' reaction to the dual-presence cau
 
 In a two-user scenario, we asked the participants to complete an object-picking task under the instructions given by an experimenter who was co-located in the same immersive device. In the virtual world, the experimenter was present via an avatar in a room with some floating targets. Participants should choose between the two forms of collaborator in order to know which target to pick. We intentionally created situations in which these two forms of collaborator were always comparable for the participants by assuring there was also a virtual object in the pointing direction of the real experimenter (see Figure~\ref{fig:2_demo}). By recording the target ID chosen by the participants, we could extract their choice of collaborator. In the meanwhile, different types of instructions (deictic gestures and/or verbal commands) were given to observe the influence of perceptual conflicts on different sensory channels (visual and auditory).
 
-\begin{figure}[ht]
+\begin{figure}[tb]
   \centering
   \includegraphics[width=0.9\textwidth]{figures/2_demo}
   \caption{\label{fig:2_demo}The 3D view of the participant and that of the experimenter were superimposed on the multi-stereoscopic display. The participant faced the dual-presence of the experimenter and her avatar, while from the experimenter's viewpoint, the avatar was co-localized with her physical body.}
@@ -36,7 +36,7 @@ Thus a possible solution is to introduce an avatar animated by real-time body mo
 
 However, with the solution proposed above, sometimes users may still enter each other's field of view when they work with the avatars. What is more, during a collaborative task, the communications between collaborators are usually conducted in a multimodal way \citep{Paggio2005Multimodal, Ennis2010Seeing} including verbal and non-verbal modalities \citep{Bailenson2002Gaze, Dodds2011Talk}, especially deictic gestures to refer to objects or places. So during a two-user co-located collaboration scenario, with the dual-presence of virtual and real information, users having multimodal interactions may encounter different perceptual conflicts both in the visual and audio modalities. For example (see Figure~\ref{fig:2_inconsistency}(a)), if user B points to an object for user A (from user B's viewpoint, he/she is pointing at a cube), user A may be confused by seeing both user B and his/her avatar doing the pointing gesture, and it may be problematic when there is another virtual object in the pointing direction of user B. Furthermore, normally the verbal communication between co-located users is conveyed by direct conversation without using headphones. As shown in Figure~\ref{fig:2_inconsistency}(b), user A is interacting with user B's avatar, but the vocal information comes from the real user B in a different direction. This kind of visual-audio inconsistency \citep{Di2009Recalibration, Spence2013Just} may be disturbing for users to concentrate on their collaboration.
 
-\begin{figure}[ht]
+\begin{figure}[tb]
   \centering
   \includegraphics[width=\textwidth]{figures/2_inconsistency}
   \caption{\label{fig:2_inconsistency}Illustration of perceptual conflicts with a two-user scenario; user A interacts with avatar of user B: (a) Visual conflict occurs when user A simultaneously perceives the real user B and B's avatar pointing to different virtual objects. (b) Visual-audio conflict occurs when user B and the avatar are not at the same position.}
@@ -56,7 +56,7 @@ We conducted an experiment to study users' behavior for the co-located use of mu
 
 During a two-user scenario of a collaborative task, the participant and an experimenter (i.e., one of the authors) were situated in the same immersive environment (a double-stereoscopy CAVE-like system). In the virtual scene, they were co-localized in a room about the size of the real set-up with some floating crowns (see Figure~\ref{fig:2_virtual_room}). The task for the participant was to reach one of the crowns according to the instruction given by the experimenter during each trial.
 
-\begin{figure}[ht]
+\begin{figure}[tb]
   \centering
   \includegraphics[width=0.8\textwidth]{figures/2_virtual_room}
   \caption{\label{fig:2_virtual_room}Front view of the virtual scene used for the experiment.}
@@ -68,7 +68,7 @@ A large number (23) of the participants were people with a computer science back
 
 A specific avatar was designed to match the experimenter's profile like the height, the clothes and the face (without facial expression) so that the real and virtual visual stimuli were comparable (see Figure~\ref{fig:2_avatar}(a)). In order to make the avatar follow user's physical body movements, we used a full-body motion capture system to map the experimenter's upper body motions to her avatar. A flystick was also provided for the experimenter to trigger the timer for task performance measurements (see Figure~\ref{fig:2_avatar}(b)).
 
-\begin{figure}[ht]
+\begin{figure}[tb]
   \centering
   \includegraphics[width=\textwidth]{figures/2_avatar_photo}
   \caption{\label{fig:2_avatar}(a) The avatar of the experimenter used in the experiment. (b) The experimenter wore a motion-tracking suit to map upper body movements to the avatar.}
@@ -83,7 +83,7 @@ Delocalization angle: As shown in Figure~\ref{fig:2_floor}(a), at the beginning 
 
 Instruction type: Interaction between users usually involves verbal and gestural modalities. In order to inspect their impact on co-located collaboration with dual-presence, we defined three deictic instruction groups: verbal-only instruction, gesture-only instruction, and multimodal (gesture and verbal) instruction. Each instruction group was then divided into two sub-groups to take into consideration the possible left-right effect. Finally we got 6 different instruction groups as indicated in Table~\ref{tab:instruction_type}. To be more precise, the target object (the crown) indicated by the experimenter was the nearest one (e.g., ``Go to the crown on my left" indicated the closest crown on the left side of the experimenter when there were more than one presented target). To make sure that ambiguities were present no matter the actual spatial configuration, there was always one crown on the left-hand side and one on the right for each of the seven predefined positions of the experimenter.
 
-\begin{figure}[ht]
+\begin{figure}[tb]
   \centering
   \includegraphics[width=\textwidth]{figures/2_floor}
   \caption{\label{fig:2_floor}(a) The top view of the virtual scene indicates the configuration of the virtual room and predefined positions for participants and their collaborator. (b) An example of the delocalization angle due to the separation of the real experimenter and the associated avatar.}
@@ -159,13 +159,13 @@ Chi-square ($\chi^2$) test on all successful trials (81.5\%) revealed that there
 
 Based on this result, we decided to divide the participants into subgroups to get a closer look on the impact of individual characteristics on their behavior. To define a criterion for clustering, we used the k-means method that took each participant's number of choices for the real experimenter and the avatar as input. The best estimate using DBI (Davies-Bouldin index) as metric was obtained for a number of clusters k = 3 (tested for 2 \textless{} k \textless{} 27). Thus we created three groups: the Real, Virtual and Mixed groups with respectively 9, 16 and 2 participants (see Figure~\ref{fig:2_clustering}). The Real group corresponded to the participants who mainly chose to interact with the real experimenter and the Virtual group for those who mainly relied on the avatar. The Mixed group contained participants who kept changing their collaborator choice throughout different trials during the experiment.
 
-\begin{figure}[ht]
+\begin{figure}[tb]
   \centering
   \includegraphics[width=\textwidth]{figures/2_clustering}
   \caption{\label{fig:2_clustering}The distribution of participants according to their number of choices on the virtual (avatar) and real (the experimenter) reference frames.}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[tb]
   \centering
   \includegraphics[width=\textwidth]{figures/2_transition}
   \caption{\label{fig:2_transition}Distribution of the number of collaborator choice transitions for each group.}
@@ -206,13 +206,13 @@ Regarding task efficiency (RT – Reaction Time, ET - Execution Time, TT – Tot
 
 Second we checked the relationship between task efficiency and instruction type, and we found a main effect on RT (H (2, N=1078) = 86.98551, p = 0.00001) and TT (H (2, N=1079) = 41.48673, p = 0.00001). Post hoc comparisons showed that gesture-only instructions required the most time and the results were intermediate with multimodal instructions (Figure~\ref{fig:2_instruction}).
 
-\begin{figure}[ht]
+\begin{figure}[tb]
   \centering
   \includegraphics[width=0.5\textwidth]{figures/2_angles}
   \caption{\label{fig:2_angles}Mean value and standard deviation of reaction time (RT), execution time (ET), and total time (TT) for each delocalization angle.}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[tb]
   \centering
   \includegraphics[width=0.5\textwidth]{figures/2_instruction}
   \caption{\label{fig:2_instruction}Mean value and standard deviation of reaction time (RT), execution time (ET), and total time (TT) for each type of instruction.}
@@ -273,7 +273,7 @@ We conducted inter-group comparison to check the relationship between the partic
 
 We used the Student's t-test with subjective questionnaire responses as inter-subject variables to compare the Real and Virtual group. We found a main effect on instruction understanding between participants in the Virtual group and those in the Real group (Table~\ref{tab:inter_gp_sub_qn}). Participants in the Real group declared weaker instruction understanding than participants in the Virtual group (Figure~\ref{fig:2_subjective_qn}). We also found an effect on user's video game experience. Participants in the Virtual group played video games more often than those in the Real group (Table~\ref{tab:inter_gp_sub_qn}).
 
-\begin{figure}[ht]
+\begin{figure}[tb]
   \centering
   \includegraphics[width=\textwidth]{figures/2_subjective_qn}
   \caption{\label{fig:2_subjective_qn}Comparison of Real and Virtual groups according to the result of the subjective questionnaire.}
@@ -318,5 +318,4 @@ We found that most users had an a priori choice of collaborator, which stayed st
 When a user faced the dual-presence of another co-located user, it seemed that the cognitive process helped him/her to solve the perceptual conflicts and allowed him/her to follow a coherent strategy. However, it was at a cost of task performance for instructions that involved gesture information.
 
 \section{Conclusion}
-
 All these results provided us three possible research axes to design effective solutions to manage co-located collaboration in multi-stereoscopic immersive systems. First, in future experiments or applications we can explicitly ask users to follow the virtual representation (the avatar) of the experimenter despite their perception of the dual-presence. It would be interesting to observe the reaction of users and to compare their performance with the results of the experiment presented in this paper, especially for users who were in the Real and Mixed group. Second, tasks that require more complicated interactions and have longer duration between collaborators could be tested (with pairs of experimenter and participant, or pairs of participants) to further investigate the impact of certain factors (e.g., delocalization angle) on task performance. At last, as we observed that the dual-presence brought conflicting information in the visual channel and thus reduced user performance for instructions including gestural interactions, an important issue could be to propose scene management approaches to limit the visual duality (i.e., visual perception of real user and his/her avatar). We could also add some automatic control (e.g., redirections) to the avatar-based approach to prevent co-located users from seeing each other's real body when navigating in the virtual world so as to avoid the perception of dual-presence.
