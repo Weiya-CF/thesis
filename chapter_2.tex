@@ -1,4 +1,4 @@
-\chapter{Immersive Projection Technology: from Stereoscopy to Multi-stereoscopic}
+\chapter{Multi-stereoscopic Immersive Virtual Environment}
 \label{chapter:multistereo}
 \minitoc
 
@@ -18,18 +18,15 @@ In a two-user scenario, we asked the participants to complete an object-picking 
 Two independent variables were chosen: the angular distance between the real experimenter and the avatar, and the type of instruction (verbal-only, gesture-only or multimodal) given by the experimenter. We believed that these variables may interfere with user's collaborator choice and task performance. For example, the proximity of the real experimenter and the avatar may increase the level of visual conflicts and users may be more disturbed by gestural instructions than verbal ones.
 
 
-\section{Stereoscopy, Human's Visual System}
-
-
-\section{Multi-stereoscopy}
+\section{Image Seperation Techniques}
 Most projection-based displays can only support one fully tracked active user, other co-located users can only share the same point of view with distorted images and participate passively in the collaborative task \citep{Bayon2006Multiple}. This visual distortion impedes users' collaborative spatial judgments by impacting the perception of depth and direction in the virtual world \citep{Pollock2012Right}. To avoid visual distortion, different approaches have been explored to provide individual stereoscopic views for multiple co-located users with projection-based display. For example, Simon proposed a multi-viewpoint images technique \citep{Simon2007MVI} which projects different images from multiple viewpoints corresponding to the viewing positions of multiple users, and combines them to a single image on the screen. Users can only get a correct stereoscopic view from predefined position without head tracking, so with static images the interactions that they can have are limited. Other display solutions can also provide individual stereoscopic views like the volumetric display \citep{Grossman2008Volum} and holographic display \citep{Lucente1997Holo}. However, these techniques can only be applied to non-immersive context with limited workspace.
 
-\subsection{Image Seperation Technique}
 In order to have relatively large separate adaptive stereoscopic images for multiple users, time-multiplexing techniques become a working solution. Efforts have been made since 1997, for example, \citet{Agrawala1997TRW} designed a prototype of a responsive workbench to provide two tracked users with independent stereoscopic views without distortion. Later on, \citet{Kunz2002TSC} used a pair of shuttered LCD projectors to generate an active stereo display and then \citet{Frohlich2005MultiViewer} extended this shuttered display to support two to four users with better performance in terms of perceived flicker, brightness of each view and crosstalk. This technique makes it possible for a single screen to support more than one stereoscopic view. Images for different users are separated by active shutter glasses while the separation of the images for the left and right eye is ensured by passive polarized filters. In 2011, \citet{Kulik2011CSS} even developed a projection-based stereoscopic display for six users by using six customized DLP projectors. With each user having an independent stereoscopic view combined with real-time head tracking, more complex collaboration scenarios can be implemented for a group of co-located users.
 
 Besides the development of display technology, various interaction techniques have also been proposed to make co-located collaboration in multi-user projection-based systems easier and more efficient, such as the bent pick ray \citep{Riege2006Bent} and the see-through techniques \citep{Argelaguet2010STT}. However, these interaction techniques focus solely on situations where users are side-by-side. Direct face-to-face collaboration in projection-based display system is supposed to be impossible \citep{Salzmann2009CIC}. Therefore here we tried to study the possibility of having co-located face-to-face collaboration by investigating users' reaction to the perceptual conflicts raised with the dual-presence of the avatar and the real person.
 
-\subsection{Application for Collaborative Work}
+\section{Application for Collaborative Work}
+\subsection{Direct Collaboration}
 Large projection-based displays can be an effective solution to support co-located collaboration in immersive CVEs. Especially, with the multi-stereoscopic projection-based setup as used by \citet{Salzmann2009VRPointing}, multiple users can collaborate side-by-side and interact with a virtual object in front of them with individual stereoscopic views of the virtual scene. However, as indicated by \citet{Salzmann2009CIC}, certain tasks that require face-to-face interaction between users cannot be applied directly within projection-based displays due to occlusions if an object is located in the middle of the users. In this case, if we want to benefit from the advantages of co-located collaboration in projection-based multi-stereoscopic systems for face-to-face tasks as in the side-by-side situations, we should prevent the users from working directly with each other.
 
 Thus a possible solution is to introduce an avatar animated by real-time body motion capture for each user, and let each user work with the other users' avatars instead of the real person. In this case users' spatial relationship (relative position and orientation) in the virtual world is no longer constrained by the one in the physical workspace, they can be facing each other in the virtual world while physically side-by-side. This avatar-based approach enables complicated tasks that require both face-to-face and side-by-side interactions in projection-based multi-user system. For example, a car assembly task may contain two phases: during the first phase, users are on the same side of the model. They discuss and work together to repair a specific part of the car. Then in the second phase, they need to be at opposite sides of the car, and consequently have different viewpoints in the virtual world. Within this scenario one user can guide the other to properly fix a seat within the car cockpit. So with our avatar-based approach, they can switch between different spatial configurations without interrupting the ongoing task by using virtual navigation techniques.
@@ -43,16 +40,17 @@ However, with the solution proposed above, sometimes users may still enter each 
 \end{figure}
 
 
-\subsection{Dual Presence}
+\subsection{Indirect Collaboration via Avatars}
 With multi-stereoscopy technology, novel projection-based immersive systems now can support multiple users by providing each one with an independent stereoscopic view of the virtual scene. When users work face-to-face, they may have an incorrect view if objects are located between them. In this case, avatars can be introduced to enable face-to-face interaction in the virtual world whereas they are side-by-side in the real device. As a consequence, such multi-user systems provide the users with a new kind of perceptual immersion and related cognitive experiences, because users must handle both information from the real world (i.e., other users' bodies) and those from the virtual scene (i.e., other users' avatars) at the same time.
 
 Avatars have been used as media for multi-user communication in both remote and co-located use of immersive CVE, but the dual-presence of users and their avatars in the same immersive device for face-to-face interaction has not yet been addressed. We do not intend to create such dual-presence to test user's preference between real person and the avatar, but to observe users' reaction to different perceptual conflicts and to study if our avatar-based approach is sufficient to support face-to-face co-located collaboration in a multi-stereoscopic immersive display system.
 
 Besides the development of display technology, various interaction techniques have also been proposed to make co-located collaboration in multi-user projection-based systems easier and more efficient, such as the bent pick ray \citep{Riege2006Bent} and the see-through techniques \citep{Argelaguet2010STT}. However, these interaction techniques focus solely on situations where users are side-by-side. Direct face-to-face collaboration in projection-based display system is supposed to be impossible \citep{Salzmann2009CIC}. Therefore here we tried to study the possibility of having co-located face-to-face collaboration by investigating users' reaction to the perceptual conflicts raised with the dual-presence of the avatar and the real person.
 
+\section{Perceptual Conflicts during Collaboration}
 
-\section{User Study}
-We conducted an experiment to study users' behavior for the co-located use of multi-stereoscopic display system. We want to see which reference frame (real vs. virtual) the participants choose and their task performance according to different experimental conditions.
+\section{Case Study on Face-to-Face Interaction through Avatars}
+We conducted an experiment to study users' behavior for the co-located use of multi-stereoscopic display system. We want to see which collaborator (real vs. virtual) the participants choose and their task performance according to different experimental conditions.
 
 During a two-user scenario of a collaborative task, the participant and an experimenter (i.e., one of the authors) were situated in the same immersive environment (a double-stereoscopy CAVE-like system). In the virtual scene, they were co-localized in a room about the size of the real set-up with some floating crowns (see Figure~\ref{fig:2_virtual_room}). The task for the participant was to reach one of the crowns according to the instruction given by the experimenter during each trial.
 
@@ -62,7 +60,8 @@ During a two-user scenario of a collaborative task, the participant and an exper
   \caption{\label{fig:2_virtual_room}Front view of the virtual scene used for the experiment.}
 \end{figure}
 
-\subsection{Participants}
+\subsection{Design}
+\subsubsection{Participants}
 27 participants (23 men and 4 women) passed our experiment. The average age is 26 years (standard deviation 4.8 years).
 A large number (23) of the participants were people with a computer science background. All participants filled out a background questionnaire, which was used to gather demographic information such as their level of computer skills, experience with video games and with virtual reality devices, and some other personal statistics (e.g., age, dominant hand, etc). Among these participants, 26 were right-handed and one person was left-handed. All participants used their dominant hand to perform the designation task and were naive with respect to the experimental setup and purpose of the experiment.
 
@@ -76,7 +75,7 @@ A specific avatar was designed to match the experimenter's profile like the heig
 
 No avatar was provided for the participants since we did not study the visual perception of the experimenter. The participants wore a pair of tracked shutter glasses to see stereoscopic images and a tracker on one hand to enable direct interaction with virtual targets by hand movements.
 
-\subsection{Experimental Condition}
+\subsubsection{Experimental Condition}
 In this experiment, we manipulated two independent variables to study their impact on participants' choice of collaborator and task performance. Here is a detailed description of these independent variables:
 
 Delocalization angle: As shown in Figure~\ref{fig:2_floor}(a), at the beginning of each trial, the participant should stand at a given point (the white square at the center of the circle) to wait for the experimenter's instruction. Around this starting point, seven predefined positions were distributed on a half circle with a radius of two meters symmetrically from the left to the right of the CAVE workspace (smaller white squares). For each trial, the experimenter and her avatar were located on one of these seven positions which were equidistant to participant's standing point, so the delocalization level between the real collaborator and her avatar can be measured by the angle between two segments started from the center of the circle (where the participant stood) and ended respectively at the positions of the experimenter and her avatar (see Figure~\ref{fig:2_floor}(b)). This delocalization angle has seven different values from 0$^\circ$ to 180$^\circ$ with an interval of 30$^\circ$ given the configuration of the chosen seven locations.
@@ -112,7 +111,7 @@ We defined the combination of the experimenter's position and her avatar's posit
 Finally, in this experiment, participants moved directly in the virtual scene through natural walking with a scale of one to reach the target object. This choice was taken in order to make the evaluation independent with any navigation paradigm to avoid warping the results because some participants may be more familiar than others with virtual interactive navigation techniques.
 
 
-\subsection{Protocol}
+\subsubsection{Protocol}
 First, each participant was invited to sign an informed consent and then an overview of the experiment was provided. This experiment was conducted in three main phases for each participant:
 
 \begin{itemize}
@@ -120,7 +119,7 @@ First, each participant was invited to sign an informed consent and then an over
 \item Learning stage: Six randomized trials were given for the participants to get familiar with the experimental setup.
 \item Experimental stage: The participant accomplished collaborative tasks under the instructions of the experimenter. The experimental stage for each participant was the same except each one of them tested a subset of all the spatial configurations. Each participant tested seven spatial configurations with all six types of instructions, so in total 42 trials. The working scenario was the following:
 
-At the beginning of trial, the virtual scene was covered by a blue curtain (virtual one). We set up the curtain and asked the participant to lower the head in order to avoid the participant from seeing the experimenter and her avatar before the trial began. The participant should stay at his/her departure position and look at his/her feet until the curtain disappeared. Once the experimenter reached the required position indicated by the square on the floor (Figure~\ref{fig:floor}(a)), the system then put the experimenter's avatar at another required position to form a delocalization angle (from 0$^\circ$ to 180$^\circ$) and hid the curtain.
+At the beginning of trial, the virtual scene was covered by a blue curtain (virtual one). We set up the curtain and asked the participant to lower the head in order to avoid the participant from seeing the experimenter and her avatar before the trial began. The participant should stay at his/her departure position and look at his/her feet until the curtain disappeared. Once the experimenter reached the required position indicated by the square on the floor (Figure~\ref{fig:2_floor}(a)), the system then put the experimenter's avatar at another required position to form a delocalization angle (from 0$^\circ$ to 180$^\circ$) and hid the curtain.
 
 The experimenter read the instruction showed on a piece of virtual paper in her left hand and then indicated the target (one of the crowns) the participant should travel to by giving verbal and/or gestural instruction, and then started the timer by pushing a button on the flystick. Then a beep was delivered by a loudspeaker to inform the participant to respond. Participants were not supposed to start before the beep, otherwise the trial was not counted.
 
@@ -128,7 +127,7 @@ The system recorded the time when the participant left the initial position as r
 
 The selected crown ID (from 1 to 8) was recorded in order to know the participant's choice of reference frame. When the experimenter and the avatar were not superimposed, they would lead the participant to different targets depending on their actual positions and the given instruction. So we recorded the selected crown ID to see which target was chosen by the participant, and then we could determine whether the participant followed the real experimenter, or her avatar, or neither of them (considered as a failure). If the participant chose to give up, the trial was also considered as a failure of the task. When the task was finished, the participant came back to the initial position and waited for the next trial.
 
-\item Questionnaire stage: First, a post-questionnaire to evaluate the level of cybersickness was conducted. Then we tested the participants with a detailed subjective questionnaire for the collaborative task (see Appendix) and finally another questionnaire to get participants' personal information.
+\item Questionnaire stage: First, a post-questionnaire to evaluate the level of cybersickness was conducted. Then we tested the participants with a detailed subjective questionnaire for the collaborative task (see Appendix~\ref{appendix:dual_pres_q}) and finally another questionnaire to get participants' personal information.
 \end{itemize}
 
 
