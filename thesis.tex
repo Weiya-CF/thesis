@@ -134,15 +134,15 @@
 
 \author{Weiya Chen}
 
-%Title for main language (french)
-%\title[french]{Bayesian Multi-Energy Computed Tomography reconstruction approaches based on decomposition models}
+%Title for main language
+\title[english]{Collaboration in Multi-stereoscopic Immersive Virtual Environment}
 %Titles for other languages
-%\title[english]{Tomographie par rayons X multi-énergétiques pour l'analyse de la structure interne de l'objet}
+\title[french]{Collaboration en Environnement Virtuel Immersif Multi-stereoscopique}
 
-%Keywords for main language (french)
-% \keywords[french]{Bayesian Multi-Energy Computed Tomography reconstruction approaches based on decomposition models}
+%Keywords for main language
+\keywords[english]{Collaboration, Virtual Reality}
 %Keywords for other languages languages
-% \keywords[english]{X-ray, Multi-Energy Computed Tomography (MECT), Bayesian estimation, Basis material decomposition, Energy Selective Computed Tomography, Spectral Computed Tomography}
+\keywords[french]{Collaboration, Réalité Virtuelle}
 
 %Order number of the thesis
 \ordernumber{}
@@ -200,9 +200,9 @@
 %########################################################################
 % Acknowledgments
 %########################################################################
-
+\iffalse
 \pagebreak\strut
- \newpage
+\newpage
 \chapter*{Acknowledgement}
 \input{acknowledgement}
 \clearpage
@@ -210,38 +210,21 @@
 \chapter*{}
 \thispagestyle{empty}
 \textit{\hfill The spring silk worm \newline \null\hfill will weave its thread until it dies;\newline\newline \null\hfill The wax candle \newline \null\hfill will shed tears until it turns to ashes. \newline\newline \null\hfill - To my family}
-
-%\phantomsection
-%\addcontentsline{toc}{chapter}{Acknowledgements}
-%\chapter*{Acknowledgements}
-%\input{acknowledgements}
-
-% \input{titlepage_english}
+\fi
 
 %########################################################################
 % Multilingual abstracts
 %########################################################################
-
-%%French abstract:
-%\begin{abstract}
-%
-%\end{abstract}
-% \newpage
-
-% \phantomsection
-%\addcontentsline{toc}{chapter}{Abstract}
-%\chapter*{Abstract}
-% \begin{abstract}[english] %one page
-% \addcontentsline{toc}{chapter}{\numberline{}Abstract}
-%\input{abstract_english}
-% \end{abstract}
+%\phantomsection
+%\addcontentsline{toc}{chapter}{\numberline{}Abstract/Résumé}
+\chapter*{}
+\mtcaddchapter[Abstract/Résumé]
+\input{abstract_english}
 
 %########################################################################
 % french resume one page
 %########################################################################
-%\addcontentsline{toc}{chapter}{Résumé}
-%\chapter*{Résumé}
-%\input{abstract_french}
+\input{abstract_french}
 
 %########################################################################
 % Contents
@@ -263,6 +246,7 @@
 %\renewcommand{\nomname}{Notations}
 %\printnomenclature[1.0in]
 %% \addcontentsline{toc}{chapter}{\numberline{}Resume}%
+
 \dominitoc % Initialization
 \tableofcontents
  %\cleardoublepage
@@ -281,15 +265,15 @@
 \input{introduction}
 \input{chapter_1}
 \input{chapter_2}
-\input{chapter_3}
-\input{chapter_4}
-\input{conclusion}
+%\input{chapter_3}
+%\input{chapter_4}
+%\input{conclusion}
 \input{appendix}
 
 %\bibliographystyle{alpha}
 %\bibliographystyle{named}
-
 \bibliographystyle{plainnat}
+
 \bibliography{references}
 %
 %%% ----------------------------------------------------------------

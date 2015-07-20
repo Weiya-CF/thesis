@@ -3,32 +3,43 @@
 \minitoc
 
 \section{Introduction}
-This chapter gives a general description of the context and different topics related to using immersive virtual environment for collaborative work. Collaborative Virtual Environments (CVEs), especially the ones providing immersive virtual experiences, 
+This chapter presents a state of the art of different topics related to using immersive virtual environment for collaborative work. Being the joint interest of Virtual Reality (VR) and Computer Supported Collaborative Work (CSCW), the research on Shared Virtual Environment (SVE) or Collaborative Virtual Environment becomes more and more popular.
 
-\section{Immersive Virtual Environment}
+With the rapid increasing computation capacity and the development of computer network, multi-agent collaboration via computer-generated virtual space with new types of communication and interaction becomes available.
+
+\section{Virtual Reality}
+
 \subsection{Virtual Environment}
-\subsection{Immersion - towards Virtual Reality}
-Virtual environment can be supported by different systems from traditional desktop computers to immersive virtual reality displays. Studies have shown that immersion, which can invoke the feeling of presence \citep{Slater1994DepthPre}, has not only a pronounced effect on user performance \citep{Dangelo2008Benefits}, but also has an impact on the social relationship between collaborators \citep{Slater2000Small}.
-
-Nowadays, immersive virtual environment can mainly be supported by two different display technologies: Projection-based displays, such as workbench, Dome, or CAVE \citep{CruzNeira1993SPV}, and Head-Mounted Displays (HMDs) \citep{Melzer1997HMD}.
+According to \citet{Fox2009Guide}, a virtual environment (VE) is a digital space in which a user's movements are tracked and his or her surroundings rendered, or digitally composed and displayed to the senses, in accordance with those movements.
 
 
-\subsubsection{Stereoscopy, Human's Visual System}
+\subsection{Immersion}
+Studies have shown that immersion, which can invoke the feeling of presence \citep{Slater1994DepthPre}, has not only a pronounced effect on user performance \citep{Dangelo2008Benefits}, but also has an impact on the social relationship between collaborators \citep{Slater2000Small}.
+
+
+
+
 \subsubsection{Immersive Projection Display}
-Projection-based VR displays, especially systems with Immersive Projected Technologies (IPT) like stereoscopic image walls or CAVEs, provide a natural place for teamwork \citep{Johanson2002IWP}, because they are usually shared by a group of people rather than a single user \citep{Benford1996SST}. However, most projection-based displays can only support one fully tracked active user, other co-located users can only share the same point of view with distorted images and participate passively in the collaborative task \citep{Bayon2006Multiple}. This visual distortion impedes users’ collaborative spatial judgments by impacting the perception of depth and direction in the virtual world \citep{Pollock2012Right}.
+Projection-based VR displays, especially systems with Immersive Projected Technologies (IPT) like stereoscopic image walls or CAVEs \citep{CruzNeira1993SPV}, 
+
+
 
 \subsubsection{Head Mounted Display}
-Head Mounted Display (HMD) can give separate stereoscopic views for each user, and users are visually immersed in the virtual world since the real environment is completely occluded by the screen in front of the eyes. This characteristic has both advantages and inconveniences for co-located collaboration. First of all, users can be co-located either side-by-side or face-to-face with the help of avatars, and they can also talk directly without computer mediation. Additionally, tangible props can be used to improve interaction with virtual content \citep{Salzmann2008TUS}. However, the fact that the perception of physical environment is completely blocked hinders direct communication between users including gestural and postural information. See-through HMDs seem to be a promising option to avoid drawbacks of non-see-through HMD for collaboration between multiple co-located users. For example, in the Studierstube project \citep{Schmalstieg2002Stube}, users wear tracked see-through HMDs to perceive both the physical environment and synthetic images at the same time.
+Head-Mounted Displays (HMDs) \citep{Melzer1997HMD}, as the name indicates, is a helmet containing two separated displays that are put directly in front of user's eyes allowing visual immersion. 
+
+For example, in the Studierstube project \citep{Schmalstieg2002Stube}, users wear tracked see-through HMDs to perceive both the physical environment and synthetic images at the same time.
+
+\subsection{Interaction}
 
 \subsection{Summary}
 
 \section{Collaboration}
 CVE (Collaborative Virtual Environment) refers to a virtual environment that can be shared by participants connected by a computer (remote or local) network. Users are connected with the virtual world through graphic embodiments called avatars.
 
-A collaborative virtual environment (CVE) \citep{Benford2001CVE} enables multiple users to interact \citep{Schroeder2006Usability} and to achieve collaborative tasks \citep{Dodds2009Using} within the same virtual environment. Users can be co-located in the same place or connected remotely. In the co-located situation, users will not only share the virtual space but also the physical workspace. This is a big advantage compared to distributed CVEs where communication and interaction between users can only be mediated by computer systems. The fact that multiple users are at the same place supports natural interactions such as talking, gestures, postures and other social communication cues that facilitate the interaction and communication between collaborators.
+A collaborative virtual environment (CVE) \citep{Benford2001CVE} enables multiple users to interact \citep{Schroeder2006Usability} and to achieve collaborative tasks \citep{Dodds2009Using} within the same virtual environment. Users can be co-located in the same place or connected remotely.
 
-\subsection{User Embodiment}
-Avatars or virtual humans have long been used in CVEs as a virtual representation of the users, or we can call it user embodiment \citep{Benford1995UEC}. Avatars can provide various important functions in a multi-user virtual environment \citep{Thalmann2001VHR}. For example, a user can get other users' positions, focus of interest and see what they are doing, etc. Users can also get a representation of self in the virtual environment by using self-avatars \citep{Lok2003Effects}, which may be especially useful when working with HMDs. Moreover, according to the task that the users need to achieve in the virtual context, social representation of self may be provided through dedicated virtual clothings and/or virtual tools. In an immersive virtual environment, avatars can play a crucial role for user interaction and communication \citep{Slater1994Body}. Users work together not only in a shared virtual world, but also in a shared social space where social human communication is conveyed by avatars \citep{Roberts2004SSH}.
+\subsection{User Representation}
+Avatars or virtual humans have long been used as virtual representation of the users, or we can call it user embodiment \citep{Benford1995UEC}. Avatars can provide various important functions in a multi-user virtual environment \citep{Thalmann2001VHR}. For example, a user can get other users' positions, focus of interest and see what they are doing, etc. Users can also get a representation of self in the virtual environment by using self-avatars \citep{Lok2003Effects}, which may be especially useful when working with HMDs. Moreover, according to the task that the users need to achieve in the virtual context, social representation of self may be provided through dedicated virtual clothings and/or virtual tools. In an immersive virtual environment, avatars can play a crucial role for user interaction and communication \citep{Slater1994Body}. Users work together not only in a shared virtual world, but also in a shared social space where social human communication is conveyed by avatars \citep{Roberts2004SSH}.
 
 Several techniques can be used to bring avatars to life. In a desktop configuration, we can use input devices like keyboards to activate predefined animations. While in an immersive virtual environment, real time motion capture systems such as Kinect or optical tracking devices are more suitable to map user's physical motion to an avatar \citep{Mohler2010Effect, Vera2011AugMir, Normand2012FBA}. Due to technology limitations or high cost, humanoid avatars do not commonly support facial expression and other subtle social cues. Another interesting method developed by \citet{Ogi2001SteAva} introduces a fully animated video avatar based on live video capture. \citet{Beck2013IGG} used a similar technique to enable interactions between multiple co-located users and a group of remote users by their avatars.
 
@@ -38,6 +49,7 @@ Social Human Communication
 Spatial Communication (Spatial Reference Frame)
 
 \subsection{User Interface}
+\subsubsection{3D Interaction}
 \subsubsection{Co-manipulation}
 \subsubsection{Co-navigation}
 
