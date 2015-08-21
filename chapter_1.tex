@@ -1,4 +1,4 @@
-\chapter{Collaborative Virtual Environment - A General State of the Art}
+\chapter{Collaboration in Virtual Environment - A General State of the Art}
 \label{chapter:context}
 \minitoc
 
@@ -57,9 +57,9 @@ As mentioned in \citet{Fuchs2011Book}'s definition of virtual reality, behaviora
 As the idiom ``Seeing is believing" states, the visual sense is nearly the most important sensory channel that humans use to discover the real world, which is also true in virtual reality applications. The software and hardware advancements in computer graphics constantly improve the quality of real time three-dimensional images, which allows more complex and photo-realistic rendering. The display used as visual interface should have the following characteristics:
 
 \begin{itemize}
-\item Large field of view (FoV) both in horizontal and vertical directions (``borderless").
-\item Stereoscopic vision in the entire binocular field of vision.
-\item High graphic resolution (pixel density), currently most widely used is 1080p FullHD display, but displays with higher resolution are on the way.
+\item Large field of view (FoV) both in horizontal and vertical directions (``borderless");
+\item Stereoscopic vision in the entire binocular field of vision;
+\item High graphic resolution (pixel density), currently most widely used is 1080p FullHD display, but displays with higher resolution are on the way;
 \item Head or eye tracking compatible. Since we can move our head and eyes to look into different directions, it is necessary to assure that user always has perspective-correct view of the virtual scene. This can be achieved by using tracking devices\footnote{see section \ref{sec:tracking}.}
 \end{itemize}
 
@@ -161,7 +161,6 @@ In many virtual reality applications, it is sufficient to track user's head and 
 
 Tracking interface can be implemented with different physical principals, including mechanical, electromagnetic, optical or acoustic methods \citep{Meyer1992Survey}. Although no single technology works for all purposes, certain methods work quite well for specific applications \citep{Welch2002Survey}. The new trend now is to combine different tracking technologies into one product to get better tracking quality, e.g. the hybrid suit from ART\footnote{http://www.ar-tracking.com/products/motion-capture/hybrid-suit} is a combination of optical, mechanical and magnetic trackers. Video based tracking devices using computer vision methods, such as kinect and leap motion (Figure~\ref{fig:1_video_tracking}), are also getting more popular because of their low cost and easy setup procedure.
 
-
 \begin{figure}[htb]
   \begin{subfigure}{.5\textwidth}
     \centering
@@ -227,8 +226,33 @@ This first part of Chapter \ref{chapter:context} gives a brief introduction of v
 \section{Computer Supported Collaboration}
 The development of communicational technology changes the way people work together, for example, telephone and telegraph make the exchange of information much faster than paper-based media. Later on, with the boom of the Internet, emails, forums, video conferences create a tighter link among remote collaborators. However, networked collaboration still faces a lot of difficulties in terms of communication and coordination. For example, how a group of coders can contribute to the same project remains a non-trivial job despite using versioning tools like svn or git.
 
-In 1984, Irene Greif of MIT and Paul M. Cashman of Digital Equipment Corporation organized a workshop attended by people from various domains interested in using technology to support people in their work. In this workshop the term Computer Supported Cooperative Work (CSCW) was first mentioned \citep{Grudin1994Computer}, then it becomes a research domain attracting world-wide interests. CSCW studies how computer systems could enable a group of people connected by network to work together efficiently, or as stated by \citet{Carstensen1999CSCW}: ``how collaborative activities and their coordination can be supported by means of computer systems". More detailed presentation of an overview of the history, state of the art and research issues of CSCW can be found in the book by \citet{Beaudouin1999CSCW}.
+In 1984, Irene Greif of MIT and Paul M. Cashman of Digital Equipment Corporation organized a workshop attended by people from various domains interested in using technology to support people in their work. In this workshop the term Computer Supported Cooperative Work (CSCW) was first mentioned \citep{Grudin1994Computer}, then it becomes a research domain attracting world-wide interests. CSCW studies how computer systems could enable a group of people connected by network to work together efficiently, or as stated by \citet{Carstensen1999CSCW}: ``how collaborative activities and their coordination can be supported by means of computer systems". More details about the history, state of the art and research issues of CSCW can be found in the book by \citet{Beaudouin1999CSCW}.
 
+
+\subsection{Characteristics of Collaborative Work}
+We can learn many things from observation of people working and collaborating in the real world to get some insights into the nature of collaborative work \citep{Churchill1998CVE}. Here are some general points to summarize characteristics of collaborative work:
+
+\paragraph{Collaboration is human-centered} The number and profile of people involved in the task define the general organization for collaboration. For example, small groups are likely to work together in real time with more flexible schedules, communicate informally and share information with minimal cost, while large groups need much more efforts for coordination and more adapted communication technology. The profile of collaborators also matters, if one person is way more experienced than others, it is better to have a leader-follower mode so everyone works around this leader. However, if working capacity is homogeneously distributed and especially, each one has his/her own expertise, it is better to work with equal responsibility for the task.
+
+\paragraph{Collaboration is task-oriented} The nature of the task defines the spatial and temporal constrains for collaboration, or we can say that sometimes people need to collaborate because of some spatial or temporal issues and the task can not be done without combining efforts from different actors. For example, tasks like painting a wall or repairing a car together require people to be co-located, other tasks like operating a TV live show, or having a video conference need synchronous actions. Moreover, complex tasks often consist of different components with inherent logical links and the task can only be accomplished with a certain procedure.  
+
+\paragraph{Awareness is the base of coordination} Awareness is one's knowledge of task related activities, especially activities of others. As stated by \citet{Dourish1992Awareness}, awareness is an ``understanding of the activities of others, which provides a context for your own activity". This ``context" allows an individual to evaluate his/her actions with respect to group goals and work progress. In addition, awareness may also refer to the knowledge of the state of a task related object (e.g. the history and current state of the shared document for group editing task) and the working atmosphere (whether there is an emergency, whether people are under pressure, etc.).
+
+
+\paragraph{A shared context is essential} A shared context allows group members to ``stay on the same page" (shared understanding), which largely facilitates their communication and coordination. We can call it a \textit{common ground} \citep{Clark1991Grounding} or \textit{team situation awareness} \citep{Salas1995SA} which is based on the situation awareness of each individual. In conventional situations, a shared context is naturally established by a shared physical and social space. For example, two workers are in the same room, there will not be confusion when one points to a table and says ``Let's move it to the corner". When people are distributed and connected by computer network, it is essential for a successful collaborative system to maintain a shared context by sharing artifacts and activities.
+
+\paragraph{Multiple viewpoints are helpful} A complex task should have multiple representations, each offering a different point of view of the problem or focusing on a specific subtask. In certain cases, one individual may require multiple representations to reflect different aspects of their task, whilst in other cases people with different profiles and skills may require tailored representations to provide information specific to their tasks. Taking an example from \citet{Churchill1998CVE}, people taking part in the architectural design review of a building might only want to see features relating to their specialty in detail. So an electrician might only want to see detailed wiring plans, but not necessarily the plans for the plumbing, except in cases where there was a potential conflict. There are more reasons to vary the representation of a task in a broader social context, for example, companies involved in a same project often need to keep their sensitive data or workflow from others. So when designing computer supported collaborative system, ``WYSIWIS" (What You See Is What I See) \citep{Stefik1987WYSIWIS} may not be a proper choice in many cases.
+
+\paragraph{Transition between shared and individual activities is required} Collaborative scenarios usually contain different coupling stages \citep{Gutwin1998Design, Lissermann2014PMC}: \textit{closely-coupled stage} to solve problems in group and \textit{loosely-coupled stage} to tackle individual subtask. So collaborative work involves the interleaving of individual and group effort, which requires explicit communication and coordination between collaborators. For example, in a car assembly task, workers may need to go to storehouses and fetch a certain component for change from time to time, and then come back to the assembly work. This task contains both individual object-searching and closely coupled interactions for the assembly work. \citet{Isenberg2012Co} further identified a series of eight different collaboration styles and activities that participants adopted during a working session around an interactive table. So a collaborative system should manage group workspace as well as personal workspace and allow active transition between shared and individual activities.
+
+
+These characteristics help us to understand the process of collaborative work and offer a guideline for the design of computer supported collaborative system. \citet{Okada2007Collab} proposed a multi-layered hierarchical framework which shows a clear picture of different elements contributing to the collaboration and a structural link between aforementioned characteristics. As shown by Figure~\ref{fig:1_collab_model}, the model consists of four layers and each layer is based on the layer below: spatial and temporal coexistence enables awareness of others' activities, which then allows the exchange of views and opinions, the sharing of knowledge and information, and the distribution of work and operations. At the highest level, the sharing of activities enable the final collaboration between multiple actors with the balance between assertions and cooperations (negotiation).
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.6\textwidth]{figures/ch1/collab_model}
+  \caption{\label{fig:1_collab_model}A hierarchical collaboration model from \citet{Okada2007Collab}.}
+\end{figure}
 
 \subsection{Groupware}
 Being the central interest of CSCW, groupware is a type of computer-based systems designed to support a group of people to work together. \citet{Ellis1991Groupware} defined groupware as the following: ``computer-based systems that support groups of people engaged in a common task (or goal) and that provide an interface to a shared environment".
@@ -243,46 +267,68 @@ Groupware implementations can be grouped by a conceptual time-space matrix \cite
 
 This typology of groupware based on time-space matrix is not aimed to provide strict rules to put every groupware application into one of the categories. Sometimes both synchronous and asynchronous communications are supported by a given device (e.g. two groups of users work on a wall display with results left by a previous group), and the used technology does not imply geographic distance between users (e.g. forwarding an email to a co-worker in the same room). However, it shows an overview of existing CSCW systems depending on the context of a system's use. It also offers a guideline for groupware design concerning temporal and spatial constrains. For example, synchronous applications need management of concurrent resource access and live communication between users, and groupware connecting remote users need to carefully choose the network architecture (server-client, peer-to-peer, etc.) to be used and to take into consideration the network latency.
 
-Another taxonomy by \citep{Grudin2012Taxonomy} divides collaborative activities into three functional categories: communication, information sharing and coordination. The accomplishment of a collaborative task often requires all three types of activities,  but with different proportions. For example, small groups are likely to work together in real time, communicate informally and share information, and they have minimal need for coordination technologies.
+Another taxonomy by \citep{Grudin2012Taxonomy} divides collaborative activities into three functional categories: communication, information sharing and coordination. The accomplishment of a collaborative task often requires all three types of activities. For example, when several authors of a book use a group editor to finish their work together, they need to have a shared version of the document and a clear assignment of different unfinished parts to corresponding authors, and also real-time communications by means of instant messages or audio meetings and asynchronous communications by leaving comments and annotations.
 
-\citet{Okada2007Collab} proposed a multi-layered hierarchical framework which shows a clear picture of different elements contributing to the collaboration between participants. As shown by Figure~\ref{fig:1_collab_model}, the model consists of four layers and each layer is based on the layer below: spatial and temporal factors affect users' awareness, which then allows them to share views and opinions (communication), to share knowledge and information (information sharing), and to share work and operations (coordination). At the highest layer, all these functional activities enable the final collaboration between multiple actors with the balance between assertions and cooperations. 
+
+\subsection{Collaborative Virtual Environment}
+\subsubsection{Definition}
+A Collaborative Virtual Environment (CVE) refers to a virtual environment that enables multiple users to interact and to achieve collaborative tasks. CVEs provide a potentially infinite, graphically realized digital landscape within which multiple users can interact with each other and with simple or complex data representations \citep{Churchill1998CVE}. 
+
+CVE differs from traditional groupware applications (e.g. email, instant messages, video conference, etc.) in that, instead of connecting people from different locations, CVEs create a virtual world and ``put" users and task related information directly in that world. This virtual world naturally provides users with a common spatial and social context for collaboration. CVEs are also different from other content sharing groupware such as group editors and group calendars because CVEs are multi-function and multi-purpose platforms that can support many forms of communication both for routinized and highly flexible tasks. Users have more degrees of control over the communication with others (free to navigate and encounter people) and more types of interactions with digital objects inside a malleable virtual space.
+
+A lot of CVE applications exist from early prototypes (e.g. DIVE \citep{Carlsson1993DIVE}, NPSNET \citep{Macedonia1994NPSNET} etc.) appeared during 1990's (Figure~\ref{fig:1_cve:dive}), to more developed systems like MASSIVE-3 \citep{Greenhalgh2000MASSIVE} and ANTS \citep{Lopez2003ANTS}, etc. The general framework of CVE is gradually stabilized and standardized since then. Now mature CVE systems are widely applied and become the major trend in the game industry, there are enormous commercial products like online communities (e.g. Active Worlds\footnote{https://www.activeworlds.com}) (Figure~\ref{fig:1_cve:aw}) and collaborative games like MMORPGs\footnote{Massively Multiplayer Online Role-Playing Games} which attract millions of users \citep{Brown2004CSCW}. More information about the history and current status of CVEs are presented by \citet{Joslin2004CVE}.
 
 \begin{figure}[htb]
-  \centering
-  \includegraphics[width=0.6\textwidth]{figures/ch1/collab_model}
-  \caption{\label{fig:1_collab_model}A hierarchical collaboration model from \citet{Okada2007Collab}.}
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/ch1/dive}
+    \caption{A virtual meeting within the DIVE platform.}
+    \label{fig:1_cve:dive}
+  \end{subfigure}
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/ch1/activeworld}
+    \caption{The Cavatar world from Active Worlds.}
+    \label{fig:1_cve:aw}
+  \end{subfigure}
+  \caption{\label{fig:1_cve} Some examples of existing CVE applications.}
 \end{figure}
 
-\subsection{Groupware}
+
+\subsubsection{Issues and Challenges}
+The emergence of CVEs comes along with technical issues due to the complexity of such system. Supporting rich social interaction in densely populated virtual worlds requires addressing a variety of technical challenges. Here is a list of technical issues that need to be addressed inspired by the work of \citet{Benford2001CVE} and \citet{Joslin2004CVE}:
+
+\begin{itemize}
+\item Scene management: how to merge events and keep data consistency among different sites, how to segment a virtual world into smaller sections \citep{Kazman1993Making};
+\item Network topology: choose among server-client, peer-to-peer or hybrid structure to reduce traffic loads and improve data distribution efficiency;
+\item Compression: how to compress the data to be transmitted knowing that real time interaction between multiple users can generate huge amount of data, especially with sophisticated virtual human \citep{Capin1998Efficient};
+\item Personal viewpoint: design software model to support ``subjective" view on the shared world \citep{Smith1996CVE};
+\item Human computer interface: using virtual reality technology to convey more information for natural interaction and social communication;
+\item etc.
+\end{itemize}
+
+Human factors are also crucial to the design and effective use of CVEs as a new type of social community. Here we group research questions around four topics: 
+
+\begin{itemize}
+\item Social conventions: are the social conventions in the real world still applicable in the shared virtual world \citep{Becker1998Social}? What has or has not changed?
+\item User embodiment: how the virtual representations (simple object, robot, humanoid avatar, etc.) influence their communication? How to design the body image of a user to provide information such as identity, activity, availability, mood and many other factors \citep{Benford1995Embodiment}? 
+\item Awareness: how to be aware of other people's intention and perceptual capabilities (e.g. size of field of view) in the virtual world \citep{Benford1994Awareness}?
+\item Social communication: how social communications are supported in CVEs compared to cases in real world \citep{Bailenson2006Long}?
+\end{itemize}
+
 
 \subsection{Summary}
-
+This second part of Chapter \ref{chapter:context} summarizes characteristics of collaborative work in the real world and their implications for the design of computer supported collaboration systems (groupware). CVE as a flexible and multi-function platform attracts research interests from both CSCW and virtual reality communities. Although there are still many technical and human-related issues to be solved, CVEs already show great potential for supporting efficient and seamless collaboration in a rich social context.
 
 % -------------------------------------------------------------------------------------------------
 \newpage
 
-\section{Collaborative Virtual Environment}
-
-\subsection{Definition}
-A Collaborative Virtual Environment (CVE) \citep{Benford2001CVE} refers to a virtual environment that enables multiple users to interact and to achieve collaborative tasks. A CVE can be shared by participants connected by remote or local computer network to allow both distributed and co-located collaborations. CVEs exist in different forms from generic prototypes (e.g. DIVE \citep{Carlsson1993DIVE}, MASSIVE \citep{Greenhalgh2000MASSIVE}, etc.) as summarized by \citet{Joslin2004CVE}, to large online games like MMORPGs\footnote{Massively Multiplayer Online Role-Playing Games} which involve millions of users \citep{Brown2004CSCW}.
-
-
-CVE differs from other kinds of groupware in that it provides users a common spatial and social context - a virtual world , which is crucial for collaborative activities \citep{Churchill1998CVE}. it not only acts as a tool for communication and sharing, but also
-
-
-The emergence of CVE creates a new way to support collaborative task on computer systems, but also brings new research challenges on both technical and human sides.
-
-\subsection{Technical Issues}
-
-Network Architecture, Scene Management, Data Distribution
-
-
+\section{Immersive Collaborative Virtual Environment}
 In this manuscript, we are interested in immersive CVEs which combine virtual reality technology with multi-user virtual environment. Traditional CVEs are based on desktop computers with keyboard and mouse as input devices
 
 Now we will discuss all these aspects separately. 
 
-\subsection{Immersive CVEs}
-\subsubsection{User Representation}
+\subsection{User Representation}
 Users are connected with the virtual world through graphic embodiments called avatars.
 
 Avatars or virtual humans have long been used as virtual representation of the users, or we can call it user embodiment \citep{Benford1995UEC}. Avatars can provide various important functions in a multi-user virtual environment \citep{Thalmann2001VHR}.
@@ -291,7 +337,7 @@ For example, a user can get other users' positions, focus of interest and see wh
 
 Several techniques can be used to bring avatars to life. In a desktop configuration, we can use input devices like keyboards to activate predefined animations. While in an immersive virtual environment, real time motion capture systems such as Kinect or optical tracking devices are more suitable to map user's physical motion to an avatar \citep{Mohler2010Effect, Vera2011AugMir, Normand2012FBA}. Due to technology limitations or high cost, humanoid avatars do not commonly support facial expression and other subtle social cues. Another interesting method developed by \citet{Ogi2001SteAva} introduces a fully animated video avatar based on live video capture. \citet{Beck2013IGG} used a similar technique to enable interactions between multiple co-located users and a group of remote users by their avatars.
 
-\subsubsection{User Communication}
+\subsection{User Communication}
 \label{sec:user-com}
 Social Human Communication
 
@@ -299,13 +345,13 @@ Users work together not only in a shared virtual world, but also in a shared soc
 
 Spatial Communication (Spatial Reference Frame)
 
-\subsubsection{User Interaction}
-\paragraph{Co-manipulation}
-\paragraph{Co-navigation}
+\subsection{User Interaction}
+\subsubsection{Co-manipulation}
+\subsubsection{Co-navigation}
 
-\subsubsection{From Presence to Co-presence}
+\subsection{From Presence to Co-presence}
 
-
+\subsection{Workspace Management}
 
 \subsection{Summary}
 
