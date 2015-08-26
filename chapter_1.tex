@@ -185,6 +185,7 @@ Apart from major sensory channels like vision, audio and the sense of touch, the
 As we discussed before, virtual reality is a human-centered research domain. Technical advancement concerning the modeling of virtual world and the design of behavioral interfaces all serve to provide a better feeling of ``being in another world" (presence) for the human in virtual environment. So to understand human activity and sensation at perceptual and cognitive levels is a key to the success of virtual reality system.
 
 \subsubsection{3D Interaction}
+\label{sec:3D_inter}
 The interaction between the user and 3D virtual world begins once he/she is inside the virtual environment, and these human activities can be divided into some basic behaviors named Virtual Behavioral Primitives (VBP) \citet{Fuchs2011Book}. VBPs can be grouped into five categories:
 
 \begin{itemize}
@@ -195,9 +196,7 @@ The interaction between the user and 3D virtual world begins once he/she is insi
   \item application control.
 \end{itemize}
 
-In the list above, except for application control, these activities are the same that people practice in the real world. Observation is our first triggered action after we dived into a virtual environment, which is a relatively passive action. The only interaction part is that when user turns head or has ocular movements (captured with eye tracking), the system will adapt the visual and audio rendering accordingly. Moving or navigation in the virtual world is also a basic interaction for the user to accomplish various tasks like object searching or transporting, way finding, sightseeing, etc. Besides natural walking, many virtual navigation metaphors are developed to effectuate more efficient virtual viewpoint control under different specific conditions (more details to be presented in Chapter \ref{chapter:nav_cohab}). Regarding ``acting", which is a vague notion, is further broke into object selection, manipulation and symbolic input by \citet{Bowman2004UIT}. The way we interact with virtual object is still quite different than with real objects due to technical limitations (e.g. lack of detailed and robust haptic feedback), thus many interaction metaphors are proposed to enable other forms of interaction \citep{Hand1997Survey}.
-
-When interacting in an immersive virtual environment, user's sensory channels are partly blocked by the computer system. However, this does not change the fact that the user is still in the real world, thus he/she is constrained by limits of the physical workspace, for example, the user can not cross real walls or screen displays. The implication of these real world constrains on the use of immersive virtual environment is a major issue of this manuscript and will be discussed in Chapter \ref{chapter:nav_cohab}).
+In the list above, except for application control, these activities are very similar to what people practice in the real world. Observation is our first triggered action after we dived into a virtual environment, which is a relatively passive action. The only interaction part is that when user turns head or has ocular movements (captured with eye tracking), the system will adapt the visual and audio rendering accordingly. Moving or navigation in the virtual world is also a basic interaction for the user to accomplish various tasks like object searching or transporting, way finding, sightseeing, etc. Besides natural walking, many virtual navigation metaphors are developed to effectuate more efficient virtual viewpoint control under different specific conditions (more details to be presented in Chapter \ref{chapter:nav_cohab}). Regarding ``acting", which is a vague notion, is further broke into object selection, manipulation and symbolic input by \citet{Bowman2004UIT}. The way we interact with virtual object is still quite different than with real objects due to technical limitations (e.g. lack of detailed and robust haptic feedback), thus many interaction metaphors are proposed to enable other forms of interaction \citep{Hand1997Survey}.
 
 
 \subsubsection{Presence}
@@ -216,6 +215,10 @@ Cybersickness is a polygenic \citep{Kennedy1992Simulator} and troublesome proble
 Researchers have tried to identify factors that are susceptible to cause cybersickness when using a virtual environment. For example, \citet{Rich1996AICS} examined the relationship between sensory compatibility and cybersickness symptoms, while \citet{So2002Scene} emphasized that the visual complexity of the virtual scene should also be taken into consideration. Technical issues such as lags \citep{Pausch1992Literature}, flickers \citep{Harwood1987Temporal}, and individual factors like gender \citep{Biocca1992Will} and age \citep{Reason1975Motion}, all have some influences on the severity of cybersickness symptoms. A more complete list of primary factors that contribute to the cause of cybersickness was provided by \citet{LaViola2000DCV}. He also gave an interesting discussion on three conflicting theories that try to explain the occurrence of cybersickness.
 
 Currently, to evaluate the severity of cybersickness, the Simulator Sickness Questionnaire (SSQ) \citep{Kennedy1993SSQ} remains the reference tool. SSQ groups all symptoms around three main factors: nausea (nausea, stomach awareness, etc.), oculomotor (eyestrain, blurred vision, etc.) and disorientation (dizziness, vertigo). The development of various physiological measurements also begins to show interesting correlation between cybersickness symptoms and various physiological indicators \citep{Kim2005Characteristic, Min2004Psycho, Sugita2008Quantitative}. However, further research efforts are required to establish a valid cybersickness evaluation model based on physiological indicators. The study of physiological responses of human body when exposed to virtual environment will also help us to better understand the cause of cybersickness.
+
+\subsubsection{Workspace Management}
+When interacting in an immersive virtual environment, user's sensory channels are partly blocked by the computer system. However, this does not change the fact that the user is still in the real world, thus he/she is constrained by limits of the physical workspace, for example, the user can not cross real walls or screen displays. The implication of these real world constrains on the use of immersive virtual environment is a major issue of this manuscript and will be discussed in Chapter \ref{chapter:nav_cohab}).
+
 
 \subsection{Summary}
 This first part of Chapter \ref{chapter:context} gives a brief introduction of virtual reality around its three main components: virtual environment, behavioral interface and the user. Key notions like presence and cybersickness, as well as different hardware implementations of virtual reality system are presented, so they can be used directly later on in this manuscript. 
@@ -296,6 +299,7 @@ A lot of CVE applications exist from early prototypes (e.g. DIVE \citep{Carlsson
 
 
 \subsubsection{Issues and Challenges}
+\label{sec:cve-issue}
 The emergence of CVEs comes along with technical issues due to the complexity of such system. Supporting rich social interaction in densely populated virtual worlds requires addressing a variety of technical challenges. Here is a list of technical issues that need to be addressed inspired by the work of \citet{Benford2001CVE} and \citet{Joslin2004CVE}:
 
 \begin{itemize}
@@ -316,42 +320,99 @@ Human factors are also crucial to the design and effective use of CVEs as a new 
 \item Social communication: how social communications are supported in CVEs compared to cases in real world \citep{Bailenson2006Long}?
 \end{itemize}
 
+\citet{Otto2006Review} also give a summary of factors that influence collaboration in CVEs by grouping them into different levels.
 
 \subsection{Summary}
 This second part of Chapter \ref{chapter:context} summarizes characteristics of collaborative work in the real world and their implications for the design of computer supported collaboration systems (groupware). CVE as a flexible and multi-function platform attracts research interests from both CSCW and virtual reality communities. Although there are still many technical and human-related issues to be solved, CVEs already show great potential for supporting efficient and seamless collaboration in a rich social context.
+
 
 % -------------------------------------------------------------------------------------------------
 \newpage
 
 \section{Immersive Collaborative Virtual Environment}
-In this manuscript, we are interested in immersive CVEs which combine virtual reality technology with multi-user virtual environment. Traditional CVEs are based on desktop computers with keyboard and mouse as input devices
+As stated in the previous section, CVE is developing as a convergence of research interests within CSCW and VR communities. On the one hand, most existing virtual reality systems (e.g. CAVEs or HMD-based systems) can offer high level of multi-sensory immersion for a single user (except multi-user systems that we will talk about in Chapter \ref{chapter:colocated}), so it is interesting to make connexions between these (remote) immersive systems by CVE technology to enable group immersion. On the other hand, with the progress of telecommunication technology and computer science (computer graphics, high performance computing, etc.) in recent years, many low-level issues of CVEs are already solved or we can say, are no longer the bottleneck for CVE usage. However, desktop-based CVEs with traditional human-computer interface have still limited support for social human communications compared to face-to-face interaction in the real world, and the lack of sensorial feedback makes it difficult for users to feel ``being in the virtual world" and impairs their task performance \citep{Narayan2005Quantifying, Nam2008Roles}, so it is important to introduce behavioral interfaces for CVEs to convey more social cues for human communication and to improve the immersion level.
 
-Now we will discuss all these aspects separately. 
+As a consequence, more immersive CVEs are implemented with various hardware and software solutions. With the ``perception, decision and action" loop as shown in Figure~\ref{fig:1_loop}, we can apply this loop in a multi-user situation and extend it to illustrate the conceptual framework of immersive CVEs (Figure~\ref{fig:1_multi_loop}). In this shared virtual world, users' ``perception, decision and action" loops are interconnected as one user's action could affect other users' perception of the virtual world.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.9\textwidth]{figures/ch1/multi_loop}
+  \caption{\label{fig:1_multi_loop}The conceptual framework of immersive CVE designed for the multi-user collaboration.}
+\end{figure}
+
+This new networked immersive experience not only changes the way people interact with objects in the virtual world, but also has impacts on how users communicate and interact with each other. The following part of this section will present in more details about different research questions and existing work around CVEs and immersive CVEs from a user-centered perspective.
 
 \subsection{User Representation}
-Users are connected with the virtual world through graphic embodiments called avatars.
+As discussed in section~\ref{sec:cve-issue}, users need virtual representations in the shared virtual space in order to be perceived by others. The virtual representation of users, or can be called user embodiment as explained by \citep{Benford1995Embodiment}, ``concerns the provision of users with appropriate body images so as to represent them to others (and also to themselves) in collaborative situations." Information conveyed by such representation could be position, identity, activity, availability and many other factors \citep{Thalmann2001VHR}. In an immersive virtual environment, this embodiment plays a crucial role for user interaction and communication \citep{Slater1994Body}, it is also helpful (sometimes indispensable) for users to get self-related information. For example, a user equipping an HMD perceives the virtual world from a first-person viewpoint, but his/her real body is completely blocked so a virtual body image can help to ``recreate the missing body" \citep{Lok2003Effects, Mohler2010Effect}. Moreover, according to the task that the users need to achieve in the virtual context, social representation of self may be provided through dedicated virtual clothings and/or virtual tools. 
 
-Avatars or virtual humans have long been used as virtual representation of the users, or we can call it user embodiment \citep{Benford1995UEC}. Avatars can provide various important functions in a multi-user virtual environment \citep{Thalmann2001VHR}.
+The virtual representation of a user is usually a graphic entity, although sometimes a spatialized audio source is also sufficient for certain tasks. Three dimensional graphic recreations of human body (i.e. avatar) can be in extremely different forms, both in terms of morphology and photorealism (rendering style and Levels of Detail (LoD)) \citep{Garau2006Fidelity}. We can have from simple humanoid robots to highly detailed realistic virtual humans. For example, as shown by Figure~\ref{fig:1_vrep:rep_avatar_low}, users in MASSIVE-1 system are embodied in T-shaped robots with their names on top, they can easily get each other's information as position, orientation, identity and availability (avatars of off-line users are lying down) \citep{Greenhalgh1995MASSIVE}. Avatars as used by \citet{Roberts2004SSH} can convey more non-verbal information such as gestures and postures (Figure~\ref{fig:1_vrep:rep_avatar_high}). Users can also be represented by live video streams shown on 3D windows (billboards) \citep{Hayashi2007Immersive} (Figure~\ref{fig:1_vrep:billboard}). Another interesting method developed by \citet{Ogi2001SteAva} introduces an animated video avatar based on live video capture to avoid mesh-based avatar design. This 2.5 dimensional video avatar is captured by a set of cameras so the avatar can be seen from a certain range of directions (Figure~\ref{fig:1_vrep:video_avatar}).
 
-For example, a user can get other users' positions, focus of interest and see what they are doing, etc. Users can also get a representation of self in the virtual environment by using self-avatars \citep{Lok2003Effects}, which may be especially useful when working with HMDs. Moreover, according to the task that the users need to achieve in the virtual context, social representation of self may be provided through dedicated virtual clothings and/or virtual tools. In an immersive virtual environment, avatars can play a crucial role for user interaction and communication \citep{Slater1994Body}. 
 
-Several techniques can be used to bring avatars to life. In a desktop configuration, we can use input devices like keyboards to activate predefined animations. While in an immersive virtual environment, real time motion capture systems such as Kinect or optical tracking devices are more suitable to map user's physical motion to an avatar \citep{Mohler2010Effect, Vera2011AugMir, Normand2012FBA}. Due to technology limitations or high cost, humanoid avatars do not commonly support facial expression and other subtle social cues. Another interesting method developed by \citet{Ogi2001SteAva} introduces a fully animated video avatar based on live video capture. \citet{Beck2013IGG} used a similar technique to enable interactions between multiple co-located users and a group of remote users by their avatars.
+\begin{figure}[htb]
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{figures/ch1/rep_avatar_low}
+    \caption{Users represented by T-shaped robots in MASSIVE-1.}
+    \label{fig:1_vrep:rep_avatar_low}
+  \end{subfigure}
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{figures/ch1/rep_avatar_high}
+    \caption{Simple avatars with higher level of detail.}
+    \label{fig:1_vrep:rep_avatar_high}
+  \end{subfigure}
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{figures/ch1/rep_billboard}
+    \caption{Users having a round table meeting through a set of video streams shown on 3D billboard.}
+    \label{fig:1_vrep:billboard}
+  \end{subfigure}
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{figures/ch1/rep_video_avatar}
+    \caption{Live video texture based 2.5 dimensional video avatar seen from various directions.}
+    \label{fig:1_vrep:video_avatar}
+  \end{subfigure}
+  \caption{\label{fig:1_vrep} Some examples of user's virtual representation in CVEs.}
+\end{figure}
+
+In immersive CVEs (as well as desktop CVEs), high fidelity virtual humans are not always preferred against simple avatars. First, as human body is extremely complex which contains hundreds of muscles and joints, a virtual model replicating exactly the human body in real time is both challenging and costly in terms of computational and network resources. So generally we only need avatars that are ``good enough" for the given task depending on the trade-off between fidelity and efficiency. Second, the resemblance between the real user and his/her avatar is not always found to be beneficial due to the uncanny valley \citep{Mori2012Uncanny}, which has led to lots of discussions and research works in the fields of robotics and computer animation. At last, as collaborative works are task-oriented, certain tasks proceeded in non-realistic virtual worlds (e.g. scientific data visualization, imaginary artistic world) do not necessarily require virtual humans. User representations are not even limited to humanoid avatars and can be any kind of ``beings" or objects according to the context of the virtual world.
+
+Overall, a lot of technical issues still present regarding avatar modeling, animation and motion capture technology if we look for realistic virtual humans inside immersive CVEs. \citet{Magnenat2006Interactive} give a good review of research work on interactive virtual humans in real-time virtual environments.
+
 
 \subsection{User Communication}
 \label{sec:user-com}
-Social Human Communication
+Social human communication (SHC) contains four primary elements: verbal and non-verbal communication, references to objects and references to the environment \citep{Burgoon1994Human}. \citet{Bolt1980Put}'s ``put-that-there" command gives a good illustration of these four elements despite the fact that he was talking to a computer: he was speaking (verbal communication) while pointing (non-verbal communication) to an object (reference to objects) and ``there" refers to a certain place in the virtual environment. 
 
-Users work together not only in a shared virtual world, but also in a shared social space where social human communication is conveyed by avatars \citep{Roberts2004SSH}.
+When working with CVEs, references to objects and environment can be easily understood as all users share the same objects and environment. Regarding verbal and non-verbal communications, while it is relatively easy to enable direct verbal communication (spatialized audio requires more complex setup) between users, it is complicated to convey non-verbal communications through network. With desktop-based CVEs, we can play pre-recorded animations to carry out non-verbal communication as implemented in many multi-player games. However, this method is cumbersome and all personal information can not be conveyed. Immersive CVEs allow users connected by network to ``step into each other's world" and provide the closest resemblance of co-location compared to other tele-collaboration technologies \citep{Wolff2007Review}. In immersive CVEs, non-verbal cues such as gestures and postures, can be captured in real time by motion tracking and haptic devices and then replicated by avatar animation techniques.
 
-Spatial Communication (Spatial Reference Frame)
+Recent research shows increasing importance of non-verbal communications during networked collaborative work \citep{Guye1999Nonverbal, Roberts2004SSH} including gestures \citep{Dodds2011Talk}, postures \citep{Normand2012Full}, eye contact \citep{Bailenson2002Gaze, Garau2003Impact} and facial expressions \citep{Boker2009Effects}. Social scientists also start to use immersive CVEs as a tool to study human behavior in face-to-face communication by introducing biases in the virtual simulation. For example, \citet{Ennis2010Seeing} investigated human sensitivity to audio mismatches and visual desynchronization using motion capture data (Figure~\ref{fig:1_commu}). 
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.9\textwidth]{figures/ch1/commu_study}
+  \caption{\label{fig:1_commu} Avatars animated by motion capture data for behavioral study.}
+\end{figure}
 
 \subsection{User Interaction}
-\subsubsection{Co-manipulation}
-\subsubsection{Co-navigation}
+Due to the inherent differences between the real and virtual world, the way that users perform actions in the virtual world can be similar or very different from how we interact in the real world. Thus many interaction metaphors are proposed to allow users to interact (e.g. object selection and manipulation, navigation, etc.) in the virtual world as summarized by \citet{Bowman2004UIT}'s book.
+
+During a collaborative work session, people can have similar roles and functions, e.g., two workers try to move a heavy object (\textit{piano movers' problem}), two pilots control the landing of a plane, etc. Collaborators can also have distinct roles with different associated competence, e.g. the relationship between trainer and trainee, field operator and online assistant, etc.
+
+Closely-coupled collaboration usually involves the co-manipulation of objects between group members. Co-manipulation means that multiple users can act on the same object simultaneously, which belongs to level 3 cooperation according to \citet{Margery1999Framework}. To support object co-manipulation, the system needs to manage concurrent access to an object by combining inputs from multiple users. Two general solutions exist: we can allocate the control of different attributes to different users, i.e. separation of degrees of freedom \citep{Pinho2002Cooperative} (e.g. one moves the object while another person changes its color); if we need to modify the same attribute, for certain type of attributes (e.g. position, size, etc.) we can take the average value of all the inputs \citep{Ruddle2002Symmetric}, or we can use sophisticated metaphors for real time concurrent manipulation, such as the 3-Hand Manipulation Technique \citep{Aguerreche2009Three}, etc.
+
+Many collaborative tasks require the cooperation among people with different profiles and skills to play different roles, like 
+
+\citep{Pouliquen2014Role, }
+
+\citep{Narayan2005Quantifying, Nam2008Roles, Oguz2010Haptic}
+
+
 
 \subsection{From Presence to Co-presence}
 
-\subsection{Workspace Management}
+
 
 \subsection{Summary}
 
