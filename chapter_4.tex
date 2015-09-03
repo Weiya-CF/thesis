@@ -1,9 +1,83 @@
-\chapter{Experiment on Cohabitation}
+\chapter{Study on User Cohabitation}
 \label{chapter:expe_cohab}
 \minitoc
 
 \section{Introduction}
 In this paper, we extend the existing cohabitation model by adding additional alterations. Then we present three refined experiments to have an exhaustive analysis of different combinations of these alterations respectively in translation-only, rotation-only and translation-rotation combined navigation conditions. In this way we can see more clearly the impact of each alteration and the interaction between them.
+
+\section{Altered Human Joystick}
+
+\subsection{Basic Model}
+The basic navigation method we use is a reduced version (from 6DoF to 3DoF) of a head-controlled navigation technique (Figure~\ref{fig:4_hcnav}) proposed by \citet{Bourdot2002HCNav}. It is actually a human joystick metaphor \citep{McMahan2012EDF}, but with an additional degree of freedom for yaw rotation. User's head position and orientation are captured in real time with an optical tracker attached to the 3D glasses.
+
+To navigate, user first needs to choose a neutral reference frame (composed of a position and an orientation ($P_{0}, \theta_{0}$)) during calibration. Then user can move in the real workspace relatively to this reference frame to control the linear and angular velocity of the vehicle ($\overrightarrow{v_{veh}}, \Omega_{veh}$), denoting $(P, \theta)$ the current configuration. The translation and rotation gain functions are configured respectively by coefficients $K_{T}$ and $K_{R}$.
+
+\begin{equation}
+\overrightarrow{v_{veh}}=K_{T}\cdot \overrightarrow{P_{0}P}
+\end{equation}
+\begin{equation}
+\overrightarrow{\Omega_{veh}}=K_{R}\cdot \widehat{\theta_{0}\theta}
+\end{equation}
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=0.8\textwidth]{figures/ch4/HCNav}
+  \caption{\label{fig:4_hcnav}Head-controlled navigation paradigm.}
+\end{figure}
+
+\subsection{Alterations}
+
+\subsubsection{Altered Gain Function}
+ To restrain user's translational workspace, we can replace the linear gain function with a divergent one integrating the distance limitation into the navigation model.
+
+\begin{equation}
+\overrightarrow{v_{veh}}=K_{T}\cdot \left(\frac{\Delta x}{X_{m}-\Delta x},\:\frac{\Delta y}{X_{m}-\Delta y}\right)
+\end{equation}
+
+where $X_{m}$ is the minimum distance from the neutral position $P_{0}$ to the border of the physical system (Figure~\ref{fig:4_workspace_border}a). This divergent gain function allows user to apply an infinite vehicle velocity when reaching $X_{m}$. So the workspace of a user is defined by the physical space that user is free to move inside before reaching any borders.
+
+\begin{figure}[tb]
+\begin{center}
+\includegraphics[width=0.6\textwidth]{figures/ch4/workspace_border}
+\par\end{center}
+\caption{\label{fig:4_workspace_border}(a) The maximum available workspace $X_{m}$ can have different values on x and y axis. (b) User's rotational workspace is defined by $\theta_{max}$ on both sides of the neutral orientation.}
+\end{figure}
+
+To avoid collision between users, we can consider each user as a moving border which restricts directly the workspace of other users. However, this method makes the velocity control too unstable when all users move the same time. A possible compromised solution is to assign each user a safe zone for proper use, and an overlapped zone to share with others. We adjust the ``virtual border" of one user's workspace depending on the penetration of other users in the shared area. This way a user's velocity will only be influenced by others when he/she is inside the shared zone, one can make use of the entire shared zone as if he/she was alone in the system until the other user also needs to use it. Figure~\ref{fig:4_adaptive_trans_border} shows an example of two users inside a 3-wall CAVE system. Usually CAVE-like systems are in a rectangular form, so the border formed by a user is chosen to be a vertical plane.
+
+\begin{figure}[tb]
+\begin{center}
+\includegraphics[width=0.6\textwidth]{figures/ch4/adaptive_trans_border}
+\end{center}
+\caption{\label{fig:4_adaptive_trans_border}Adaptive border of user's workspace for translation in a two-user case : a) Initial state. b) User B moves into the shared zone while user A is still in the safe zone, both users' workspaces are not influenced and user B can use the entire shared zone. c) User A also moves into the shared zone and pushes the border of user B's workspace to the right. d) User B moves back to the safe zone, the entire shared zone can now be used by user A.}
+\end{figure}
+
+Considering rotations, physical constrains could also be integrated into the gain function similarly as for translation. For example, in a 3-wall CAVE it is preferable to avoid user occlusions and prevent users from seeing the empty screen behind them. However, due to the different nature between translation and rotation movements, we chose to use a saturated quadratic gain function rather than a divergent form as follows:
+
+\begin{equation}
+\Omega_{veh}=
+  \begin{cases}
+    \frac{\Omega_{max}}{(\theta_{max})^{2}}\cdot(|\Delta\theta|)^{2} & \text{if } |\Delta\theta|<\theta_{max} \\
+    \Omega_{max} & \text{if } |\Delta\theta| \geq \theta_{max}
+  \end{cases}
+\end{equation}
+
+where $\theta_{max}$ represents the maximum available rotational workspace (with which the user reaches the maximum rotation speed $\Omega_{max}=\pi\, rad.s^{-1}$) computed as the minimum of $\theta_{left}$, $\theta_{right}$ and $\theta_{user}$ to provide a symmetric vehicle control around the neutral orientation $\theta_{0}$ (Figure~\ref{fig:4_workspace_border}b).  
+
+
+\subsubsection{Adaptive Neutral Reference Frame}
+
+The original human joystick metaphor has a fixed neutral reference frame (a neutral position and orientation) defined during calibration. This reference frame should give user the maximum workspace that the physical working environment can offer, for example, the center of a CAVE is often a good choice. However, when we have mobile obstacles in the physical working environment, e.g. multiple co-located users, it may be inappropriate to have a fixed reference frame. With the above methods of computing user's available workspace, a fixed neutral reference frame distribution will often lead to non-symmetric use of the total available workspace both for translation and rotation.
+
+To optimize workspace usage, we can reconfigure each user's neutral reference frame as the center of his/her available workspace (Figure~\ref{fig:4_neutral_ref}). In this way, each user's workspace is balanced between constrains introduced by the display system and by other users, and is always symmetric on the left and right with respect to the neutral reference frame.
+
+Although this method could make better use of the total workspace, it also potentially increases the mutual influence between users, which may be disturbing for the navigation control. When users have relatively small workspace, the variation of neutral reference frame may remain imperceptible during navigation, which is to be tested.   
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=0.6\textwidth]{figures/ch4/neutral_ref}
+  \caption{\label{fig:4_neutral_ref}(a, c) Users' neutral reference frames are fixed to the initial distribution. (b, d) Users' neutral reference frames are computed dynamically according to both users' positions.}
+\end{figure}
 
 \section{Measures}
 We are interested in information coming from two different sources: how well they could achieve goals and manage navigation in the virtual world, and how they position themselves with respect to the screens and other users in the physical workspace. Some information could be collected directly or indirectly through logs, others could only for now be gathered via questionnaires. Here we summarized three categories of measurements that we used for evaluation.
