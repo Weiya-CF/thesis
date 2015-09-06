@@ -1,20 +1,22 @@
-\chapter{Co-located Collaboration with Multi-viewer Immersive Display}
+\chapter{Co-located Collaboration with Multi-user Immersive Display}
 \label{chapter:colocated_colab}
 \minitoc
 
 \section{Introduction}
 Immersive CVEs can be used to connect networked users to the same virtual place for collaboration. Users can be both geographically distributed or co-located at the same physical place. Compared to remote situations, co-located users share the same physical workspace which allows direct user communication and interaction without computer mediation, and unlike cases in which co-located users collaborate with 2D graphic user interface (e.g. image wall, interactive table), immersive CVEs allow them to share the same virtual world on top of the same real space.
 
-A major problem of using immersive CVE for co-located collaboration is that classical projection-based immersive displays can only show images generated from a single user's viewpoint and others sharing the same images from another location will suffer visual distortion. To tackle this problem, multi-viewer immersive displays are designed to offer individual stereoscopic views for multiple users.
+A major problem of using immersive CVE for co-located collaboration is that classical projection-based immersive displays can only show images generated from a single user's viewpoint and others sharing the same images from another location will suffer visual distortion. To tackle this problem, multi-user immersive displays are designed to offer individual stereoscopic views for multiple users.
 
-This chapter concentrates on how co-located users collaborate inside multi-viewer immersive virtual environment and it is divided into four sections. The first presents technical aspects related to multi-viewer immersive displays and summarizes existing methods to separate images for different users. The second describes notions that allow us to define two collaborative modes that form a general framework for co-located collaboration. Then the third section presents two major issues that we identify during the collaboration process and the last proposes research methodology that we adopted to solve the aforementioned issues.  
+This chapter concentrates on how co-located users collaborate inside multi-user immersive virtual environment and it is divided into four sections. The first presents technical aspects related to multi-user immersive displays and summarizes existing methods to separate images for different users. The second describes notions that allow us to define two collaborative modes that form a general framework for co-located collaboration. Then the third section presents two major issues that we identify during the collaboration process and the last proposes research methodology that we adopted to solve the aforementioned issues.  
 
 
-\section{Multi-viewer Immersive Display}
+\section{Multi-user Immersive Display}
 Immersive display constitutes a main component of immersive virtual environment as the visual sense plays a predominant role in user's perception process. As mentioned in previous chapter (section~\ref{sec:visual_interface}), immersive displays differ from traditional displays in that they have large field of view, high resolution, stereoscopic images associated with viewpoint tracking technology.
 
 
 \subsection{Stereoscopy}
+\label{sec:stereo}
+
 Stereoscopy is the production of the illusion of depth by presenting a pair of 2D images showing two perspectives that both eyes naturally have in binocular vision. Then the brain merges the two images into a ``single" one to achieve stereopsis \citep{Blake2006Perception}. Besides stereoscopy, other cues (e.g. object occlusion, linear perspective, etc.) can also help to determine relative distances and depth in a perceived scene, but stereoscopy remains the most effective factor that provides users with instant depth perception.
 
 To achieve stereoscopic vision, we should first generate a pair of images depending on user's head position and orientation, as well as the interpupillary distance (IPD) \citep{Dodgson2004IPD}. Then we need to provide two images separately for each eye. Existing separation methods can be classified into three categories:
@@ -54,36 +56,56 @@ Visual distortion caused by displacement from the CoP can be predicted by a ray-
 A series of studies have been conducted to assess the influences of such visual distortion. When viewing monocular displays from locations displaced from the CoP, the spatial judgments remain relatively acceptable. \citet{Vishwanath2005Pictures} investigated the mechanism underlying this perceptual invariance by studying the perceived shapes of pictured objects viewed from various locations and they find that invariance is achieved through the awareness of the 2D picture plane. However, when it comes to stereo images, \citet{Banks2009Perception}'s experiment indicates that human viewers of stereo pictures are unable to compensate for incorrect viewing position. This result is confirmed by follow-up studies: judgments of angles are distorted after leftward and rightward displacement from the CoP \citep{Burton2012Diagnosing} and judgments of object depth are distorted after forward and backward displacement from the CoP \citep{Pollock2012Right}, although the magnitude of these distortions is consistently less than predicted by the ray-intersection models. More studies on visual distortions in stereoscopic systems can be found in articles by \citet{Woods1993Image, Held2008Misperceptions, Ponto2013Perceptual}.
 
 
-\subsection{User Separation}
-To avoid visual distortion, different approaches have been explored to provide individual stereoscopic views for multiple co-located users with projection-based display. For example, Simon proposed a multi-viewpoint images technique \citep{Simon2007MVI} which projects different images from multiple viewpoints corresponding to the viewing positions of multiple users, and combines them to a single image on the screen. Users can only get a correct stereoscopic view from predefined position without head tracking, so with static images the interactions that they can have are limited. 
+\subsection{View Separation}
+To better support co-located use of immersive virtual environments, we need to provide perspective-correct (distortion free) individual stereoscopic views for each user. One direct way is to use personal displays such as HMDs \citep{Salzmann2008TUS} or see-through HMDs \citep{Schmalstieg2002Stube}, and another solution is to introduce adaptations to existing immersive displays which already support group immersion.
 
-In order to have relatively large separate adaptive stereoscopic images for multiple users, time-multiplexing techniques become the major working solution. Efforts have been made since 1997, for example, \citet{Agrawala1997TRW} designed a prototype of a responsive workbench to provide two tracked users with independent stereoscopic views without distortion. Later on, \citet{Kunz2002TSC} used a pair of shuttered LCD projectors to generate an active stereo display and then \citet{Frohlich2005MultiViewer} extended this shuttered display to support two to four users with better performance in terms of perceived flicker, brightness of each view and crosstalk. This technique makes it possible for a single screen to support more than one stereoscopic view. Images for different users are separated by active shutter glasses while the separation of the images for the left and right eye is ensured by passive polarized filters. In 2011, \citet{Kulik2011CSS} even developed a projection-based stereoscopic display for six users by using six customized DLP projectors. With each user having an independent stereoscopic view combined with real-time head tracking, more complex collaboration scenarios can be implemented for a group of co-located users.
+\citet{Bolas2004New} categorize solutions for displaying multiple images in a common area:
+
+\begin{itemize}
+\item Spatial barriers use the display's physical configuration and user placement to block users from seeing each other's view.
+\item Optical filtering involves systems that filter viewpoints using light's electromagnetic properties, such as polarization or wavelength.
+\item Optical routing uses the angle-sensitive optical characteristics of certain materials to direct or occlude images based on the user's position.
+\item Time multiplexing solutions use time-sequenced light and shutters to determine which user sees an image at a given point in time.
+\end{itemize}
+
+Except the first solution, the three other options are the same technologies that are used to separate images for the left and right eye of a single user as presented in section~\ref{sec:stereo}. Multi-user systems are often build with mixed solutions from these categories, here is a description of existing systems that provide independent stereo images for different users inside immersive or semi-immersive environment.
 
 
-Table~\ref{tab:multi-user} shows a list of multi-viewer immersive displays.
+\subsubsection{Image Separation} 
+Typically we can create separate image channels for different users by adding shutters and/or optical filters in front of projectors combined with synchronized counterparts in front of user's eyes.
 
-\begin{table}[htb]
-\renewcommand{\arraystretch}{1.3}
-\caption{A List of Multi-viewer Displays.}
-\label{tab:multi-user}
-\centering
-\begin{tabular}{p{3cm} l l l l l l}
-  \hline
-  Type & User Tracking & Number of Users \\ 
-  \hline
-  Omni-directional Stereo & No need & Large group \\
-  \hline
-  Multi-viewer Rendering Algorithm & All users & Two users (could be more) \\
-  \hline
-  Multi-monoscopic Display & All users & Two users \\
-  \hline
-  Multi-stereoscopic Display & All users & Two to six users \\
-  \hline
-  Multiple HMDs & All users & Depending on the room size \\
-  \hline
-\end{tabular}
-\end{table}
+The two-user Responsive Workbench developed by \citet{Agrawala1997TRW} relies purely on a time-multiplexing method which displays four different images in sequence on a CRT projector at 144Hz, thus each eye of a user views the virtual scene at 36Hz. This workbench is the first demonstration of a two-user stereoscopic system, but the time-multiplexing method largely reduces projection time for each eye (low brightness) and users suffer from image flicker and crosstalk. \citet{Blom2002Multiple} then extended this active shuttering method to multi-screen systems like CAVEs. \citep{Froehlich2004Implementing} further studied active shuttering technology by testing two kinds of shutters on the projector side with a range of shuttering frequencies. The mechanical shuttering delivers higher brightness and less cross talk, but does not extend as easily to more than two users as liquid crystal (LC) shutters because of the required rotation speed and size of the disc. They tested LC shutters from 140Hz to 400Hz and found that users did not perceive flicker above a refresh rate of 200Hz, but a frequency higher than 320Hz would result in very dark images.
 
+Another solution is to combine time-multiplexing with polarization filters. In 1999, Barco developed the ``Virtual Surgery Table"\footnote{http://www.barco.com/en/Products/Compact-Multi-User-Projection-Table.aspx/} which provides two users with stereoscopic images by differently polarizing the output of two active stereo projectors. Then \citet{Frohlich2005MultiViewer} extended this shuttered display to support up to four users with eight shuttered liquid-crystal display (LCD) projectors. In this setup, images for different users are separated by active shutter glasses while the separation of the images for the left and right eye is ensured by passive polarized filters. This approach shows better performance in terms of perceived flicker, brightness of each view and crosstalk compared to purely active shuttering method. \citet{Frohlich2005MultiViewer} also summarized three main parameters can be considered to evaluate the quality of a multi view projection system:
+
+\begin{itemize}
+\item Brightness per view;
+\item Static and dynamic crosstalk; 
+\item Perceived flicker, which depends on the shutter frequency, the video rate of the projector and brightness.
+\end{itemize}
+
+In 2011, \citet{Kulik2011CSS} developed a projection-based stereoscopic display for six users by using six customized digital light processing (DLP) projectors running at 360Hz for a single screen, which results in 60Hz per user.
+
+\citet{Dodgson2005Autostereoscopic} provided an introduction and overview of auto-stereoscopic multi-view displays. Users in this kind of multi-view system get perceive 3D objects from his/her own point of view without tracking or eyeglasses, but only inside a limited zone depending on different properties of the display. Another issue is that with increasing number of views (e.g. up to 256 views by \citet{Takaki2010Multi}), generating images in real time for dynamic interaction would be a challenge.
+
+\subsubsection{Spatial Separation}
+Instead of creating image channels, we can also take advantage of the spatial property of the display by assigning different screens or parts of a single screen to different users. For example, the ``Protein Interactive Theater" (PIT) \citep{Arthur1998PIT} uses two orthogonal screens and each user looks at only one of the screens. The IllusionHole \citep{Kitamura2001Interactive} uses a circular mask on top center of a tabletop projection. By looking through the mask, users positioned around the table see their individual stereo images shown in different areas of the screen. Other systems like the Virtual Showcase \citep{Bimber2006Virtual}and Joint Space Station \citep{Mulder2004Modular} use similar mirror-based display to support multiple users. These desktop-based systems are often designed to accomplish specific collaborative tasks (e.g. 3D object visualization) and provide limited workspace with inherent spatial constrains. 
+
+When using larger wall display or CAVE, users can have head-tracked individual monoscopic \citep{Maksakov2010Whale} or stereoscopic views \citep{Schulze2012Democratizing} on different parts of the display. When they share the same part of the screen, sophisticated algorithms are applied to recalculates images based on an averaged viewpoint depending on positions and orientations of all tracked users. These software-based solutions allow co-located collaboration in immersive virtual environment without additional hardware setup, although the reduced visual distortions could still be disturbing for certain tasks that require precise spatial operations (e.g. object co-manipulation).
+
+\subsubsection{Other Methods}
+There are also many other display solutions offering individual stereoscopic views like the volumetric display \citep{Grossman2008Volum} and holographic display \citep{Lucente1997Holo}. However, for now it is still difficult to extend these displays to provide large-scale visual immersion. 
+
+Another interesting multi-user display is the omni-stereo display \citep{Simon2004Omni} such as AVIE \citep{Mcginity2007Avie} and i-Cone \citep{Simon2002Icone} which provides good support for immersive visualization with large user group, but theoretically users need to stay at predefined positions to get good perspective. \citet{Simon2007MVI} compared usability and interaction performance between multi-viewpoint images and head-tracked stereo display. Results showed that for certain tasks that users do not need to move physically (e.g. ray-casting selection and in-hand object manipulation), multi-viewpoint images can produce similar or even better performance than fully head-tracked interaction.
+
+
+\subsection{Summary}
+This section gives a general presentation of multi-user immersive display from the initial motivation (to provide distortion-free stereoscopic view for each user) to various implementations.
+
+Among all presented multi-user display technologies, the active \& passive method which combines time-multiplexing with polarization filters is the most effective and cost-efficient way to build multi-user immersive virtual environment. There are multiple reasons: first, it completely eliminated visual distortion due to observation from another position than the CoP; second,
+it can be easily applied to different shapes of large-scale immersive systems like walls, CAVEs or domes without imposing strong spatial constrains on user's position and orientation with respect to the screen(s), users can move inside a relatively large physical workspace; at last, compared to purely time-multiplexing separation, it provides high brightness, low crosstalk and less flicker stereo images.   
+
+The main experimental platform for this thesis named EVE (Evolutive Virtual Environment), is a four-screen multi-user immersive CAVE system built with the active \& passive separation technique (see Appendix~\ref{appendix:platform}). It serves as an experimental tool to study issues related to user interaction and communication for co-located collaboration in projection-based multi-user immersive virtual environment.
 
 % -------------------------------------------------------------------------------------------------
 
@@ -151,6 +173,30 @@ So to support safe and functional free navigation in an immersive context, the o
 Two aspects of the problem should be solved: how to manage the spatial relationship between active users and the immersive display boundaries, i.e. how to prevent users from touching the wall screens and from seeing non projected areas, and how to provide enough workspace for each co-located user and thus avoid collision and occlusion between them.
 
 When it comes to managing multiple users in the same immersive virtual environment for co-located collaboration, most works focused only on closely coupled collaboration (e.g. co-manipulation). In this case, virtual navigation is either disabled or controlled by a leader and shared by other users \citep{Beck2013IGG, Kulik2011CSS}. To enable more complex collaborative scenarios including loosely coupled tasks which require individual navigation for co-located users, we should propose novel navigation models that comply with user cohabitation constrains.
+
+Table~\ref{tab:multi-user} shows a list of multi-user immersive displays.
+
+\begin{table}[htb]
+\renewcommand{\arraystretch}{1.3}
+\caption{A List of Multi-user Displays.}
+\label{tab:multi-user}
+\centering
+\begin{tabular}{p{3cm} l l l l l l}
+  \hline
+  Type & User Tracking & Number of Users \\ 
+  \hline
+  Omni-directional Stereo & No need & Large group \\
+  \hline
+  Multi-viewer Rendering Algorithm & All users & Two users (could be more) \\
+  \hline
+  Multi-monoscopic Display & All users & Two users \\
+  \hline
+  Multi-stereoscopic Display & All users & Two to six users \\
+  \hline
+  Multiple HMDs & All users & Depending on the room size \\
+  \hline
+\end{tabular}
+\end{table}
 
 
 % -------------------------------------------------------------------------------------------------
