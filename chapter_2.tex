@@ -241,8 +241,9 @@ In projection-based immersive system, we can consider that users' physical bodie
   \caption{\label{fig:2_consistent_collab}Co-located collaborations in consistent mode.}
 \end{figure}
 
-The consistent mode is initially motivated by efforts to bring distortion-free stereoscopic view for each tracked user, and for a long time it is considered to be the default mode for co-located collaboration. This consistent mode suits well for closely-coupled collaborative tasks \citep{Simon2005First, Aguerreche2010Comparison, Martin2011Reconfigurable} (Figure~\ref{fig:2_consistent_collab:comanip} and \ref{fig:2_consistent_collab:malcomiics}) that do not require users to be or travel to different virtual places. This spatial constrain restricts collaborative scenarios that can be supported in multi-user immersive virtual environment.
+The consistent mode is initially motivated by efforts to bring distortion-free stereoscopic view for each tracked user, and for a long time it is considered to be the default mode for co-located collaboration. This consistent mode suits well for closely-coupled collaborative tasks \citep{Simon2005First, Aguerreche2010Comparison, Martin2011Reconfigurable} (Figure~\ref{fig:2_consistent_collab:comanip} and \ref{fig:2_consistent_collab:malcomiics}) that do not require users to be or travel to different virtual places.
 
+However, this spatial constrain restricts collaborative scenarios that can be supported in multi-user immersive virtual environment. Though several interaction techniques have been proposed to get around spatial constrains and to extend collaborative scenarios in consistent mode, such as the bent pick ray \citep{Riege2006Bent} and the see-through techniques \citep{Argelaguet2010STT}.
 
 \paragraph{Individual Mode}
 As opposite to consistent mode, the individual mode loosens constrains applied to users' spatial reference frames. This mode is complementary to the consistent mode and largely broadens collaborative scenarios that can be supported in the co-located use of immersive virtual environment. Collaborative scenarios can be extended in the following ways:
@@ -324,77 +325,83 @@ In individual mode, individual navigation can be easily achieved by providing in
 
 % -------------------------------------------------------------------------------------------------
 
-
 \subsection{Addressed Issues}
+As presented above, co-located collaboration in IVE contains two different collaborative modes: the consistent mode and individual mode. In consistent mode, users have a distribution of virtual spaces that are coherent with their physical workspace, which offers a similar interaction experience as in real world. On the contrary, users in individual mode have independent viewpoints which broadens supported collaborative scenarios with more flexible viewpoint control.
+
+However, due to the inconsistency between users' spatial distributions in the virtual world and real workspace, the individual mode provides users with a new kind of perceptual immersion and related cognitive experiences as they need to handle information from both real world and the virtual scene at the same time. We identified two main categories of spatial issues: perceptual conflicts during user communication and interaction, and user cohabitation in limited physical workspace. These issues should be studied if we want to validate the use of individual mode for co-located collaboration in IVEs. 
+
+
 \subsubsection{Perceptual Conflicts}
-With multi-stereoscopy technology, novel projection-based immersive systems now can support multiple users by providing each one with an independent stereoscopic view of the virtual scene. When users work face-to-face, they may have an incorrect view if objects are located between them. In this case, avatars can be introduced to enable face-to-face interaction in the virtual world whereas they are side-by-side in the real device. As a consequence, such multi-user systems provide the users with a new kind of perceptual immersion and related cognitive experiences, because users must handle both information from the real world (i.e., other users' bodies) and those from the virtual scene (i.e., other users' avatars) at the same time.
+Communications between collaborators are usually conducted in a multimodal way \citep{Paggio2005Multimodal} including verbal and non-verbal modalities \citep{Ennis2010Seeing, Dodds2011Talk}, especially deictic gestures to refer to objects or places. In individual mode, this kind of spatial interactions can be restored by introducing embodied avatars just like in remote situations - each user interacts temporally with other users' avatars instead of the real user in his/her own ``copy" of virtual world.  As a consequence, multimodal interactions in individual mode lead to two kinds of perceptual conflicts:
 
-Avatars have been used as media for multi-user communication in both remote and co-located use of immersive CVE, but the dual-presence of users and their avatars in the same immersive device for face-to-face interaction has not yet been addressed. We do not intend to create such dual-presence to test user's preference between real person and the avatar, but to observe users' reaction to different perceptual conflicts and to study if our avatar-based approach is sufficient to support face-to-face co-located collaboration in a multi-stereoscopic immersive display system.
+First, in projection-based immersive systems, users sharing the same display may sometimes enter each other's field of view when they work with embodied avatars. The simultaneous perception of a user and his/her avatar leads to a special experience that we called ``dual-presence". The dual-presence offers conflicting visual cues because the perceived real user and corresponding avatar share some common properties in terms of appearance and body movement (animated by real-time motion capture).
 
-However, with the solution proposed above, sometimes users may still enter each other's field of view when they work with the avatars. What is more, during a collaborative task, the communications between collaborators are usually conducted in a multimodal way \citep{Paggio2005Multimodal, Ennis2010Seeing} including verbal and non-verbal modalities \citep{Bailenson2002Gaze, Dodds2011Talk}, especially deictic gestures to refer to objects or places. So during a two-user co-located collaboration scenario, with the dual-presence of virtual and real information, users having multimodal interactions may encounter different perceptual conflicts both in the visual and audio modalities. For example (see Figure~\ref{fig:2_inconsistency}(a)), if user B points to an object for user A (from user B's viewpoint, he/she is pointing at a cube), user A may be confused by seeing both user B and his/her avatar doing the pointing gesture, and it may be problematic when there is another virtual object in the pointing direction of user B. Furthermore, normally the verbal communication between co-located users is conveyed by direct conversation without using headphones. As shown in Figure~\ref{fig:2_inconsistency}(b), user A is interacting with user B's avatar, but the vocal information comes from the real user B in a different direction. This kind of visual-audio inconsistency \citep{Di2009Recalibration, Spence2013Just} may be disturbing for users to concentrate on their collaboration.
+For example, in a two-user collaborative scenario (Figure~\ref{fig:2_pc_dualpresence}), user A is pointing at a cube next to him/her for user B to delete it. User B may be troubled by seeing both the real user A and his/her avatar doing the pointing gesture, and it may be more confusing when there happens to be another virtual object (e.g. a cylinder) in the pointing direction of real user A.
 
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=\textwidth]{figures/ch2/inconsistency}
-  \caption{\label{fig:2_inconsistency}Illustration of perceptual conflicts with a two-user scenario; user A interacts with avatar of user B: (a) Visual conflict occurs when user A simultaneously perceives the real user B and B's avatar pointing to different virtual objects. (b) Visual-audio conflict occurs when user B and the avatar are not at the same position.}
+  \includegraphics[width=.7\textwidth]{figures/ch2/pc_dualpresence}
+  \caption{\label{fig:2_pc_dualpresence}Illustration of dual presence with a two-user scenario, two users are virtually face-to-face while standing side-by-side. User B simultaneously perceives that the real user A and A's avatar is pointing at different virtual objects.}
 \end{figure}
 
-Therefore here we tried to study the possibility of having co-located face-to-face collaboration by investigating users' reaction to the perceptual conflicts raised with the dual-presence of the avatar and the real person.
+Second, in individual mode, users dialogue with each other while interacting via embodied avatars. Since co-located users talk to each other directly without computer mediation, hearing someone from a different location than his/her visual representation (i.e. avatar) results in a visual-auditive conflict. Still in a two-user example (Figure~\ref{fig:2_pc_visualauditive}), user B is looking at user A's avatar in front, but the audio source (i.e. real user A) is on his/her left.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=.7\textwidth]{figures/ch2/pc_visualauditive}
+  \caption{\label{fig:2_pc_visualauditive}Illustration of visual-auditive conflicts with a two-user scenario. User B experiences visual-auditive spatial conflicts when focusing on user A's avatar in front while talking to the real user A situated at a different location.}
+\end{figure}
+
+Although according to \citet{Spence2013Just}'s review, spatial coincidence does not represent a general constraint on multi-sensory integration in humans, but would be a much more task-dependent phenomenon. However, in a multi-user IVE, this visual-auditive conflict could be amplified due to the flexibility of virtual environment. For example, users could be far away from each other in the virtual world and they still hear each other from a close distance.
+
+These two categories of perceptual conflicts are interrelated since they all depend on the distance between a user and his/her avatar. We need to study the usability of individual mode for co-located collaboration by investigating users' reaction to dual-presence and visual-auditive conflicts. The effects of such perceptual conflicts will influence choices on the design of co-located collaborative immersive systems. For example, whether we should prevent users from seeing the real users to avoid dual-presence, whether we need headphones to map users' speech to avatars' positions by 3D audio, etc.
+
 
 \subsubsection{User Cohabitation}
+Users in a multi-user IVE are subjected to two kinds of spatial constrains: users are inside a limited physical workspace, and they share the same workspace. These two constrains lead to different aspects of user cohabitation management: how to manage the spatial relationship between active users and the workspace boundaries while keeping good visual immersion? How to allocate personal workspace for users so that they won't collide or occlude each other?
 
-Besides the development of display technology, various interaction techniques have also been proposed to make co-located collaboration in multi-user projection-based systems easier and more efficient, such as the bent pick ray \citep{Riege2006Bent} and the see-through techniques \citep{Argelaguet2010STT}.
+Immersive virtual environment has the power to bring users to an artificial world by blocking the perception of the real world. In such situation users often forget boundaries of the physical workspace due to visual immersion, so when they move around in such system they risk to run into walls (with HMDs) or screens (projection-based display) which could endanger both the user and the device. Moreover, visual immersion is limited by functional tracking area and the screen configuration (for projection-based display). For example, in large projection-based immersive systems with non-closed displays such as large image wall or a 3-wall CAVE, visual immersion is limited to the display area (Figure~\ref{fig:2_illu_system}).
 
-However, as indicated by \citet{Salzmann2009CIC}, certain tasks that require face-to-face interaction between users cannot be applied directly within projection-based displays due to occlusions if an object is located in the middle of the users. In this case, if we want to benefit from the advantages of co-located collaboration in projection-based multi-stereoscopic systems for face-to-face tasks as in the side-by-side situations, we should prevent the users from working directly with each other.
-
-Immersive virtual environment has the power to bring users to an artificial world by blocking the perception of the real world. In such situation users often forget boundaries of the physical workspace due to visual immersion, which could endanger both the user and the device. For some devices with non-closed display such as large image wall or a 3-wall CAVE, immersion is limited to the display area.
-
-The human joystick metaphor does not necessarily prevent users from running into physical obstacles or keep user's field of view within projected areas. Moreover, if multiple users share the same immersive device for co-located collaboration with each one using a human joystick metaphor, they may have user cohabitation problems: users may run into collision when they move around without paying attention to other users (Figure~\ref{fig:2_illustration} left); one can also disrupt the visual perception of the virtual world of another if the former appears to be in the field of view of that user due to body occlusion (Figure~\ref{fig:2_illustration} right).
-
-\begin{figure*}[tb]
+\begin{figure}[htb]
   \centering
-  \includegraphics[width=0.49\textwidth]{figures/ch2/illu_col}
+  \includegraphics[width=0.49\textwidth]{figures/ch2/illu_wall_col}
+  \includegraphics[width=0.49\textwidth]{figures/ch2/illu_empty}
+  \caption{\label{fig:2_illu_system}Illustration of workspace boundary for translation (left) and looking direction (right) in a multi-stereoscopic 3-wall CAVE.}
+\end{figure}
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.49\textwidth]{figures/ch2/illu_user_col}
   \includegraphics[width=0.49\textwidth]{figures/ch2/illu_occ}
-  \caption{\label{fig:2_illustration}Illustration of collision (left) and occlusion (right) between co-located users in a multi-stereoscopic 3-wall plus floor CAVE.}
-\end{figure*}
+  \caption{\label{fig:2_illu_users}Illustration of collision (left) and occlusion (right) between co-located users in a multi-stereoscopic 3-wall CAVE.}
+\end{figure}
 
-So to support safe and functional free navigation in an immersive context, the original human joystick metaphor should be adapted according to the number of co-located users and the configuration of the immersive system (size and shape of the screen walls, effective tracking space, etc.).
+When multiple users share the same immersive device for co-located collaboration in individual mode, they may run into collision when they move around without paying attention to the others. In projection-based immersive systems, one's visual perception of the virtual world could be disrupted by another if the latter appears to be in the field of view of that user due to body occlusion (Figure~\ref{fig:2_illu_users}).
 
-Two aspects of the problem should be solved: how to manage the spatial relationship between active users and the immersive display boundaries, i.e. how to prevent users from touching the wall screens and from seeing non projected areas, and how to provide enough workspace for each co-located user and thus avoid collision and occlusion between them.
-
-
-
-It is essential to keep user's safety when immersed in the virtual world. The navigation technique should prevent users from reaching the limits of the physical workspace. Some navigation metaphors such as the bubble technique \citep{Dominjon2005Bubble} and the magic barrier tape \citep{Cirio2009MBT} combine both walking and vehicle-based control in order to enable infinite navigation within restricted real workspace. \citet{Cirio2012Cube} summarized several metaphors for safe navigation in a restricted cubic workspace. Moreover, \citet{Fleury2010Generic} proposed a general model to integrate physical workspace into the virtual world and make the user aware of the physical environment in different ways.
-
-Table~\ref{tab:multi-user} shows a list of multi-user immersive displays.
+Depending on the choice of display technology and screen configuration, not all aforementioned issues are present in all types of immersive systems. Here Table~\ref{tab:cohab_issues} divides all cohabitation issues into different categories: some are inherent issues of the individual collaborative mode, others are more system-dependent, i.e. depending on the type and configuration of used immersive display. For example, user occlusion merely appears in projection-based immersive system, and perceiving ``empty screen" is only possible with non-closed immersive display. 
 
 \begin{table}[htb]
 \renewcommand{\arraystretch}{1.3}
-\caption{A List of Multi-user Displays.}
-\label{tab:multi-user}
+\caption{Cohabitation Issues in Multi-user Immersive Systems.}
+\label{tab:cohab_issues}
 \centering
-\begin{tabular}{p{3cm} l l l l l l}
-  \hline
-  Type & User Tracking & Number of Users \\ 
-  \hline
-  Omni-directional Stereo & No need & Large group \\
-  \hline
-  Multi-viewer Rendering Algorithm & All users & Two users (could be more) \\
-  \hline
-  Multi-monoscopic Display & All users & Two users \\
-  \hline
-  Multi-stereoscopic Display & All users & Two to six users \\
-  \hline
-  Multiple HMDs & All users & Depending on the room size \\
-  \hline
+\begin{tabular}{l | l l}
+   & Workspace-related & User-related \\ \hline
+  System-independent & Collision with workspace border & Collision between users \\
+  System-dependent & Seeing non-projected area & User occlusion \\
 \end{tabular}
 \end{table}
+
+For safe and efficient use of multi-user IVEs, new paradigms are needed to enable individual navigation in infinite virtual space while keeping users' level of immersion and safety.
 
 % -------------------------------------------------------------------------------------------------
 
 
 \subsection{Approach}
 \subsubsection{Experiment}
+within subject \& between subject
+
 \subsubsection{Iterative Paradigm Design}
+It is essential to keep user's safety when immersed in the virtual world. The navigation technique should prevent users from reaching the limits of the physical workspace. Some navigation metaphors such as the bubble technique \citep{Dominjon2005Bubble} and the magic barrier tape \citep{Cirio2009MBT} combine both walking and vehicle-based control in order to enable infinite navigation within restricted real workspace. \citet{Cirio2012Cube} summarized several metaphors for safe navigation in a restricted cubic workspace. Moreover, \citet{Fleury2010Generic} proposed a general model to integrate physical workspace into the virtual world and make the user aware of the physical environment in different ways.
 
 \section{Chapter Summary}
