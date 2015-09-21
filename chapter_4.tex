@@ -1,17 +1,20 @@
 \chapter{Study on User Cohabitation}
-\label{chapter:expe_cohab}
+\label{chapter:user_cohab}
 \minitoc
 
 \section{Introduction}
+To support safe and functional individual navigation in an multi-user IVE, traditional navigation metaphors should be adapted according to the number of co-located users and the configuration of the immersive system (size and shape of the screen walls, effective tracking space, etc.) to avoid cohabitation problems that we summarized in Chapter~\ref{chapter:colocated_colab}.
 
-So to support safe and functional free navigation in an immersive context, the original human joystick metaphor should be adapted according to the number of co-located users and the configuration of the immersive system (size and shape of the screen walls, effective tracking space, etc.).
+This chapter consists of two sections. The first summarizes conceptual details about a navigation paradigm we designed called Altered Human Joystick metaphor. The idea of this metaphor is to let each user navigate with normal human joystick control and the system will introduce alterations to a user's navigation velocity according to his/her spatial relationship with other users and with respect to the physical workspace, in order to keep user's safety and immersion level.
 
-In this paper, we extend the existing cohabitation model by adding additional alterations. Then we present three refined experiments to have an exhaustive analysis of different combinations of these alterations respectively in translation-only, rotation-only and translation-rotation combined navigation conditions. In this way we can see more clearly the impact of each alteration and the interaction between them.
+The second presents several user experiments that we conducted to verify the effectiveness of cohabitation control and their impacts on users' navigation performance and subjective feelings. First, we tested several alterations accumulatively in a collaborative case study, then three refined experiments followed to give an exhaustive analysis of different combinations of these alterations respectively in translation-only, rotation-only and translation-rotation combined navigation conditions.
 
-\section{Altered Human Joystick}
+
+\section{Approach - Altered Human Joystick}
+In an immersive virtual environment, the human joystick paradigm allows virtual navigation by physical movements relative to a fixed reference frame. It can not assure safe and efficient navigation because it does not take into account the spatial limitations of the physical system. Users need to make sure themselves to stay inside a safe zone without touching any physical obstacles and to stay within usable projection areas. So we proposed some alterations of the original paradigm to free user's mind from these constrains.
 
 \subsection{Basic Model}
-The basic navigation method we use is a reduced version (from 6DoF to 3DoF) of a head-controlled navigation technique (Figure~\ref{fig:4_hcnav}) proposed by \citet{Bourdot2002HCNav}. It is actually a human joystick metaphor \citep{McMahan2012EDF}, but with an additional degree of freedom for yaw rotation. User's head position and orientation are captured in real time with an optical tracker attached to the 3D glasses.
+The basic navigation method that we use is a reduced version (from 6DoF to 3DoF) of a head-controlled navigation technique (Figure~\ref{fig:4_hcnav}) proposed by \citet{Bourdot2002HCNav}. It is actually a human joystick metaphor \citep{McMahan2012EDF}, but with an additional degree of freedom for yaw rotation. User's head position and orientation are captured in real time with an optical tracker attached to the 3D glasses. With Human Joystick metaphor users' hands can be left over for object manipulation or gesture interaction. This ratio control technique requires a user to move physically and thus involves his/her vestibular system during navigation, which could potentially reduce symptoms of cybersickness \citep{Chen2013NVW}.
 
 To navigate, user first needs to choose a neutral reference frame (composed of a position and an orientation ($P_{0}, \theta_{0}$)) during calibration. Then user can move in the real workspace relatively to this reference frame to control the linear and angular velocity of the vehicle ($\overrightarrow{v_{veh}}, \Omega_{veh}$), denoting $(P, \theta)$ the current configuration. The translation and rotation gain functions are configured respectively by coefficients $K_{T}$ and $K_{R}$.
 
@@ -31,7 +34,7 @@ To navigate, user first needs to choose a neutral reference frame (composed of a
 \subsection{Alterations}
 
 \subsubsection{Altered Gain Function}
- To restrain user's translational workspace, we can replace the linear gain function with a divergent one integrating the distance limitation into the navigation model.
+To restrain user's translational workspace, we can replace the linear gain function with a divergent one integrating the distance limitation into the navigation model.
 
 \begin{equation}
 \overrightarrow{v_{veh}}=K_{T}\cdot \left(\frac{\Delta x}{X_{m}-\Delta x},\:\frac{\Delta y}{X_{m}-\Delta y}\right)
@@ -39,18 +42,18 @@ To navigate, user first needs to choose a neutral reference frame (composed of a
 
 where $X_{m}$ is the minimum distance from the neutral position $P_{0}$ to the border of the physical system (Figure~\ref{fig:4_workspace_border}a). This divergent gain function allows user to apply an infinite vehicle velocity when reaching $X_{m}$. So the workspace of a user is defined by the physical space that user is free to move inside before reaching any borders.
 
-\begin{figure}[tb]
+\begin{figure}[htb]
 \begin{center}
-\includegraphics[width=0.6\textwidth]{figures/ch4/workspace_border}
+\includegraphics[width=0.8\textwidth]{figures/ch4/workspace_border}
 \par\end{center}
-\caption{\label{fig:4_workspace_border}(a) The maximum available workspace $X_{m}$ can have different values on x and y axis. (b) User's rotational workspace is defined by $\theta_{max}$ on both sides of the neutral orientation.}
+\caption{\label{fig:4_workspace_border}a) The maximum available workspace $X_{m}$ can have different values on x and y axis. b) User's rotational workspace is defined by $\theta_{max}$ on both sides of the neutral orientation.}
 \end{figure}
 
 To avoid collision between users, we can consider each user as a moving border which restricts directly the workspace of other users. However, this method makes the velocity control too unstable when all users move the same time. A possible compromised solution is to assign each user a safe zone for proper use, and an overlapped zone to share with others. We adjust the ``virtual border" of one user's workspace depending on the penetration of other users in the shared area. This way a user's velocity will only be influenced by others when he/she is inside the shared zone, one can make use of the entire shared zone as if he/she was alone in the system until the other user also needs to use it. Figure~\ref{fig:4_adaptive_trans_border} shows an example of two users inside a 3-wall CAVE system. Usually CAVE-like systems are in a rectangular form, so the border formed by a user is chosen to be a vertical plane.
 
-\begin{figure}[tb]
+\begin{figure}[htb]
 \begin{center}
-\includegraphics[width=0.6\textwidth]{figures/ch4/adaptive_trans_border}
+\includegraphics[width=0.7\textwidth]{figures/ch4/adaptive_trans_border}
 \end{center}
 \caption{\label{fig:4_adaptive_trans_border}Adaptive border of user's workspace for translation in a two-user case : a) Initial state. b) User B moves into the shared zone while user A is still in the safe zone, both users' workspaces are not influenced and user B can use the entire shared zone. c) User A also moves into the shared zone and pushes the border of user B's workspace to the right. d) User B moves back to the safe zone, the entire shared zone can now be used by user A.}
 \end{figure}
@@ -76,24 +79,59 @@ To optimize workspace usage, we can reconfigure each user's neutral reference fr
 
 Although this method could make better use of the total workspace, it also potentially increases the mutual influence between users, which may be disturbing for the navigation control. When users have relatively small workspace, the variation of neutral reference frame may remain imperceptible during navigation, which is to be tested.   
 
-\begin{figure}[tb]
+\begin{figure}[htb]
   \centering
-  \includegraphics[width=0.6\textwidth]{figures/ch4/neutral_ref}
+  \includegraphics[width=0.7\textwidth]{figures/ch4/neutral_ref}
   \caption{\label{fig:4_neutral_ref}(a, c) Users' neutral reference frames are fixed to the initial distribution. (b, d) Users' neutral reference frames are computed dynamically according to both users' positions.}
 \end{figure}
 
-\section{Measures}
-We are interested in information coming from two different sources: how well they could achieve goals and manage navigation in the virtual world, and how they position themselves with respect to the screens and other users in the physical workspace. Some information could be collected directly or indirectly through logs, others could only for now be gathered via questionnaires. Here we summarized three categories of measurements that we used for evaluation.
+\subsection{Combinations}
+With the two categories of alterations presented above, we can create a set of similar navigation methods by combining these modifications. To see more clearly the impacts of each modification, we created three groups of navigation methods (see table~\ref{tab:4_combinations}). In the first two groups (Group T and Group R), we deactivated respectively rotation and translation, and we kept both for the last group (Group TR). For Group R, since users are not supposed to change their positions, the neutral orientations will always be fixed, though they will be different depending on how they are computed (be facing the front screen or be the bissectrice of rotational workspace).
 
-\subsection{Navigation Performance Metrics}
+\begin{table}[hbt]
+\renewcommand{\arraystretch}{1.3}
+\caption{A List of Altered Versions of Human Joystick divided in Three Groups (``/" means undefined)}
+\label{tab:4_combinations}
+\centering
+\begin{tabular}{c l l l l}
+  \hline
+  Technique & \multicolumn{2}{c}{Translation} & \multicolumn{2}{c}{Rotation} \\
+   & Form & Neutral Position & Form & Neutral Orientation \\ \hline
+  T1 & Linear & Fixed & / & / \\
+  T2 & Linear & Adaptive & / & / \\
+  T3 & Divergent & Fixed & / & / \\
+  T4 & Divergent & Adaptive & / & / \\ \hline
+  R1 & / & / & Linear & Face front screen \\
+  R2 & / & / & Linear & Bissectrice \\
+  R3 & / & / & Saturated Quadratic & Face front screen \\
+  R4 & / & / & Saturated Quadratic & Bissectrice \\ \hline
+  TR1 & Linear & Fixed & Linear & Fixed \\ TR2 & Linear & Fixed & Linear & Adaptive \\
+  TR3 & Linear & Adaptive & Linear & Fixed \\ TR4 & Linear & Adaptive & Linear & Adaptive \\
+  TR5 & Divergent & Fixed & Saturated Quadratic & Fixed \\ TR6 & Divergent & Fixed & Saturated Quadratic & Adaptive \\
+  TR7 & Divergent & Adaptive & Saturated Quadratic & Fixed \\ TR8 & Divergent & Adaptive & Saturated Quadratic & Adaptive \\
+  \hline
+\end{tabular}
+\end{table}
+
+
+% -------------------------------------------------------------------------------------------------
+
+
+\section{Evaluation Framework}
+To evaluate the contributions of alterations described above, we defined several categories of metrics. Then we used them to compare these altered human joystick models by doing different navigation tasks within our CAVE platform.
+
+\subsection{Measures}
+We are interested in information coming from two different sources: how well users could achieve goals and manage navigation in the virtual world, and how they position themselves with respect to the screens and other users in the physical workspace. Here we summarized three categories of measurements that we used for evaluation.
+
+\subsubsection{Navigation Performance Metrics}
 For a pure navigation task, measurements like task finishing time (or speed) and trajectory length are often used to evaluate user's navigation efficiency.
 
-\subsection{User Cohabitation Capacity Metrics}
+\subsubsection{User Cohabitation Capacity Metrics}
 User cohabitation concerns both users' spatial relationship with the limitation of physical system and disturbance between users. We propose an evaluation model containing four variables covering all these aspects to measure user cohabitation capacity in a restricted physical workspace.
 
 When several autonomous entities move within a restricted physical workspace, whether they will have cohabitation problem depends not only on where they are, but also on the moment when they have spatial coincidence. So all these variables combine spatial and temporal dimensions, and higher scores suggest higher disturbance level.
 
-\subsubsection{Hazardous Area Consumption}
+\paragraph{Hazardous Area Consumption}
 In the real world, we choose to define an ``Hazardous area" including all positions closer than $D_{Hazard}=1$ meter to any physical obstacle as shown on Figure \ref{fig:4_metrics}a.
 
 In this area, user's presence and safety may be in balance depending both on the user real speed $\overrightarrow{v_{real}}$ which may affect collision probability, and on his/her relative distance to the screens $d_{screen[i]}$. So we compute a relative score $V_{hac}$ based on $\overrightarrow{v_{real}}$ and $d_{screen[i]}$ when the user is inside the hazardous area. 
@@ -112,12 +150,12 @@ V_{hac}=\sum_{t_{initial}}^{t_{final}}\left(\sum_{i=1}^{i=3}\left(\frac{S}{d_{sc
 where $\overrightarrow{n_{i}}$ is the screen's normal vector.
 
 
-\subsubsection{Shared Workspace Occupation}
+\paragraph{Shared Workspace Occupation}
 In a two-user case, they share part of their translation workspace. To estimate the probability of user collision in the shared zone, we measure each user's penetration distance in the shared workspace $\Delta P_{sh}(t)=\left|(\overrightarrow{P}-\overrightarrow{P_{0}}).\overrightarrow{x}\right|$ while the other user is also inside the shared area (cf. Figure \ref{fig:4_metrics}b), and $\Delta P_{sh}(t)=0$ otherwise.
 
 \begin{figure}[tb]
   \centering
-  \includegraphics[width=0.6\textwidth]{figures/ch4/cohab_metrics}
+  \includegraphics[width=0.7\textwidth]{figures/ch4/cohab_metrics}
   \caption{\label{fig:4_metrics}(a) The hazardous area. (b) User's penetration $\Delta P_{sh}(t)$ in the shared zone. (c) Illustration of seeing empty screen angle $\theta_{emp}(t)$ and (d) the occlusion angle $\theta_{occ}(t)$.}
 \end{figure}
 
@@ -127,14 +165,14 @@ Using this penetration information, we can define a variable $V_{Psh}$ allowing 
 V_{Psh}=\int_{t_{init}}^{t_{final}}\Delta P_{sh}(t)\cdot dt
 \end{equation}
 
-\subsubsection{Empty Screen Perception}
+\paragraph{Empty Screen Perception}
 We define a variable $V_{emp}$ to evaluate to what extent and how long a user sees the empty screen behind by using $\theta_{emp}(t)$ (Figure \ref{fig:4_metrics}c)
 
 \begin{equation}
 V_{emp}=\int_{t_{init}}^{t_{final}}\theta_{emp}(t)\cdot dt
 \end{equation}
 
-\subsubsection{User Occlusion}
+\paragraph{User Occlusion}
 In order to evaluate the occlusion phenomenon, we define a penalty angle $\theta_{occ}(t)$ which quantifies the non-usable part of the field of view where the perception of other users disrupts the perception of the virtual world as shown on Figure \ref{fig:4_metrics}d. This angle can be expressed, using the current user position $P$, the head orientation $\overrightarrow{H}$, the total available field of view $\theta_{fov}$ , the other user position $P'$ and a bounding cylinder radius $R$ which represented the size of the disturbing user, as:
 
 \begin{equation}
@@ -148,24 +186,29 @@ V_{occ}=\int_{t_{init}}^{t_{final}}\theta_{occ}(t)\cdot dt
 \end{equation}
 
 
-\subsection{Subjective Questionnaires}
+\subsubsection{Subjective Questionnaires}
 Questionnaires are very useful tools to get user's subjective feelings (like presence and cybersickness) and explanations of certain choices and behaviors.
 
-In our experiments, since we compared similar navigation conditions with minor differences, the level of presence was not our primary concern. However, these alterations could be source of cybersickness, so we used the Simulator Sickness Questionnaire (SSQ) \cite{Kennedy1993SSQ} to assess user's level of cybersickness before and after each test. In addition, we developed a light-weight cohabitation questionnaire to further investigate user's feeling towards disturbances coming from physical surroundings as well as from the other user (see Appendix~\ref{appendix:cohab_q}).
+In our experiments, since we compared similar navigation conditions with minor differences, the level of presence was not our primary concern. However, these alterations could be source of cybersickness, so we used the Simulator Sickness Questionnaire (SSQ) \citep{Kennedy1993SSQ} to assess user's level of cybersickness before and after each test. In addition, we developed a light-weight cohabitation questionnaire to further investigate user's feeling towards disturbances coming from physical surroundings as well as from the other user (see Appendix~\ref{appendix:cohab_q}).
+
 
 \subsection{Pre-test Condition}
 In all the experiments below we tested the cohabitation of two users. The initial distribution of both users' neutral reference frames was defined as follows: each user's neutral position had equal distance to the nearest obstacle on the left and right, and they were moved 0.6m away from the front screen to leave more space for user to move forward. The neutral orientations were chosen to be face the front screen (Figure~\ref{fig:4_initial_config}). At the beginning of each task trial, users were always situated at the neutral position and facing the neutral orientation.
 
-\begin{figure}[tb]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=0.8\textwidth]{figures/ch4/initial_config}
   \caption{\label{fig:4_initial_config}The initial distribution of users' neutral reference frames in our CAVE platform.}
 \end{figure}
 
-Before passing real tests, participants had a training session during which they spent about three to five minutes in a virtual playground to get familiar with the original human joystick metaphor.
+Before passing real tests, participants joined a training session during which they spent about three to five minutes in a virtual playground to get familiar with the original human joystick metaphor.
+
+
+% -------------------------------------------------------------------------------------------------
+
 
 \section{Collaborative Case Study}
-\subsection{Design}
+\subsection{Experimental Design}
 We conducted a first user study \citep{Chen2015Cohab} with 36 participants divided into pairs to test modified gain functions in a two-user working scenario. We defined three test conditions:
 
 \begin{itemize}
@@ -178,9 +221,9 @@ Back then, the idea of adaptive neutral reference frame was not fully developed 
 
 We assumed that modified gain functions (C2) would improve users' cohabitation capacity, thus improve their navigation performance compared to linear gain functions (C1). We also assumed that as adaptive neutral orientation provided better distribution of user's rotational workspace, users should have less occlusion with C3 than C2.
 
-Participants were invited to accomplish an object-finding task inside a virtual factory (Figure~\ref{fig:4_teaser_exp1}). The factory had five similar sections each containing a common working zone and two storage areas connected by corridors. The task was for each participant to bring target objects from different storage areas to the common working zone. Since the task was relatively complicated (based on a realistic working scenario) and had a pre and post questionnaire session (for the evaluation of cybersickness), we used an between-subject design with each pair of participants testing one of the three conditions.
+Participants were invited to accomplish an object-finding task inside a virtual factory (Figure~\ref{fig:4_teaser_exp1}). The factory had five similar sections each containing a common working zone and two storage areas connected by corridors. The task was for each participant to bring target objects from different storage areas to the common working zone. Since the task was relatively complicated (based on a realistic working scenario) and had a pre and post questionnaire session (for the evaluation of cybersickness), we used a between-subject design with each pair of participants testing one of the three conditions.
 
-\begin{figure}[tb]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=0.8\textwidth]{figures/ch4/teaser_exp1}
   \caption{\label{fig:4_teaser_exp1}Two users worked inside a multi-stereoscopic CAVE system to finish an object-finding task. They were virtually face to face to put down collected objects.}
@@ -200,6 +243,10 @@ Although we did not find significant results to prove the benefits of modified g
 
 Moreover, the alterations tested in this experiment did not seem to provoke more symptoms of cybersickness, which made it viable for us to extend the model and conduct more refined experiments.
 
+
+% -------------------------------------------------------------------------------------------------
+
+
 \section{Follow-up Experiments}
 We conducted three additional experiments to complete previous user study. As explained above, we globally lowered the base gain value for all gain functions. In Experiment T (Translation only) and Experiment R (Rotation only), we created two special groups of navigation conditions by cutting off respectively rotation and translation, while in Experiment TR (Translation with Rotation) we kept both. All the three groups of conditions were listed in table \ref{tab:4_combinations} and to be tested with different types of navigation tasks. 
 
@@ -212,41 +259,14 @@ For all the experiments below, we performed one-way ANOVA test to compare differ
 \subsection{Participants}
 12 participants (11 male, 1 female), aged from 24 to 54 (mean=32) were involved in our user study. They were divided into six pairs and each pair passed successively Experiment T, R and TR.
 
-\subsection{Combinations}
-With the two categories of alterations presented above, we can create a set of similar navigation methods by combining these modifications. To see more clearly the impacts of each modification, we created three groups of navigation methods (see table~\ref{tab:4_combinations}). In the first two groups (Group T and Group R), we deactivated respectively rotation and translation, and we kept both for the last group (Group TR). For Group R, since users are not supposed to change their positions, the neutral orientations will always be fixed, though they will be different depending on how they are computed (be facing the front screen or be the bissectrice of rotational workspace).
-
-\begin{table*}[!t]
-\renewcommand{\arraystretch}{1.3}
-\caption{A List of Altered Versions of Human Joystick divided in Three Groups}
-\label{tab:4_combinations}
-\centering
-\begin{tabular}{c l p{2.5cm} l p{2.5cm}}
-  \hline
-  Technique & \multicolumn{2}{c}{Translation} & \multicolumn{2}{c}{Rotation} \\
-   & Form & Neutral Position & Form & Neutral Orientation \\ \hline
-  T1 & Linear & Fixed & / & / \\
-  T2 & Linear & Adaptive & / & / \\
-  T3 & Divergent & Fixed & / & / \\
-  T4 & Divergent & Adaptive & / & / \\ \hline
-  R1 & / & / & Linear & Face front screen \\
-  R2 & / & / & Linear & Bissectrice \\
-  R3 & / & / & Saturated Quadratic & Face front screen \\
-  R4 & / & / & Saturated Quadratic & Bissectrice \\ \hline
-  TR1 & Linear & Fixed & Linear & Fixed \\ TR2 & Linear & Fixed & Linear & Adaptive \\
-  TR3 & Linear & Adaptive & Linear & Fixed \\ TR4 & Linear & Adaptive & Linear & Adaptive \\
-  TR5 & Divergent & Fixed & Saturated Quadratic & Fixed \\ TR6 & Divergent & Fixed & Saturated Quadratic & Adaptive \\
-  TR7 & Divergent & Adaptive & Saturated Quadratic & Fixed \\ TR8 & Divergent & Adaptive & Saturated Quadratic & Adaptive \\
-  \hline
-\end{tabular}
-\end{table*}
 
 \subsection{Experiment T}
-\subsubsection{Design}
+\subsubsection{Experimental Design}
 To compare the four navigation techniques in the first group (T1 - T4), we asked participants to accomplish a navigation task several times with each time a different technique. Thus, each navigation technique was tested once and the four conditions were randomized for different groups of participants.
 
 The task was to travel to the other side of a straight corridor by following a given path marked by a white line on the floor and crossing all the gates along the path (Figure~\ref{fig:4_task1}). Each pair of participants had parallel corridors with symmetric path to walk through so they have more chance to collide in the physical workspace. To begin, participants left their departure areas and traveled to destination zones on the other side of the corridors. Once both participants arrived, they were teleported to the departure areas to begin the next round with a different navigation technique till all the conditions were tested.
 
-\begin{figure}[tb]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=0.8\textwidth]{figures/ch4/t1}
   \caption{\label{fig:4_task1}A screen-shot of the virtual scene used in Experiment T.}
@@ -255,28 +275,29 @@ The task was to travel to the other side of a straight corridor by following a g
 \subsubsection{Results}
 We first tested the effects on two independent variables: the translation gain function (linear or divergent) and neutral position type (fixed or adaptive). Then to see interaction effects between these two variables, we further compared the four navigation techniques.
 
-\begin{table*}[!t]
+\begin{table}[hbt]
 \renewcommand{\arraystretch}{1.3}
-\caption{Results of Experiment T}
+\caption{Results of Experiment T (Translation only), $\varnothing$ means non significant result.}
 \label{tab:4_result_t1}
 \centering
-\begin{tabular}{l l l l}
+\small
+\begin{tabular}{p{3cm} l l p{4.5cm}}
   \hline
-  Variable & Gain Function Type & Neutral Position Type & Technique T1 $\sim$ T4 \\
+  Variable & Transfer Function Type & Neutral Position Type & Technique T1 $\sim$ T4 \\
   \hline
-  Time & Divergent\textless Linear & / & T1\textgreater \{T3, T4\}; T2\textgreater T4 \\
-  Length & / & / & / \\
-  Hazardous Area Consumption & Divergent\textless Linear & / & T1\textgreater \{T3, T4\}; \\
-  Shared Workspace Occupation & Divergent\textless Linear & / & T1\textgreater T4; T1\textgreater T3 (0.054); T2\textgreater T4 (0.055) \\
+  Time & Divergent\textless Linear & $\varnothing$ & T1\textgreater \{T3, T4\}; T2\textgreater T4 \\
+  Length & $\varnothing$ & $\varnothing$ & $\varnothing$ \\
+  Hazardous Area Consumption & Divergent\textless Linear & $\varnothing$ & T1\textgreater \{T3, T4\}; \\
+  Shared Workspace Occupation & Divergent\textless Linear & $\varnothing$ & T1\textgreater T4; T1\textgreater T3 (0.054); T2\textgreater T4 (0.055) \\
   \hline
 \end{tabular}
-\end{table*}
+\end{table}
 
 Results showed that the gain function type had a significant influence on multiple dependent variables while the neutral position type did not (Table~\ref{tab:4_result_t1}). For navigation time, divergent gain function (mean=89.5, sd=17.8) was faster than the linear one (mean=113.0, sd=21.1) (F(1, 46)=17.25, p\textless 0.001). For Hazardous Area Consumption, divergent gain function (mean=111.57, sd=15.17) had lower score than the linear one (mean=132.58, sd=22.22) (F(1, 46)=14.63, p\textless 0.001). Same for Shared Workspace Occupation, divergent gain function (mean=5.18, sd=3.26) had lower score than the linear one (mean=12.58, sd=8.99) (F(1, 46)=14.38, p\textless 0.001).
 
 
 \subsection{Experiment R}
-\subsubsection{Design}
+\subsubsection{Experimental Design}
 We compared the four navigation techniques in the second group (R1 - R4) which only allowed rotations. We asked participants to turn each time virtually 180 degrees to perform an object picking task. Each navigation technique was tested once and the four conditions were randomized for different groups of participants.
 
 The task was to pick up an object behind a user and put it into the orange cube on the table in front (Figure~\ref{fig:4_task2}). Participants were asked to stay on the neutral position and to keep their feet fixed on the floor since we did not want to involve translation. As a consequence, in this experiment we could only test a specific value of adaptive neutral orientation (the bissectrice of rotational workspace) compared to an empirically chosen direction (facing front screen).
@@ -286,47 +307,48 @@ We used green arrows to indicate the right rotation direction for the participan
 \subsubsection{Results}
 We first tested the effects on two independent variables: the rotation gain function (linear or saturated quadratic) and neutral orientation type (face front screen or bissectrice). Then to see interaction effects between these two variables, we further compared the four navigation techniques.
 
-\begin{figure}[tb]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=0.8\textwidth]{figures/ch4/t2}
   \caption{\label{fig:4_task2}A screen-shot of the virtual scene used in Experiment R.}
 \end{figure}
 
-\begin{table*}[!t]
+\begin{table}[hbt]
 \renewcommand{\arraystretch}{1.3}
-\caption{Results of Experiment R}
+\caption{Results of Experiment R (Rotation only), $\varnothing$ means non significant result.}
 \label{tab:4_result_t2}
+\small
 \centering
-\begin{tabular}{l l l l}
+\begin{tabular}{p{2.5cm} l p{3cm} p{4.5cm}}
   \hline
-  Variable & Gain Function Type & Neutral Orientation Type & Technique R1 $\sim$ R4 \\
+  Variable & Transfer Function Type & Neutral Orientation Type & Technique R1 $\sim$ R4 \\
   \hline
-  Time & Saturated quadratic\textless Linear & / & R2\textgreater \{R3, R4\} \\
-  Empty Screen Perception & Saturated quadratic\textless Linear & / & \{R1, R2\}\textgreater\{R3, R4\} \\
-  User Occlusion & Saturated quadratic\textless Linear & / & R1\textgreater R3 (0.076), R1\textgreater R4 (0.053); R2\textgreater \{R3, R4\} \\
+  Time & Saturated quadratic\textless Linear & $\varnothing$ & R2\textgreater \{R3, R4\} \\
+  Empty Screen Perception & Saturated quadratic\textless Linear & $\varnothing$ & \{R1, R2\}\textgreater\{R3, R4\} \\
+  User Occlusion & Saturated quadratic\textless Linear & $\varnothing$ & R1\textgreater R3 (0.076), R1\textgreater R4 (0.053); R2\textgreater \{R3, R4\} \\
   \hline
 \end{tabular}
-\end{table*}
+\end{table}
 
 Results showed that the gain function type had a significant influence on multiple dependent variables while the neutral orientation type did not (Table~\ref{tab:4_result_t2}). For task finish time, saturated quadratic gain function (mean=13.6, sd=5.0) was faster than the linear one (mean=27.6, sd=15.9) (F(1, 46)=17.09, p\textless 0.001). For Empty Screen Perception, saturated quadratic gain function (mean=59.57, sd=34.61) had lower score than the linear one (mean=196.21, sd=92.06) (F(1, 46)=46.32, p\textless 0.001). For User Occlusion, saturated quadratic gain function (mean=66.69, sd=51.69) also had lower score than the linear one (mean=264.82, sd=219.62) (F(1, 46)=18.51, p\textless 0.001).
 
 
 \subsection{Experiment TR}
 
-\subsubsection{Design}
+\subsubsection{Experimental Design}
 This last experiment aimed to evaluate the 3DoF version human joystick with full translation and rotation control. We compared the eight navigation techniques in the third group (TR1 - TR8), we asked participants to perform a navigation task several times with each time a different technique. Each navigation technique was tested once and the eight conditions were randomized for different groups of participants.
 
 Similar to Experiment T, the task was to travel to the other end of an ``S" shaped corridor by following a given path marked by a white line on the floor and crossing all the gates along the path (Figure~\ref{fig:4_task3}). Each pair of participants had symmetric path to walk through and they were free to use translation combined with rotation.
 
 To begin, participants left their departure areas and traveled to destination zones on the other side of the corridors. Once both participants arrived, they were transported to a separated virtual space to finish the aforementioned cohabitation questionnaire by selecting a response with a tracker on the right hand (Figure~\ref{fig:4_task3_q}). There were six answer levels from negative to positive answers represented by six floating cubes from left to right. For example, the leftmost one meant ``I do not agree at all" and the rightmost ``I totally agree", etc.  When both participants finished all the seven questions, they were transported again to the departure areas to begin the next round with a different navigation technique till all the conditions were tested.
 
-\begin{figure}[tb]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=0.8\textwidth]{figures/ch4/t3}
   \caption{\label{fig:4_task3}A screen-shot of the virtual scene used in Experiment TR.}
 \end{figure}
 
-\begin{figure}[tb]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=0.8\textwidth]{figures/ch4/t3_q}
   \caption{\label{fig:4_task3_q}Participants filled a questionnaire about user cohabitation presented on a virtual screen.}
@@ -336,49 +358,50 @@ To begin, participants left their departure areas and traveled to destination zo
 \subsubsection{Results}
 We first tested the effects on three independent variables: the gain function type (linear or modified), neutral position and neutral orientation types (fixed or adaptive). Then to see interaction effects between these variables, we further compared the eight navigation techniques.
 
-\begin{table*}[!t]
-\caption{Results of Experiment TR}
+\begin{sidewaystable}[hbt]
+\caption{Results of Experiment TR, $\varnothing$ means non significant result.}
 \label{tab:4_result_t3}
 \centering
-\begin{tabular}{p{1.6cm} | p{1.8cm} p{2.2cm} p{2cm} p{2.2cm} p{5.8cm}}
+\small
+\begin{tabular}{p{2cm} | p{3cm} l l l p{6cm}}
   \hline
-   & Variable & Gain Function Type & Neutral Position Type & Neutral Orientation Type & Technique TR1 $\sim$ TR8 \\
+   & Variable & Transfer Function Type & Neutral Position Type & Neutral Orientation Type & Technique TR1 $\sim$ TR8 \\
   \hline
-  Navigation Performance & Time & Modified\textless Linear & / & / & \{TR1, TR2, TR3, TR4\}\textgreater \{TR5, TR6, TR7, TR8\} \\
+  Navigation Performance & Time & Modified\textless Linear & $\varnothing$ & $\varnothing$ & \{TR1, TR2, TR3, TR4\}\textgreater \{TR5, TR6, TR7, TR8\} \\
   \cline{2-6}
-   & Length & Modified\textless Linear & / & / & TR3\textgreater \{TR5, TR6, TR7\}; TR4\textgreater TR7; TR2\textgreater TR7 (0.052); TR4\textgreater TR5 (0.06) \\ \hline \hline
-   & Hazardous Area Consumption & Modified\textless Linear & / & / & \{TR1, TR2, TR3, TR4\}\textgreater \{TR5, TR6, TR7, TR8\} \\
+   & Length & Modified\textless Linear & $\varnothing$ & $\varnothing$ & TR3\textgreater \{TR5, TR6, TR7\}; TR4\textgreater TR7; TR2\textgreater TR7 (0.052); TR4\textgreater TR5 (0.06) \\ \hline \hline
+   & Hazardous Area Consumption & Modified\textless Linear & $\varnothing$ & $\varnothing$ & \{TR1, TR2, TR3, TR4\}\textgreater \{TR5, TR6, TR7, TR8\} \\
    \cline{2-6}
-  Cohabitation Capacity & Shared Workspace Occupation & Modified\textless Linear & Adaptive\textless Fixed (p=0.1) & / & \textbf{TR1}\textgreater \{\textbf{TR4}, TR5, TR6, TR7, TR8\}; \newline \{TR2, TR3\}\textgreater \{TR5, TR6, TR7, TR8\} \\
+  Cohabitation Capacity & Shared Workspace Occupation & Modified\textless Linear & Adaptive\textless Fixed (p=0.1) & $\varnothing$ & \textbf{TR1}\textgreater \{\textbf{TR4}, TR5, TR6, TR7, TR8\}; \newline \{TR2, TR3\}\textgreater \{TR5, TR6, TR7, TR8\} \\
   \cline{2-6}
-   & Empty Screen Perception & Modified\textless Linear & / & Fixed\textless Adaptive & \textbf{TR1}\textless \{\textbf{TR2, TR4}\}; \textbf{TR3\textless TR4} \newline \{TR2, TR4\}\textgreater \{TR5, TR6, TR7, TR8\};  \\
+   & Empty Screen Perception & Modified\textless Linear & $\varnothing$ & Fixed\textless Adaptive & \textbf{TR1}\textless \{\textbf{TR2, TR4}\}; \textbf{TR3\textless TR4} \newline \{TR2, TR4\}\textgreater \{TR5, TR6, TR7, TR8\};  \\
    \cline{2-6}
-   & User Occlusion & Modified\textless Linear & / & Adaptive\textless Fixed & \textbf{TR1}\textgreater \{\textbf{TR2, TR4}, TR5, TR6, TR7, TR8\}; TR2\textgreater \{TR6, TR7, TR8\}; \textbf{TR3}\textgreater \{\textbf{TR2, TR4}, TR5, TR6, TR7, TR8\}; TR4\textgreater \{TR6, TR7, TR8\}; \\ \hline \hline
-   & Question 1 & Modified\textless Linear & / & / & TR1\textgreater \{TR5, TR6, TR7, TR8\}; TR4\textgreater TR6 (0.054) \\
+   & User Occlusion & Modified\textless Linear & $\varnothing$ & Adaptive\textless Fixed & \textbf{TR1}\textgreater \{\textbf{TR2, TR4}, TR5, TR6, TR7, TR8\}; TR2\textgreater \{TR6, TR7, TR8\}; \textbf{TR3}\textgreater \{\textbf{TR2, TR4}, TR5, TR6, TR7, TR8\}; TR4\textgreater \{TR6, TR7, TR8\}; \\ \hline \hline
+   & Question 1 & Modified\textless Linear & $\varnothing$ & $\varnothing$ & TR1\textgreater \{TR5, TR6, TR7, TR8\}; TR4\textgreater TR6 (0.054) \\
    \cline{2-6}
-   & Question 2 & Modified\textless Linear & / & / & \{TR1, TR4\}\textgreater \{TR5, TR6, TR7, TR8\} \\
+   & Question 2 & Modified\textless Linear & $\varnothing$ & $\varnothing$ & \{TR1, TR4\}\textgreater \{TR5, TR6, TR7, TR8\} \\
    \cline{2-6}
-   & Question 3 & Modified\textless Linear & / & / & \{TR1, TR3, TR4\}\textgreater \{TR5, TR6, TR7, TR8\} \\
+   & Question 3 & Modified\textless Linear & $\varnothing$ & $\varnothing$ & \{TR1, TR3, TR4\}\textgreater \{TR5, TR6, TR7, TR8\} \\
    \cline{2-6}
-  Questionnaire & Question 4 & Modified\textless Linear & / & / & \{TR1, TR2, TR3, TR4\}\textgreater \{TR5, TR6, TR7, TR8\} \\
+  Questionnaire & Question 4 & Modified\textless Linear & $\varnothing$ & $\varnothing$ & \{TR1, TR2, TR3, TR4\}\textgreater \{TR5, TR6, TR7, TR8\} \\
   \cline{2-6}
-   & Question 5 & Modified\textless Linear & / & / & TR1\textgreater \{TR5, TR6, TR7, TR8\}; TR2\textgreater TR5; TR3\textgreater TR5; TR3\textgreater \{TR6, TR7, TR8\} (0.065); TR4\textgreater TR5 (0.065) \\ \cline{2-6}
-   & Question 6 & Modified\textless Linear & / & / & \{TR1, TR3, TR4\}\textgreater \{TR5, TR6, TR7, TR8\} \\ \cline{2-6}
-   & Question 7 & Modified\textless Linear & / & / & \{TR1, TR3\}\textgreater \{TR5, TR6, TR7, TR8\}; TR4\textgreater TR6 \\
+   & Question 5 & Modified\textless Linear & $\varnothing$ & $\varnothing$ & TR1\textgreater \{TR5, TR6, TR7, TR8\}; TR2\textgreater TR5; TR3\textgreater TR5; TR3\textgreater \{TR6, TR7, TR8\} (0.065); TR4\textgreater TR5 (0.065) \\ \cline{2-6}
+   & Question 6 & Modified\textless Linear & $\varnothing$ & $\varnothing$ & \{TR1, TR3, TR4\}\textgreater \{TR5, TR6, TR7, TR8\} \\ \cline{2-6}
+   & Question 7 & Modified\textless Linear & $\varnothing$ & $\varnothing$ & \{TR1, TR3\}\textgreater \{TR5, TR6, TR7, TR8\}; TR4\textgreater TR6 \\
   \hline
 \end{tabular}
-\end{table*}
+\end{sidewaystable}
 
 Results showed that the gain function type had a significant influence on multiple dependent variables. Modified gain functions (divergent for translation, saturated quadratic for rotation) tended to provide better navigation efficiency and improved cohabitation capacity (Table~\ref{tab:4_result_t3}). Figure~\ref{fig:4_exp_tr_box} showed a detailed view of results on cohabitation measurements grouped by navigation techniques.
 
-\begin{figure*}[tb]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=0.48\textwidth]{figures/ch4/HAC}
   \includegraphics[width=0.48\textwidth]{figures/ch4/SWO}
   \includegraphics[width=0.48\textwidth]{figures/ch4/ESP}
   \includegraphics[width=0.48\textwidth]{figures/ch4/UO}
   \caption{\label{fig:4_exp_tr_box}Boxplot for conditions from TR1 to TR8 (marked as 1 to 8) on cohabitation measurements in Experiemnt TR. The numbers in the graph are outlier observations.}
-\end{figure*}
+\end{figure}
 
 Modified gain function (mean=67.1, sd=13.8) was faster than the linear one (mean=101.2, sd=14.8) (F(1, 94)=136.6, p\textless 0.001), and had a shorter path (mean=100.51, sd=2.41) than the linear one (mean=104.21, sd=4.46) (F(1, 94)=25.45, p\textless 0.001), knowing that the optimal path was 98 meters long (marked by white line on the floor in Figure~\ref{fig:4_task3}). For Hazardous Area Consumption, modified gain function (mean=71.59, sd=20.77) had lower score than the linear one (mean=114.86, sd=29.82) (F(1, 94)=68.05, p\textless 0.001). For Shared Workspace Occupation, modified gain function (mean=1.71, sd=1.57) also had lower score than the linear one (mean=7.50, sd=5.60) (F(1, 94)=47.5, p\textless 0.001). Concerning rotational aspects, for Empty Screen Perception, modified gain function (mean=6.83, sd=15.53) had lower score than the linear one (mean=68.78, sd=83.08) (F(1, 94)=25.79, p\textless 0.001). For User Occlusion, modified gain function (mean=55.69, sd=52.57) also had lower score than the linear one (mean=393.58, sd=233.79) (F(1, 94)=95.44, p\textless 0.001).
 
@@ -386,12 +409,12 @@ The type of neutral reference frame did not seem to influence navigation efficie
 
 Regarding the cohabitation questionnaire, we got similar results from question 1 to question 7: modified gain functions globally had lower scores than linear gain functions, whereas neutral reference frame type did have significant influence on users' subjective feeling towards user cohabitation (Figure~\ref{fig:4_questionnaire}).
 
-\begin{figure*}[tb]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=0.53\textwidth]{figures/ch4/qn_bar}
   \includegraphics[width=0.46\textwidth]{figures/ch4/qn_line}
   \caption{\label{fig:4_questionnaire}Cohabitation questionnaire scores grouped by gain function type (left) and by navigation condition (right).}
-\end{figure*}
+\end{figure}
 
 \subsection{Discussion}
 From the above three experiments, we could clearly see that modified gain functions had a significant influence on users' navigation efficiency and cohabitation capacity, shown by both objective and subjective measurements. The divergent and quadratic gain functions allowed users to get a much higher navigation speed before reaching the borders of the physical workspace. As discussed in previous experiment, linear gain functions with higher gain value could also reduce cohabitation problems, but at a cost on low speed control precision, which can be observed from difference of trajectory lengths in Experiment TR. So in general, the modified gain functions, which take the border of physical workspace into consideration for velocity computation, are more suitable than linear gain functions to ensure safe navigation in restricted physical workspace with human joystick metaphor.
@@ -406,9 +429,15 @@ A closer look on the effects of adaptive neutral reference frames showed that, s
 
 Regarding the questionnaire of cohabitation, we almost got the same result with objective measurements: two clusters of techniques were clearly identified - techniques with linear gain functions nearly doubled the scores on all the questions (Figure~\ref{fig:4_questionnaire}). However, participants were not able to feel the influence of adaptive neutral reference frames, whose effects may be covered by the significant improvements brought by modified gain functions. Another test with merely modified gain functions should be added if we want to further compare different types of neutral reference frames with subjective measurements.
 
-\section{Chapter Summary}
-In this paper we presented several modifications of the human joystick metaphor in order to enable individual navigation for co-located users in a multi-stereoscopic immersive virtual environment and to solve associated cohabitation problems. The alterations were designed to help users avoid physical obstacles and non-usable part of the display by directly integrating limitations of the physical system and the influence of other users into the paradigm, so to assure users' safety and level of immersion. Then we summarized an evaluation model to assess user cohabitation capability, using different variables to quantify the risk of collision and perceptual disturbance.
+
+% -------------------------------------------------------------------------------------------------
+
+
+\section{Conclusion}
+In this chapter we presented Altered Human Joystick metaphor, which is a combination of modifications with human joystick paradigm in order to enable individual navigation for co-located users in a multi-user IVE and to solve associated cohabitation problems. The alterations were designed to help users avoid physical obstacles and non-usable part of the display to assure users' safety and level of immersion by directly integrating limitations of the physical system and the influence of other users into the paradigm. Then we summarized an evaluation model to assess user cohabitation capability, using different variables to quantify the risk of collision and perceptual disturbance.
 
 We conducted a series of user evaluations to investigate the influence of each alteration by testing their combinations with various navigation tasks. Results showed that modified gain functions could provide a larger velocity range with relatively small base gain value compared to linear gain functions, thus could largely improve users' cohabitation situation both for translation and rotation. Adaptive neutral orientations can efficiently reduce user occlusion, more generally user's perception of physical environment. Whereas adaptive neutral positions only showed some potential benefits and needed to be further developed. For example, the optimal distribution of the neutral positions is not necessarily the median of each user's workspace, but can be more flexible depending on both users' activities in real time (velocity in physical workspace, navigation strategy, etc.).
 
 Finally, in spite of our work to propose measurements which characterize efficiently navigation performance as well as user cohabitation, some limitations remain to be solved. For example, a user staying for a very long time in the peripheral field of view of another user may not be as disturbing as a user standing right in front of another for a few seconds even though the latter has a lower occlusion score.
+
+Moreover, the way we define users' workspaces for translation (i.e. division of shared zone and safe zones) is system-dependent. It works well for rectangular workspaces, but not necessarily for circular or non-regular setups. The following chapter presents our efforts to propose a more general cohabitation model along with appropriate user collision probability metrics. 
