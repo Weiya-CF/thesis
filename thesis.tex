@@ -12,7 +12,8 @@
 \usepackage{latexsym}
 \usepackage{amsmath,amsfonts,amssymb}
 \usepackage{stmaryrd}
-%added by li
+
+% added by Gong Li
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{subcaption}
@@ -21,12 +22,12 @@
 \usepackage{algorithm, algorithmic}
 \usepackage{xspace}
 \usepackage[table]{xcolor}
-\usepackage{rotating}
 \usepackage{CJKutf8}
 \usepackage{multicol}
 \usepackage[titletoc]{appendix}
 
-% What I added
+% added by Weiya Chen
+\usepackage{rotating}
 \usepackage{minitoc}
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
@@ -48,83 +49,10 @@
 \newcommand{\argmax}{\operatornamewithlimits{argmax}}
 \newcommand{\argmin}{\operatornamewithlimits{argmin}}
 
-
-%%%% Translation text
-\newcommand{\corpus}{\ensuremath{\mathbf{C}\xspace}}
-\newcommand{\scorpus}{\ensuremath{\mathbf{C_{|s}}}\xspace}
-\newcommand{\tcorpus}{\ensuremath{\mathbf{C_{|t}}}\xspace}
-\newcommand{\sentset}{\ensuremath{\mathbf{c}\xspace}}
-\newcommand{\corpusAlign}{\ensuremath{\mathbf{A}\xspace}}
-
-\newcommand{\aseq}{\ensuremath{\mathbf{a}\xspace}} % alignment sentence
-\newcommand{\sseq}{\ensuremath{\mathbf{s}\xspace}} % source sentence
-\newcommand{\tseq}{\ensuremath{\mathbf{t}\xspace}} % target sentence
-\newcommand{\sentpair}{\ensuremath{\sseq ,\tseq}} % target sentence
-\newcommand{\ls}{\ensuremath{I}} % source sentence length 
-\newcommand{\lt}{\ensuremath{J}} % target sentence length 
-
-%\newcommand{\sseg}{\ensuremath{\boldsymbol{\sigma}\xspace}} % source phrase
-%\newcommand{\tseg}{\ensuremath{\boldsymbol{\tau}\xspace}} % target phrase
-\newcommand{\sseg}{\ensuremath{\bar{s}\xspace}} % source phrase
-\newcommand{\tseg}{\ensuremath{\bar{t}\xspace}} % target phrase
-\newcommand{\phrasepair}{\ensuremath{\sseg ,\tseg}} % target sentence
-\newcommand{\params}{\ensuremath{\boldsymbol{\theta}\xspace}} %parameters, models
-
-\newcommand{\substr}{\ensuremath{{\sqsubset}}}
-
-\newcommand{\ssymb}{\ensuremath{s}} % symbol of *one* element of the source
-\newcommand{\tsymb}{\ensuremath{t}} % symbol of *one* element of the target
-\newcommand{\ssymbindex}{\ensuremath{i}} % source sentence length 
-\newcommand{\tsymbindex}{\ensuremath{j}} % target sentence length 
-\newcommand{\symbpair}{\ensuremath{\ssymb ,\tsymb}} % target sentence
-\newcommand{\asymb}{\ensuremath{a}} % symbol of *one* element of the align
-
-%\newcommand{\tuple}{\ensuremath{u}} % symbol of *one* tuple%
-\newcommand{\tuple}{\ensuremath{(\stuple, \ttuple)}} % full tuple
-%\newcommand{\stuple}{\ensuremath{\overline{\ssymb}}} % source side of a tuple
-%\newcommand{\ttuple}{\ensuremath{\overline{\tsymb} }} %  targetside of a tuple 
-%\newcommand{\atuple}{\ensuremath{\overline{\asymb} }} %  align of a tuple 
-
-\newcommand{\lentuple}[1]{\ensuremath{|#1|}} 
-
-\newcommand{\sample}{\ensuremath{\mathbf{S}\xspace}}
-\newcommand{\ssample}{\ensuremath{\mathbf{S_{|s}}}\xspace}
-\newcommand{\tsample}{\ensuremath{\mathbf{S_{|t}}}\xspace}
-
-
-\newcommand{\cache}{\ensuremath{\mathbf{K}\xspace}}
-\newcommand{\doc}{\ensuremath{\mathbf{d}}\xspace}
-
-
-\newcommand{\tvoc}{\ensuremath{\mathcal{V}_{tsymb}}} % Target vocab
-\newcommand{\svoc}{\ensuremath{\mathcal{V}_{ssymb}}} % Source vocab
-
-\newcommand{\samplesize}{\ensuremath{M}\xspace}
-
-\newcommand{\maincorpusenfr}{\texttt{WMT}}
-\newcommand{\cochrane}{\texttt{Cochrane}}
-\newcommand{\newstest}{\texttt{Newstest}}
-\newcommand{\wmtmedic}{\texttt{WMT'14-med}}
-%\newcommand{\sbaiteration}{\ensuremath{A}\xspace}
-
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
-
-%\subtitle{Ph.D. dissertation submitted to reviewers}
 
 \author{Weiya Chen}
 
-%Title for main language
-\title[english]{Co-located Collaboration in Immersive Virtual Environment}
-%Titles for other languages
-%\title[french]{Collaboration Co-localisée en Environnement Virtuel Immersif}
-
-%Keywords for main language
-\keywords[english]{Collaboration, Virtual Reality}
-%Keywords for other languages languages
-\keywords[french]{Collaboration, Réalité Virtuelle}
-
-%Order number of the thesis
-\ordernumber{}
 
 % define fixed table cell with centered text
 \newcolumntype{C}[1]{>{\centering}m{#1}}
@@ -145,7 +73,7 @@
 %########################################################################
 % Acknowledgments
 %########################################################################
-\iffalse
+%\iffalse
 \pagebreak\strut
 \newpage
 \chapter*{Acknowledgement}
@@ -155,43 +83,21 @@
 \chapter*{}
 \thispagestyle{empty}
 \textit{\hfill The spring silk worm \newline \null\hfill will weave its thread until it dies;\newline\newline \null\hfill The wax candle \newline \null\hfill will shed tears until it turns to ashes. \newline\newline \null\hfill - To my family}
-\fi
+%\fi
 
 %########################################################################
 % Multilingual abstracts
 %########################################################################
 %\phantomsection
-
-\chapter*{}
+\chapter*{} %one page
 \addcontentsline{toc}{chapter}{Abstract/Résumé}
-\input{abstract_english}
 
-%########################################################################
-% french resume one page
-%########################################################################
+\input{abstract_english}
 \input{abstract_french}
 
 %########################################################################
 % Contents
 %########################################################################
-
-%\strut\newpage
-%\printglossaries
-
-%% Glossary display styles
-%%   type=\acronymtype  : dislay acronyms on separate page
-%%   style=listdotted   : displayed in form <acronym> ------ description
-%%         more styles see http://get-software.net/macros/latex/contrib/glossaries/glossaries-user.html#sec:styles
-%\cleardoublepage
-%\addcontentsline{toc}{chapter}{Acronyms}
-%\printglossary[type=\acronymtype,style=altlist] %listdotted]
-%\printglossary
-%\cleardoublepage
-%\addcontentsline{toc}{chapter}{Notations}
-%\renewcommand{\nomname}{Notations}
-%\printnomenclature[1.0in]
-%% \addcontentsline{toc}{chapter}{\numberline{}Resume}%
-
 
 \tableofcontents
 \mtcaddchapter
@@ -213,14 +119,14 @@
 \input{conclusion}
 \input{appendix}
 
-\iffalse
+%\iffalse
 \listoffigures
 \addcontentsline{toc}{chapter}{\listfigurename}
 \mtcaddchapter
 \listoftables
 \addcontentsline{toc}{chapter}{\listtablename}
 \mtcaddchapter
-\fi
+%\fi
 
 %\bibliographystyle{alpha}
 %\bibliographystyle{named}
