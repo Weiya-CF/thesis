@@ -107,28 +107,6 @@
 \newcommand{\wmtmedic}{\texttt{WMT'14-med}}
 %\newcommand{\sbaiteration}{\ensuremath{A}\xspace}
 
-%%%% Names
-\newcommand{\moses}{\texttt{moses}}
-\newcommand{\mert}{\texttt{MERT}}
-\newcommand{\kbmira}{\texttt{KBMIRA}}
-\newcommand{\anymalign}{\texttt{Anymalign}}
-\newcommand{\giza}{\texttt{giza++}}
-\newcommand{\mgiza}{\texttt{mgiza++}}
-\newcommand{\fastalign}{\texttt{FastAlign}}
-\newcommand{\otf}{\texttt{owa}}
-\newcommand{\rnd}{\texttt{rnd}}
-\newcommand{\tfidf}{\texttt{TF-IDF}}
-\newcommand{\ppl}{\texttt{perplexity}}
-\newcommand{\ngp}{\texttt{NGP}}
-\newcommand{\ctx}{\texttt{ctx}}
-\newcommand{\ngram}{\ensuremath{n\textnormal{-gram}}\xspace}
-\newcommand{\bleu}{\textnormal{BLEU}}
-\newcommand{\ter}{\textnormal{TER}}
-\newcommand{\hter}{\textnormal{HTER}}
-
-\newcommand{\sota}{state-of-the-art}
-\newcommand{\Sota}{State-of-the-art}
-
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 
 %\subtitle{Ph.D. dissertation submitted to reviewers}
@@ -138,7 +116,7 @@
 %Title for main language
 \title[english]{Co-located Collaboration in Immersive Virtual Environment}
 %Titles for other languages
-\title[french]{Collaboration Co-localisée en Environnement Virtuel Immersif}
+%\title[french]{Collaboration Co-localisée en Environnement Virtuel Immersif}
 
 %Keywords for main language
 \keywords[english]{Collaboration, Virtual Reality}
@@ -219,14 +197,6 @@
 \mtcaddchapter
  %\cleardoublepage
 
-\iffalse
-\listoffigures
-\addcontentsline{toc}{chapter}{\listfigurename}
-\mtcaddchapter
-\listoftables
-\addcontentsline{toc}{chapter}{\listtablename}
-\mtcaddchapter
-\fi
 \pagenumbering{arabic}
 
 %Enable page numbering
@@ -242,6 +212,15 @@
 \input{chapter_5}
 \input{conclusion}
 \input{appendix}
+
+\iffalse
+\listoffigures
+\addcontentsline{toc}{chapter}{\listfigurename}
+\mtcaddchapter
+\listoftables
+\addcontentsline{toc}{chapter}{\listtablename}
+\mtcaddchapter
+\fi
 
 %\bibliographystyle{alpha}
 %\bibliographystyle{named}

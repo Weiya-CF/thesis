@@ -4,7 +4,7 @@
 % Author   : Vincent Feuvrier
 % Contact  : vincent.feuvrier@normalesup.org
 % modified by CAI Caifang, le mai 2012
-%
+% modified by Weiya Chen, le septembre 2015
 %
 % Simple to use LaTeX class for writing thesis in sciense at
 % Paris-Sud university.

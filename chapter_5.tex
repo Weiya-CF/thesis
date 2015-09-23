@@ -4,23 +4,71 @@
 
 \section{Introduction}
 
+we designed a kinematic model which integrates real world information into the virtual navigation control in the aim of providing a general framework for co-located collaboration by supporting both consistent and individual modes and also fluent transition between them.
 
 
-\section{Motivation}
+\section{Motivation and Objective}
 A generic model: not dependent on system configuration
  
 extensible in terms of user number and control method
 
 More flexible bi-directional control of navigation, friction, pseudo-haptic feedback
 
+One user should not be disturbed by other users when in a stable state
 
-\section{Concept}
+Integrating constrains from virtual world into the navigation control.
+
+
+\section{Basic Components}
 \subsection{Kinematic State}
-\subsection{Vehicle Model}
-\subsection{Potential Force Field}
-\subsection{Mode Switching}
+A kinematic state in a 3D space contains three components:
+\begin{itemize}
+  \item Position and orientation.
+  \item Linear and angular velocity.
+  \item Linear and angular acceleration.
+\end{itemize}
 
-\section{Implementation}
+With the Kinematic State (KS) we can store all the information we need to correctly put the vehicle in the virtual world. The KS can be updated either by providing a new acceleration or a new configuration (in form of a 4x4 matrix). For example, we move the vehicle by applying an acceleration which results in a corresponding velocity and a change in configuration. The user also has a KS that is updated by tracking information in a different way than the vehicle.
+
+\subsubsection{Verlet Integration}
+The verlet integration is used to update the KS with a new acceleration.
+
+For translation:
+
+\[
+\overrightarrow{p_{1}}=\overrightarrow{p_{0}}+\overrightarrow{v_{0}}\Delta t+\frac{1}{2}\overrightarrow{a_{0}}\Delta t^{2}
+\]
+
+\[
+\overrightarrow{v_{1}}=\overrightarrow{v_{0}}+\frac{\overrightarrow{a_{0}}+\overrightarrow{a_{1}}}{2}\Delta t
+\]
+
+And for rotation, we choose to represent the orientation in quaternion for its convenience and simplicity, while angular velocity and acceleration are expressed separately according to euler angles:
+
+\[
+\omega_{1}=\omega_{0}+\frac{\dot{\omega_{0}}+\dot{\omega_{1}}}{2}\Delta t
+\]
+
+\[
+q_{1}=q_{a}q_{v}q_{0}
+\]
+
+\[
+q_{v}=Q\left(\cos(\frac{\Vert\omega_{0}\Vert\Delta t}{2}),\:\sin(\frac{\Vert\omega_{0}\Vert\Delta t}{2})\frac{\omega_{0}(x)}{\Vert\omega_{0}\Vert\Delta t}),\:\sin(\frac{\Vert\omega_{0}\Vert\Delta t}{2})\frac{\omega_{0}(y)}{\Vert\omega_{0}\Vert\Delta t}),\:\sin(\frac{\Vert\omega_{0}\Vert\Delta t}{2})\frac{\omega_{0}(z)}{\Vert\omega_{0}\Vert\Delta t})\right)
+\]
+
+\[
+q_{a}=Q\left(\cos(\frac{\Vert\dot{\omega_{0}}\Vert\Delta t}{2}),\:\sin(\frac{\Vert\dot{\omega_{0}}\Vert\Delta t}{2})\frac{\dot{\omega_{0}}(x)}{\Vert\dot{\omega_{0}}\Vert\Delta t}),\:\sin(\frac{\Vert\dot{\omega_{0}}\Vert\Delta t}{2})\frac{\dot{\omega_{0}}(y)}{\Vert\dot{\omega_{0}}\Vert\Delta t}),\:\sin(\frac{\Vert\dot{\omega_{0}}\Vert\Delta t}{2})\frac{\dot{\omega_{0}}(z)}{\Vert\dot{\omega_{0}}\Vert\Delta t})\right)
+\]
+
+\subsection{Transfer Function}
+t
+\subsection{Potential Field}
+In the domain of robotics, some algorithms can be used to guide a robot to navigate over a field occupied by some obstacles to get to a goal position, one of them is the potential field function. Generally, 2 kinds of potential fields lead to 2 different behaviors of the robot. An attractive field generates an action vector that points the robot toward the goal, while a repulsive field pushes the robot away from an obstacle.
+
+\subsection{Virtual Constrains}
+
+\section{Structure}
 
 python
 
@@ -28,7 +76,11 @@ class schema
 
 sequential graph
 
-\section{Discussion}
+\section{Mode Switching}
+state machine
+
+\section{Parameter Setting}
+
 
 \section{Conclusion}
 We need a model of human for reaction of acceleration.
