@@ -3,7 +3,7 @@
 \minitoc
 
 \section{Introduction}
-Immersive CVEs can be used to connect networked users to the same virtual place for collaboration. Users can be both geographically distributed or co-located at the same physical place. Compared to remote situations, co-located users share the same physical workspace which allows direct user communication and interaction without computer mediation, and unlike cases in which co-located users collaborate with 2D graphic user interface (e.g. image wall, interactive table), immersive CVEs allow them to share the same virtual world on top of the same real space.
+Immersive CVEs can be used to connect networked users to the same virtual place for collaboration. Users can be geographically distributed or co-located at the same physical place. Compared to remote situations, co-located users share the same physical workspace which allows direct user communication and interaction without computer mediation, and unlike cases in which co-located users collaborate with 2D graphic user interface (e.g. image wall, interactive table), immersive CVEs allow them to share the same virtual world on top of the same real space.
 
 A major problem of using immersive CVE for co-located collaboration is that classical projection-based immersive displays can only show images generated from a single user's viewpoint and others sharing the same images from another location will suffer visual distortion. To tackle this problem, multi-user immersive displays are designed to offer individual stereoscopic views for multiple users.
 
@@ -190,6 +190,7 @@ Below we begin by presenting different concepts related to spatial arrangement o
 
 \subsection{Concepts}
 \subsubsection{Spatial Reference Frame}
+\label{sec:srframe}
 In most VR systems, there is a spatial reference frame that maps user's physical position in the tracking space to a corresponding value in the virtual world, so that the computer can use this position to render proper images corresponding user's point of view. In practice, the spatial reference frame is often expressed as the virtual coordinates of the center of physical workspace defined by the screen and/or tracking device configuration. For example in Figure~\ref{fig:2_reference}, from left to right, user remains at the same position in the physical workspace while the spatial reference frame is set to different location in the virtual world, the user will have different virtual viewpoints accordingly.
 
 
@@ -281,6 +282,7 @@ There are different ways to switch between different collaborative modes by spli
 
 
 \subsubsection{Virtual Navigation}
+\label{sec:navigation}
 Navigation is a basic type of interaction for user to accomplish various tasks in the virtual world. A lot of navigation techniques of different nature exist to allow users to travel through large virtual space.
 
 
@@ -406,7 +408,7 @@ Second, we concentrate on the design and evaluation of appropriate navigation pa
 
 Chapter~\ref{chapter:user_cohab} presents the implementation of Altered Human Joystick along with metrics that we defined to evaluate cohabitation capacity in response to identified cohabitation problems. A series of experiments were carried out to test different alterations to see their influences on user distribution and to find an optimal combination.
 
-At last, in Chapter~\ref{chapter:kinematic_model}, we designed a kinematic model which integrates real world information into the virtual navigation control in the aim of providing a general framework for co-located collaboration by supporting both consistent and individual modes and also fluent transition between them.
+At last, in Chapter~\ref{chapter:dynamic_model}, we designed a dynamic model which integrates real world information into the virtual navigation control in the aim of providing a generic framework for co-located collaboration by supporting both consistent and individual modes and also fluent transition between them.
 
 
 \section{Conclusion}
