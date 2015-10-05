@@ -1,7 +1,10 @@
 \chapter{A Dynamic Model for Co-located Collaboration}
 \label{chapter:dynamic_model}
+\pagebreak
+
 \minitoc
 
+\newpage
 \section{Introduction}
 The Altered Human Joystick metaphor is based on a 
 we designed a dynamic model which integrates real world information into the virtual navigation control in the aim of providing a general framework for co-located collaboration by supporting both consistent and individual modes and also fluent transition between them.
@@ -30,43 +33,7 @@ Integrating constrains from virtual world into the navigation control.
 
 \section{Concepts}
 
-\subsection{Virtual Vehicle}
-This dynamic model is based on a \textit{virtual vehicle} as described in Section~\ref{sec:navigation}. The idea is that each user is on board a personal vehicle that allows virtual navigation in 3D space under user's control. From a mathematical point of view, this vehicle is just a mobile spatial reference frame (as explained in Section~\ref{sec:srframe}) which helps to map user's physical workspace to its counterpart in the virtual world. Here we borrow some definitions from the Immersive Interactive Virtual Cabin (IIVC) model (Figure~\ref{fig:5_iivc}) that can help to describe the virtual vehicle for navigation:
-
-\begin{itemize}
-\item The \textit{stage} is a virtual representation of the physical workspace;
-\item The \textit{conveyor} is the integration frame of the stage into the virtual world. This conveyor has its own position, orientation and scale in the virtual world coordinate system, and the stage is linked to the conveyor with position, orientation, and scale offsets.
-\end{itemize}
-
-\begin{figure}[htb]
-  \centering
-  \includegraphics[width=.7\textwidth]{figures/ch5/IIVC}
-  \caption{\label{fig:5_iivc}The IIVC model: the conveyor carries the stage with its workspaces in the virtual world \citep{Fleury2010Generic}.}
-\end{figure}
-
-The virtual vehicle is just a special type of conveyor that is superimposed with user's avatar in the virtual world, so from user's first person viewpoint, the vehicle is always situated underneath user's current location, or we can say that the user is on board his/her personal vehicle in the virtual world in order to navigate. As illustrated in Figure~\ref{fig:5_vehicle}, the user navigates as the vehicle moves forward in the virtual world (the stage is also ``carried" by the vehicle). The vehicle has a constant orientation offset with the stage, but the position offset changes as the user moves in the real environment. In this way the rotation is always centered around user's avatar position no matter his/her location with respect to the physical workspace.
-
-\begin{figure}[htb]
-  \centering
-  \includegraphics[width=.9\textwidth]{figures/ch5/vehicle}
-  \caption{\label{fig:5_vehicle}Illustration of virtual vehicle based navigation.}
-\end{figure}
-
-We name this reference frame as a vehicle instead of conveyor mainly for two reasons: first, rate control navigation techniques provide similar navigation experience as we drive or pilot vehicles in the real world; second, we can reproduce some ``realistic" vehicle-based navigation behaviors (e.g. collisions, frictions) by adding constrains to the virtual vehicle without physicalize the whole virtual scene.
-
-As a summary, the virtual vehicle provides a standard abstraction which facilitates the design of rate control navigation techniques, we just need to concentrate on how to control the vehicle. This conceptual model also makes it easier to understand user's velocity perception within immersive displays. When the user can move in the physical workspace, the navigation velocity perceived by the user is the sum of the virtual vehicle's velocity and user's velocity in the real workspace: 
-
-\begin{equation}
-\overrightarrow{v_{perceived}} = \overrightarrow{v_{vehicle}} + \overrightarrow{v_{user}}
-\end{equation}
-
-The virtual vehicle along with the IIVC model can be easily adapted to manage multiple co-located users in immersive virtual environments. Each user has his/her own copy of stage and virtual vehicle (Figure~\ref{fig:5_multi_vehicle}) which allows individual navigation. Group navigation can also be achieved by merging all the stages and giving the control of all vehicles to a leader. 
-
-\begin{figure}[htb]
-  \centering
-  \includegraphics[width=.9\textwidth]{figures/ch5/multi_vehicle}
-  \caption{\label{fig:5_multi_vehicle}Illustration of virtual vehicle based navigation.}
-\end{figure}
+\subsection{Dynamic Vehicle}
 
 
 \subsection{Transfer Function}
@@ -172,7 +139,20 @@ sequential graph
 % -------------------------------------------------------------------------------------------------
 
 \section{Mode Switching}
-state machine
+Complex collaborative tasks often involve both shared and individual activities that require different spatial configurations of users, which could be identified as different coupling stages \citep{Lissermann2014PMC}. For example, in a virtual assembly task, a scenario could be that users first need to get parts of a model at different storehouses and then come back to the assembly area to put them together. This task contains first a loosely coupled collaboration stage (individual object-searching), followed by closely coupled interactions (the assembly work). 
+
+Multi-user immersive virtual environments designed for co-located collaboration should support both consistent and individual collaborative modes to cover as more scenarios as possible, and also to integrate advanced viewpoint control that facilitate user communication and understanding of the situation.
+
+There are different ways to switch between different collaborative modes by splitting or merging users' spatial reference frames that are summarized as follows:
+
+\begin{itemize}
+\item User initiated commands (e.g. button, gesture or vocal command, etc.);
+\item Automatic transitions (i.e. embedded in the story line of the task);
+\item Event-driven design (e.g. triggered when users enter or leave a certain zone in the virtual world).
+\end{itemize}
+
+
+TODO: state machine
 
 
 % -------------------------------------------------------------------------------------------------

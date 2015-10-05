@@ -1,13 +1,29 @@
 \chapter{Co-located Collaboration with Multi-user Immersive Display}
 \label{chapter:colocated_colab}
+\pagebreak
+
+\textbf{Chapter Summary}
+
+This chapter concentrates on how co-located users collaborate inside multi-user immersive virtual environment and it is divided into three main parts. The first presents technical aspects related to multi-user immersive displays and summarizes existing methods to separate images for different users. The second describes notions that allow us to define two collaborative modes that form a general framework for co-located collaboration. Then the last part presents two major issues that we identify during the collaboration process and proposes research methodology that we adopted to solve the aforementioned issues.
+
+\vspace*{2\baselineskip}
+
 \minitoc
 
+\newpage
 \section{Introduction}
-Immersive CVEs can be used to connect networked users to the same virtual place for collaboration. Users can be geographically distributed or co-located at the same physical place. Compared to remote situations, co-located users share the same physical workspace which allows direct user communication and interaction without computer mediation, and unlike cases in which co-located users collaborate with 2D graphic user interface (e.g. image wall, interactive table), immersive CVEs allow them to share the same virtual world on top of the same real space.
+When several users work in a multi-user immersive virtual environment for collaborative tasks, they share a virtual world on top of the same physical workspace. This physical collocation forms a mixed context which lies in the middle of \citet{Milgram1995AR}'s reality-virtuality continuum where user can have direct as well as computer-mediated interaction and communication. While lots of research works focus on supporting remote users to work efficiently together via immersive CVEs, co-located collaboration in the same immersive virtual environment for now receives limited attention. This is mainly due to the rareness and relatively high-cost of multi-user immersive systems, in contrast to non-immersive multi-user systems such as interactive walls and tables that are already widely studied in the CSCW community \citep{Scott2003System, Inkpen2005Exploring}.
 
-A major problem of using immersive CVE for co-located collaboration is that classical projection-based immersive displays can only show images generated from a single user's viewpoint and others sharing the same images from another location will suffer visual distortion. To tackle this problem, multi-user immersive displays are designed to offer individual stereoscopic views for multiple users.
+Here we focus on co-located collaboration in immersive multi-user systems. Given the characteristics of collaborative work presented in chapter~\ref{chapter:context}, we are mainly interested in following research questions:
 
-This chapter concentrates on how co-located users collaborate inside multi-user immersive virtual environment and it is divided into two sections. The first presents technical aspects related to multi-user immersive displays and summarizes existing methods to separate images for different users. The second describes notions that allow us to define two collaborative modes that form a general framework for co-located collaboration, and then presents two major issues that we identify during the collaboration process and proposes research methodology that we adopted to solve the aforementioned issues.  
+\begin{itemize}
+\item How users perceive each other and achieve a shared context for collaboration?
+\item How to intelligently manage users' viewpoints to support various types of collaborative tasks that require different spatial configuration of users in the virtual world (side-by-side or far away from each other)?
+\item How to manage each user's workspace and spatial relationship with other users?
+\item How to allow fluent transition between shared and individual activities for each user?
+\end{itemize}
+
+Below we begin by presenting multi-user immersive displays designed to offer individual stereoscopic views for multiple users. Then we talk about different concepts related to spatial arrangement of users in the common physical workspace and navigation in the virtual world. At last we talk about issues that we identified during collaborative tasks and research methods that are applied to study these issues.
 
 
 \section{Multi-user Immersive Display}
@@ -160,53 +176,54 @@ it can be easily applied to different shapes of large-scale immersive systems li
 % -------------------------------------------------------------------------------------------------
 
 
-\section{Co-located Collaboration}
-When several users work in a multi-user immersive virtual environment for collaborative tasks, they share a virtual world on top of the same physical workspace. This physical collocation forms a mixed context which lies in the middle of \citet{Milgram1995AR}'s reality-virtuality continuum where user can have direct as well as computer-mediated interaction and communication. While lots of research works focus on supporting remote users to work efficiently together via immersive CVEs, co-located collaboration in the same immersive virtual environment for now receives limited attention. This is mainly due to the rareness and relatively high-cost of multi-user immersive systems, in contrast to non-immersive multi-user systems such as interactive walls and tables that are already widely studied in the CSCW community \citep{Scott2003System, Inkpen2005Exploring}.
+\section{Spatial Organization} 
 
-Here we focus on co-located collaboration in immersive multi-user systems. Given the characteristics of collaborative work presented in chapter~\ref{chapter:context}, we are mainly interested in following research questions:
+\subsection{Stage}
+\label{sec:stage}
+In most VR systems, there is a spatial reference frame that maps user's physical position in the tracking space to a corresponding location in the virtual world, so that the computer can use this position to render proper images in correspondence with user's point of view. In practice, the spatial reference frame is often expressed as the virtual coordinates of the center of physical workspace defined by the screen and/or tracking device configuration. Here we borrow some definitions from the Immersive Interactive Virtual Cabin (IIVC) model (Figure~\ref{fig:2_iivc}) that can help to describe user's workspace:
 
 \begin{itemize}
-\item How users perceive each other and achieve a shared context for collaboration?
-\item How to intelligently manage users' viewpoints to support various types of collaborative tasks that require different spatial configuration of users in the virtual world (side-by-side or far away from each other)?
-\item How to manage each user's workspace and spatial relationship with other users?
-\item How to allow fluent transition between shared and individual activities for each user?
-\end{itemize}
-
-Below we begin by presenting different concepts related to spatial arrangement of users in the common physical workspace and the management of their points of view in the virtual world. Then we talk about issues that we identified during collaborative tasks and research methods that are applied to study aforementioned issues.
+\item The \textit{stage} is a virtual representation of the physical workspace;
+\item The \textit{conveyor} is the integration frame of the stage into the virtual world. This conveyor has its own position, orientation and scale in the virtual world coordinate system, and the stage is linked to the conveyor with position, orientation, and scale offsets.
+-\end{itemize}
 
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=.8\textwidth]{figures/ch2/referenceframe}
+  \includegraphics[width=.7\textwidth]{figures/ch2/IIVC}
+  \caption{\label{fig:2_iivc}The IIVC model: the conveyor carries the stage with its workspaces in the virtual world \citep{Fleury2010Generic}.}
+\end{figure}
+
+So with the stage model, the stage center becomes the spatial reference frame to correctly locate not only the user, but also other devices (e.g. props) in the virtual world. For example in Figure~\ref{fig:2_reference}, from left to right, user remains at the same position in the physical workspace while the stage center is set to different location in the virtual world, the user will have different virtual viewpoints accordingly.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=.4\textwidth]{figures/ch2/referenceframe_1}
+  \includegraphics[width=.4\textwidth]{figures/ch2/referenceframe_2}
   \includegraphics[width=0.48\textwidth]{figures/ch2/ref_1}
   \includegraphics[width=0.48\textwidth]{figures/ch2/ref_2}
   \caption{\label{fig:2_reference}Illustration of the impact of moving spatial reference frame on user's viewpoint location in the virtual scene.}
 \end{figure}
 
+\subsection{Spatial Consistency}
+In a multi-user virtual environment, each user has a corresponding stage in the virtual world. The multi-user display system is able to render completely different stereoscopic images for each user depending on the configuration of users' stage centers.
+
+When all stage centers are strictly superimposed, the spatial relationship between users in the virtual world will be consistent with their relative spatial distribution in the real workspace. In an immersive multi-user virtual environment, this spatial consistency allows users to perceive a virtual object at exactly the same physical location from corresponding viewpoints (Figure~\ref{fig:2_consistency} top). This particular situation is quite similar to cases when users collaborate around physical objects in the real world.
+
+Otherwise, each user will no longer perceive the same object at the same physical location. What a user perceives totally depends on the configuration of spatial reference frame in the virtual world. For example in bottom part of Figure~\ref{fig:2_consistency}, user B's stage center is shifted to the left regarding the one of user A, so user B sees a cube in front of him/her while user A considers the same cube to be on user B's left.
+
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=.9\textwidth]{figures/ch2/consistency}
-  \caption{\label{fig:2_consistency}Distribution of users' spatial reference frames: a) consistent mode; b) individual mode.}
-\end{figure} 
-
-\subsection{Concepts}
-\subsubsection{Spatial Reference Frame}
-\label{sec:srframe}
-In most VR systems, there is a spatial reference frame that maps user's physical position in the tracking space to a corresponding value in the virtual world, so that the computer can use this position to render proper images corresponding user's point of view. In practice, the spatial reference frame is often expressed as the virtual coordinates of the center of physical workspace defined by the screen and/or tracking device configuration. For example in Figure~\ref{fig:2_reference}, from left to right, user remains at the same position in the physical workspace while the spatial reference frame is set to different location in the virtual world, the user will have different virtual viewpoints accordingly.
+  \includegraphics[width=.7\textwidth]{figures/ch2/consistency_1}
+  \includegraphics[width=.7\textwidth]{figures/ch2/consistency_2}
+  \caption{\label{fig:2_consistency}Distribution of users' stage centers: consistent mode (above) and individual mode (below).}
+\end{figure}
 
 
-\subsubsection{Spatial Consistency}
-In a multi-user virtual environment, each user has a corresponding spatial reference frame. The multi-user display system is able to render completely different stereoscopic images for each user depending on the configuration of users' spatial reference frames.
-
-When all reference frames are strictly superimposed, the spatial relationship between users in the virtual world will be consistent with their relative spatial distribution in the real workspace. In an immersive multi-user virtual environment, this spatial consistency allows users to perceive a virtual object at exactly the same physical location from corresponding viewpoints (Figure~\ref{fig:2_consistency}a). This particular situation is quite similar to cases when users collaborate around physical objects in the real world.
-
-Otherwise, each user will no longer perceive the same object at the same physical location. What a user perceives totally depends on the configuration of spatial reference frame in the virtual world. For example in Figure~\ref{fig:2_consistency}b, user B's spatial reference frame is shifted to the left regarding the one of user A, so user B sees a cube in front of him/her while user A considers the same cube to be on user B's left.
+\subsection{Collaborative Mode}
+The distribution of stage centers has a direct influence on how users interact and communicate with each other, so collaboration in multi-user immersive virtual environment can be divided into two modes depending on whether the spatial consistency is maintained among all the users.
 
 
-\subsubsection{Collaborative Mode}
-The distribution of spatial reference frames has a direct influence on how users interact and communicate with each other, so collaboration in multi-user immersive virtual environment can be divided into two modes depending on whether the spatial consistency is maintained among all the users.
-
-
-\paragraph{Consistent Mode}
+\subsubsection{Consistent Mode}
 In this mode, all users' virtual spaces are consistent with the common physical workspace which result in a shared spatial understanding of the virtual environment. In this context, users can communicate spatial information similarly as in the real world. For example, one can speak to another ``Pass me the book on your left", or point to objects or directions by deictic gestures \citep{Salzmann2009VRPointing} (Figure~\ref{fig:2_consistent_collab:pointing}). Another advantage of consistent mode is that users can make use of tangible devices (props) to get passive tactile feedback for object co-manipulation \citep{Aguerreche2009Three, Salzmann2009CIC} (Figure~\ref{fig:2_consistent_collab:tangible}) or for other specific tasks like two-user driving test \citep{Salzmann2008TUS}, etc.
 
 In projection-based immersive system, we can consider that users' physical bodies are directly ``integrated" into the virtual environment. Social cues that facilitate human communication (e.g. gestures, postures, facial expressions and gaze direction, etc.) can be conveyed without computer mediation. This is a big advantage compared to remote situations where users communicate through embodied avatars. 
@@ -244,8 +261,8 @@ The consistent mode is initially motivated by efforts to bring distortion-free s
 
 However, this spatial constrain restricts collaborative scenarios that can be supported in multi-user immersive virtual environment. Though several interaction techniques have been proposed to get around spatial constrains and to extend collaborative scenarios in consistent mode, such as the bent pick ray \citep{Riege2006Bent} and the see-through techniques \citep{Argelaguet2010STT}.
 
-\paragraph{Individual Mode}
-As opposite to consistent mode, the individual mode loosens constrains applied to users' spatial reference frames. This mode is complementary to the consistent mode and largely broadens collaborative scenarios that can be supported in the co-located use of immersive virtual environment. Collaborative scenarios can be extended in the following ways:
+\subsubsection{Individual Mode}
+As opposite to consistent mode, the individual mode loosens constrains applied to users' stage centers. This mode is complementary to the consistent mode and largely broadens collaborative scenarios that can be supported in the co-located use of immersive virtual environment. Collaborative scenarios can be extended in the following ways:
 
 \begin{itemize}
 \item Spatial distribution of users in the virtual world becomes more flexible:
@@ -267,40 +284,49 @@ The individual mode can be very useful, even indispensable in some cases. For ex
 In fact, individual mode puts users in an intermediate state between remote collaboration through CVE where all interactions are mediated by the computer network, and consistent co-located collaboration where users can interact the same way as they do in the real world. In individual mode, the physical collocation still allows direct user communication in verbal and non-verbal form (e.g. one wants another to stop moving a table, he or she can simply say ``stop" or show a stop hand gesture). However, since users' spatial relationship (relative position and orientation) in the virtual world is no longer constrained by the one in the physical workspace, direct user interaction and communication involving spatial information may become confusing (e.g. the same virtual object will appear at different spatial locations for users who do not share the same spatial reference frame). In this case, embodied avatars as those used in remote situations are often needed to allow coherent user interactions.
 
 
-\paragraph{Mode Switching}
-Complex collaborative tasks often involve both shared and individual activities that require different spatial configurations of users, which could be identified as different coupling stages \citep{Lissermann2014PMC}. For example, in a virtual assembly task, a scenario could be that users first need to get parts of a model at different storehouses and then come back to the assembly area to put them together. This task contains first a loosely coupled collaboration stage (individual object-searching), followed by closely coupled interactions (the assembly work). 
+% -------------------------------------------------------------------------------------------------
 
-Multi-user immersive virtual environments designed for co-located collaboration should support both consistent and individual collaborative modes to cover as more scenarios as possible, and also to integrate advanced viewpoint control that facilitate user communication and understanding of the situation.
-
-There are different ways to switch between different collaborative modes by splitting or merging users' spatial reference frames that are summarized as follows:
-
-\begin{itemize}
-\item User initiated commands (e.g. button, gesture or vocal command, etc.);
-\item Automatic transitions (i.e. embedded in the story line of the task);
-\item Event-driven design (e.g. triggered when users enter or leave a certain zone in the virtual world).
-\end{itemize}
-
-
-\subsubsection{Virtual Navigation}
+\section{Virtual Navigation}
 \label{sec:navigation}
-Navigation is a basic type of interaction for user to accomplish various tasks in the virtual world. A lot of navigation techniques of different nature exist to allow users to travel through large virtual space.
-
-
-\paragraph{Navigation in IVE}
-Navigation methods used in immersive virtual environments are in general different with desktop-based ones. At least two requirements should be met when designing navigation technique in such context:
+Navigation is a basic type of interaction for user to accomplish various tasks in the virtual world. A lot of navigation techniques of different nature exist to allow users to travel through large virtual space. Navigation methods used in immersive virtual environments are in general different with desktop-based ones. At least two requirements should be met when designing navigation technique in such context:
 
 \begin{itemize}
 \item Desktop-based input devices like mouse and keyboard are not preferred as they are not compatible with behavioral interfaces;
 \item Users should have access to an infinite virtual world while staying in a limited physical workspace.
 \end{itemize}
 
+Below we present a taxonomy of existing navigation techniques by their control law and a virtual vehicle model that we propose as a conceptual model to design rate control navigation techniques. Then we discuss how co-located users navigate in the same immersive virtual environment.
+
+\subsection{Taxonomy}
+\subsubsection{Position Control}
 Natural walking is considered to be the most intuitive way to explore the virtual environment \citep{Ruddle2009BW}. However, due to the limited size of available physical workspace, we need additional controls to enable infinite walking in restricted real workspace. Both hardware solutions like various locomotion devices (e.g. treadmills \citep{Iwata1999Treadmill}) and software solutions (e.g. redirection \citep{Peck2008RED}, resetting \citep{Williams2007ELV} and scaling techniques \citep{Interrante2007SLB}) are proposed to tackle the space limitation. Other metaphors like walk-in-place \citep{Razzaque2002RWP} and WIM (World-In-Miniature) \citep{Stoakley1995VRW} are also interesting alternatives.
 
-Unlike previous techniques, rate control techniques activate virtual navigation by setting the velocity of user's spatial reference frame (we can imagine that the user is on board a virtual vehicle) instead of its position and orientation. Users can have the sensation of navigating (self-motion illusion or vection \citep{Riecke2012Vection}) without moving physically. Actually the virtual vehicle can be controlled by information coming from different sources, for example, various input devices like joystick, haptic arm \citep{Martin2012Forklift} or even specific locomotion devices \citep{Marchal2011JOYMAN}. With video cameras or optical tracking systems, users can specify the velocity of the vehicle by motion tracking data of the hand (camera-in-hand \citep{Ware1990EVC}) or head movements \citep{Bourdot2002HCNav}. Gestures \citep{Konrad2003Gesture} and postures \citep{Kapri2011Steering} can also be used to move the virtual vehicle. Bowman et al. named this kind of virtual navigation techniques steering metaphors \citep{Bowman2004UIT} which are often relatively easy to implement and can provide efficient and flexible control of virtual navigation.
+\subsubsection{Rate Control}
+Unlike previous techniques, rate control techniques activate virtual navigation by giving a velocity to user's stage to change constantly its position and orientation in the virtual world. Users can have the sensation of navigating (self-motion illusion or vection \citep{Riecke2012Vection}) without moving physically. Actually the navigation can be controlled by information coming from different sources, for example, various input devices like joystick, haptic arm \citep{Martin2012Forklift} or even specific locomotion devices \citep{Marchal2011JOYMAN}. With video cameras or optical tracking systems, users can specify the navigation velocity by motion tracking data of the hand (camera-in-hand \citep{Ware1990EVC}) or head movements \citep{Bourdot2002HCNav}, and also gestures \citep{Konrad2003Gesture} or postures \citep{Kapri2011Steering}. \citet{Bowman2004UIT} named this kind of virtual navigation techniques steering metaphors which are often relatively easy to implement and can provide efficient and flexible control of virtual navigation.
 
+\subsubsection{Mixed Control}
 Some navigation metaphors such as the bubble technique \citep{Dominjon2005Bubble} and the magic barrier tape \citep{Cirio2009MBT} combine both position and rate control in order to enable infinite navigation within restricted real workspace. Position control is used within the physical workspace and then rate control is applied to the virtual vehicle to move further in the virtual world. \citet{Cirio2012Cube} summarized several metaphors for safe navigation in a restricted cubic workspace. Moreover, \citet{Fleury2010Generic} proposed a general model to integrate physical workspace into the virtual world and make the user aware of the physical environment in different ways.
 
-\paragraph{Navigation in Multi-user IVE}
+
+\subsection{Virtual Vehicle}
+To better describe rate control navigation technique, we proposed a virtual vehicle model. The virtual vehicle is a special type of conveyor (mentioned in section~\ref{sec:stage}) that is superimposed with user's avatar in the virtual world, so from user's first person viewpoint, the vehicle is always situated underneath user's current location, or we can say that the user is on board his/her personal vehicle in the virtual world in order to navigate. As illustrated in Figure~\ref{fig:2_vehicle}, the user navigates as the vehicle moves forward in the virtual world (the stage is ``carried" by the vehicle). The vehicle has a constant orientation offset with the stage, but the position offset changes as the user moves in the real environment. In this way the rotation is always centered around user's avatar position no matter his/her location with respect to the physical workspace.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=.8\textwidth]{figures/ch2/vehicle}
+  \caption{\label{fig:2_vehicle}Illustration of virtual vehicle based navigation.}
+\end{figure}
+
+We name this reference frame as a vehicle instead of conveyor mainly for two reasons: first, rate control navigation techniques provide similar navigation experience as we drive or pilot vehicles in the real world; second, we can reproduce some ``realistic" vehicle-based navigation behaviors (e.g. collisions, frictions) by adding constrains to the virtual vehicle without physicalize the whole virtual scene.
+
+As a summary, the virtual vehicle provides a standard abstraction which facilitates the design of rate control navigation techniques, we just need to concentrate on how to control the vehicle. This conceptual model also makes it easier to understand user's velocity perception within immersive displays. When the user can move in the physical workspace, the navigation velocity perceived by the user is the sum of the virtual vehicle's velocity and user's velocity in the real workspace: 
+
+\begin{equation}
+\overrightarrow{v_{perceived}} = \overrightarrow{v_{vehicle}} + \overrightarrow{v_{user}}
+\end{equation}
+
+
+\subsection{Navigation in Multi-user IVE}
 In a multi-user immersive virtual environment, existing studies on co-located collaboration focused mainly on closely-coupled collaboration (e.g. co-manipulation) in consistent mode. In this situation, virtual navigation is often disabled. When users need to change the place for collaboration, navigation is conducted in a leader-follower mode that one user controls the navigation for the whole group. Spatial consistency is always maintained \citep{Beck2013IGG} (Figure~\ref{fig:2_group_navig:group_navig_1}) or temporarily disabled \citep{Kulik2011CSS} in certain cases to avoid virtual obstacles (Figure~\ref{fig:2_group_navig:group_navig_2}).
 
 \begin{figure}[htb]
@@ -319,18 +345,26 @@ In a multi-user immersive virtual environment, existing studies on co-located co
   \caption{\label{fig:2_group_navig}Navigation of co-located users controlled by a leader.}
 \end{figure}
 
-In individual mode, individual navigation can be easily achieved by providing independent navigation metaphors for each user which gives users full control on their own virtual locations. However, navigation metaphors based on users' physical movements may be problematic as users share the same physical workspace. Thus multi-user navigation models with individual navigation control should comply with user cohabitation constrains that will be discussed in the following section.
+The virtual vehicle along with the IIVC model can be easily adapted to manage multiple co-located users in immersive virtual environments. Each user has his/her own copy of stage and virtual vehicle (Figure~\ref{fig:2_multi_vehicle}) which allows individual navigation. Group navigation can also be achieved by merging all the stages and giving the control of all vehicles to a leader. 
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=.8\textwidth]{figures/ch2/multi_vehicle}
+  \caption{\label{fig:2_multi_vehicle}Illustration of virtual vehicle based navigation.}
+\end{figure}
+
+In individual mode, individual navigation can be achieved by providing independent navigation metaphors for each user which gives users full control on their own virtual locations. However, using navigation metaphors based on users' physical movements may be problematic as users share the same physical workspace. Thus multi-user navigation models with individual navigation control should comply with user cohabitation constrains that will be discussed in the following section.
 
 
 % -------------------------------------------------------------------------------------------------
 
-\subsection{Addressed Issues}
+\section{Addressed Issues}
 As presented above, co-located collaboration in IVE contains two different collaborative modes: the consistent mode and individual mode. In consistent mode, users have a distribution of virtual spaces that are coherent with their physical workspace, which offers a similar interaction experience as in real world. On the contrary, users in individual mode have independent viewpoints which broadens supported collaborative scenarios with more flexible viewpoint control.
 
 However, due to the inconsistency between users' spatial distributions in the virtual world and real workspace, the individual mode provides users with a new kind of perceptual immersion and related cognitive experiences as they need to handle information from both real world and the virtual scene at the same time. We identified two main categories of spatial issues: perceptual conflicts during user communication and interaction, and user cohabitation in limited physical workspace. These issues should be studied if we want to validate the use of individual mode for co-located collaboration in IVEs. 
 
 
-\subsubsection{Perceptual Conflicts}
+\subsection{Perceptual Conflicts}
 Communications between collaborators are usually conducted in a multimodal way \citep{Paggio2005Multimodal} including verbal and non-verbal modalities \citep{Ennis2010Seeing, Dodds2011Talk}, especially deictic gestures to refer to objects or places. In individual mode, this kind of spatial interactions can be restored by introducing embodied avatars just like in remote situations - each user interacts temporally with other users' avatars instead of the real user in his/her own ``copy" of virtual world.  As a consequence, multimodal interactions in individual mode lead to two kinds of perceptual conflicts:
 
 First, in projection-based immersive systems, users sharing the same display may sometimes enter each other's field of view when they work with embodied avatars. The simultaneous perception of a user and his/her avatar leads to a special experience that we called ``dual-presence". The dual-presence offers conflicting visual cues because the perceived real user and corresponding avatar share some common properties in terms of appearance and body movement (animated by real-time motion capture).
@@ -356,7 +390,7 @@ Although according to \citet{Spence2013Just}'s review, spatial coincidence does 
 These two categories of perceptual conflicts are interrelated since they all depend on the distance between a user and his/her avatar. We need to study the usability of individual mode for co-located collaboration by investigating users' reaction to dual-presence and visual-auditive conflicts. The effects of such perceptual conflicts will influence choices on the design of co-located collaborative immersive systems. For example, whether we should prevent users from seeing the real users to avoid dual-presence, whether we need headphones to map users' speech to avatars' positions by 3D audio, etc.
 
 
-\subsubsection{User Cohabitation}
+\subsection{User Cohabitation}
 Users in a multi-user IVE are subjected to two kinds of spatial constrains: users are inside a limited physical workspace, and they share the same workspace. These two constrains lead to different aspects of user cohabitation management: how to manage the spatial relationship between active users and the workspace boundaries while keeping good visual immersion? How to allocate personal workspace for users so that they won't collide or occlude each other?
 
 Immersive virtual environment has the power to bring users to an artificial world by blocking the perception of the real world. In such situation users often forget boundaries of the physical workspace due to visual immersion, so when they move around in such system they risk to run into walls (with HMDs) or screens (projection-based display) which could endanger both the user and the device. Moreover, visual immersion is limited by functional tracking area and the screen configuration (for projection-based display). For example, in large projection-based immersive systems with non-closed displays such as large image wall or a 3-wall CAVE, visual immersion is limited to the display area (Figure~\ref{fig:2_illu_system}).
@@ -396,8 +430,7 @@ For safe and efficient use of multi-user IVEs, new paradigms are needed to enabl
 
 % -------------------------------------------------------------------------------------------------
 
-
-\subsection{Approach}
+\section{Approach}
 To assess users' reactions to certain stimuli (e.g. perceptual conflicts) or the performance of novel paradigms (e.g. paradigms for navigation or object manipulation) in virtual environments, experiment-based user evaluation inherited from HCI research has become a mainstream method. Besides formative user experiment, there are many other evaluation methods such as cognitive walkthrough, heuristic expert evaluation, interview, post-hoc questionnaire and so on, each can help us to gather some information from a different angle with certain cost \citep{Bowman2002Survey}.
 
 In the context of this thesis, our goal is to study spatial issues related to individual collaborative mode in order to design a valid and efficient framework for co-located collaboration in IVE. All experiments discussed below are conducted in projection-based immersive system in which all spatial issues that we mentioned are present. The main experimental platform named EVE (Evolutive Virtual Environment), is a four-screen multi-user immersive CAVE system built with the active \& passive separation technique (see Appendix~\ref{appendix:platform}). It serves as an experimental tool to study issues related to user interaction and communication for co-located collaboration in projection-based multi-user immersive virtual environment.
@@ -406,12 +439,11 @@ The first step is to study effects and influencing factors of perceptual conflic
 
 Second, we concentrate on the design and evaluation of appropriate navigation paradigms to allow individual navigation while solving user cohabitation problems in a progressive way. The paradigm that we propose is based on a Human Joystick metaphor controlled by head tracking \citep{Bourdot2002HCNav}. First we evaluated this metaphor by a comparative experiment \citep{Chen2013NVW} to confirm its advantages over traditional navigation solutions (e.g. joystick). Then we created an Altered Human Joystick paradigm by adding additional controls to manage users' relationship with system borders and to minimize inter-user interferences.
 
-Chapter~\ref{chapter:user_cohab} presents the implementation of Altered Human Joystick along with metrics that we defined to evaluate cohabitation capacity in response to identified cohabitation problems. A series of experiments were carried out to test different alterations to see their influences on user distribution and to find an optimal combination.
+At last, by taking into account feedbacks of existing studies, we continue to make improvements on the human joystick paradigm in the aim of providing a generic framework for co-located collaboration which supports both consistent and individual modes and also fluent transition between them as described in Chapter~\ref{chapter:dynamic_model}.
 
-At last, in Chapter~\ref{chapter:dynamic_model}, we designed a dynamic model which integrates real world information into the virtual navigation control in the aim of providing a generic framework for co-located collaboration by supporting both consistent and individual modes and also fluent transition between them.
-
+% -------------------------------------------------------------------------------------------------
 
 \section{Conclusion}
-The research described in this thesis consists of investigating how to enable individual mode to better support co-located collaboration in multi-user IVEs. The first part of this chapter outlines motivations and techniques to create immersive systems for co-located collaboration. Then the second part presents notions and issues related to spatial aspects of co-located use of IVE, it also summarizes research efforts that we made to study these issues and to propose solutions accordingly.
+The research described in this thesis consists of investigating how to enable individual mode to better support co-located collaboration in multi-user IVEs. The first part of this chapter outlines motivations and techniques to create immersive systems for co-located collaboration, and the second part presents notions around spatial organization of users' workspaces and how we navigate in IVEs. Then the last part summarizes issues related to spatial aspects of co-located use of IVE, it also presents research efforts that we made to study these issues and to propose solutions accordingly.
 
-To fully support co-located collaboration in multi-user IVE, our approach is to study and to resolve separately the spatial issues that we identified in the aim of building a general framework for co-located collaboration in IVE which allows both consistent and individual modes.
+In following chapters, we present separately our studies on perceptual and cohabitation issues that we identified in the aim of building a general framework for co-located collaboration in IVE which allows both consistent and individual modes.
