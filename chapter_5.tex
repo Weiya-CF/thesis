@@ -282,29 +282,44 @@ Moreover, the optimal configuration defined by the potential field may not alway
 
 
 \subsection{Virtual World Constrains}
-Unlike in 
+In most rate control navigation methods, the virtual vehicle is just a mobile reference frame whose position and orientation is directly set by user commands, so it can not be influenced by physical constrains defined in the virtual world (e.g. the vehicle can cross virtual objects like walls or floors). However, the dynamic vehicle defined in DYNAMIC receives user commands in form of accelerations, so forces in the virtual world could be easily applied to the vehicle by giving the vehicle a certain virtual mass.
 
-In the dynamic navigation model, 
+\subsubsection{Interaction with Virtual World}
+Various physical behaviors can be simulated when using the dynamic model to navigate in the virtual world:
 
+\begin{itemize}
+\item Viscosity of the virtual space or friction of the floor (add an acceleration in the opposite direction of the vehicle's current velocity);
+\item Attraction or repulsion fields associated with a zone or a location;
+\item Collision with certain objects (e.g. a bounding box at the boundary of the virtual scene).
+\end{itemize}
 
-\subsubsection{Interaction with Environment}
-interaction with virtual world
- - simulate physical behavior         we can apply an acceleration in the opposite direction of the vehicle's current velocity to
-                                     simulate the viscosity or friction of the virtual world
-
- - integrate with physics engine      cross wall: collision
+The dynamic model acts as a pseudo physics engine so we do not need to physicalize the whole virtual world to achieve some simple physical interactions. Otherwise, the vehicle can be integrated into a physics engine in order to get more realistic physical behaviors.
 
 \subsubsection{Interaction between Users}
-interact with other user             
+When multiple users navigate in the same virtual space with the dynamic model, physical links could be established between vehicles to allow different levels of collaboration:     
 
-three levels of user interaction
-Imagine two users moving together a virtual table to another place, in this case their vehicles are virtually connected by the table so they have mutual influences on each other's navigation control
+\begin{itemize}
+\item Closely-coupled collaboration: there is a strong physical link between vehicles, one user's move will have an instant influence on the navigation of another. This is typical for object co-manipulation - when several users move together a heavy or large object to another place;
+\item Loosely-coupled collaboration: there is a soft physical link between vehicles. For example, a user's vehicle is attached to the vehicle of another user by a spring so the former could be guided from one place to another while keeping a certain degree of autonomy;
+\item Individual navigation: no physical constrains exist between different vehicles.
+\end{itemize}
+
+Users can switch from one collaborative state to another by changing the physical link connecting the vehicles (Figure~\ref{fig:5_user_inter}). Consequently, the dynamic navigation model broadens collaborative scenarios that can be achieved in multi-user immersive virtual environment.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=.8\textwidth]{figures/ch5/user_inter}
+  \caption{\label{fig:5_user_inter}Three levels of collaboration involving user navigation activities (example of two vehicles).}
+\end{figure}
+
 
 % -------------------------------------------------------------------------------------------------
 
-
 \section{Implementation}
-\subsection{Kinematic State}
+\subsection{Data Structure}
+
+Kinematic State
+
 Kinematics is a field of study which describes the motion of points and more complex objects without consideration of the causes of motion \citep{Beggs1983Kinematics}. It is the basic component of a physics engine for virtual simulation.
 
 Instead of navigating by setting a user's position and orientation in the virtual world, we can also make use of other kinematic information such as velocity and acceleration to control user's virtual motion, especially in cases where we look for navigation sensations that are close to those we have in the physical world. 
@@ -371,7 +386,7 @@ q_{a}=\left(\cos(\frac{\Vert\dot{\omega_{0}}\Vert\Delta t}{2}),\:\sin(\frac{\Ver
 
 
 
-\subsection{Structure}
+\subsection{Organization}
 
 python
 
@@ -391,6 +406,8 @@ An \textbf{Inverse Model} computes an acceleration based on the difference betwe
 Parameter Setting user perception
 
 One user should not be disturbed by other users when in a stable state
+
+can not distinguish the source of disturbance (virtual vs real)
 
 % -------------------------------------------------------------------------------------------------
 
