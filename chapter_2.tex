@@ -2,9 +2,9 @@
 \label{chapter:colocated_colab}
 \pagebreak
 
-\textbf{Chapter Summary}
+\textbf{Chapter Abstract}
 
-This chapter concentrates on how co-located users collaborate inside multi-user immersive virtual environment and it is divided into three main parts. The first presents technical aspects related to multi-user immersive displays and summarizes existing methods to separate images for different users. The second describes notions that allow us to define two collaborative modes that form a general framework for co-located collaboration. Then the last part presents two major issues that we identify during the collaboration process and proposes research methodology that we adopted to solve the aforementioned issues.
+This chapter concentrates on how co-located users collaborate inside multi-user immersive virtual environment and it is divided into three main parts. The first presents technical aspects related to multi-user immersive displays and summarizes existing methods to separate images for different users. The second describes notions related to users' spatial organization and how users navigate in the virtual environment. Then the last part presents two major issues that we identify during the collaboration process and proposes research methodology that we adopted to solve these issues.
 
 \vspace*{2\baselineskip}
 
@@ -283,6 +283,17 @@ The individual mode can be very useful, even indispensable in some cases. For ex
 
 In fact, individual mode puts users in an intermediate state between remote collaboration through CVE where all interactions are mediated by the computer network, and consistent co-located collaboration where users can interact the same way as they do in the real world. In individual mode, the physical collocation still allows direct user communication in verbal and non-verbal form (e.g. one wants another to stop moving a table, he or she can simply say ``stop" or show a stop hand gesture). However, since users' spatial relationship (relative position and orientation) in the virtual world is no longer constrained by the one in the physical workspace, direct user interaction and communication involving spatial information may become confusing (e.g. the same virtual object will appear at different spatial locations for users who do not share the same spatial reference frame). In this case, embodied avatars as those used in remote situations are often needed to allow coherent user interactions.
 
+\subsubsection{Mode Switching}
+Multi-user immersive virtual environments should support both consistent and individual collaborative modes to cover as more collaborative scenarios as possible, and also to integrate advanced viewpoint control that facilitate user communication and understanding of the situation.
+
+The transition between the two modes are achieved by splitting or merging users' stages through automatic or guided virtual navigation and viewpoint control. Here we summarize different ways to activate mode switching:
+
+\begin{itemize}
+\item User initiated commands (e.g. button, gesture or vocal command, etc.);
+\item Automatic transitions (i.e. embedded in the story line of the task);
+\item Event-driven design (e.g. triggered when users enter or leave a certain zone in the virtual world).
+\end{itemize}
+
 
 % -------------------------------------------------------------------------------------------------
 
@@ -439,7 +450,7 @@ The first step is to study effects and influencing factors of perceptual conflic
 
 Second, we concentrate on the design and evaluation of appropriate navigation paradigms to allow individual navigation while solving user cohabitation problems in a progressive way. The paradigm that we propose is based on a Human Joystick metaphor controlled by head tracking \citep{Bourdot2002HCNav}. First we evaluated this metaphor by a comparative experiment \citep{Chen2013NVW} to confirm its advantages over traditional navigation solutions (e.g. joystick). Then we created an Altered Human Joystick paradigm by adding additional controls to manage users' relationship with system borders and to minimize inter-user interferences.
 
-At last, by taking into account feedbacks of existing studies, we continue to make improvements on the human joystick paradigm in the aim of providing a generic framework for co-located collaboration which supports both consistent and individual modes and also fluent transition between them as described in Chapter~\ref{chapter:dynamic_model}.
+At last, by taking into account feedbacks of existing studies, we continue to make improvements on the human joystick paradigm in the aim of providing a generic framework for co-located collaboration which integrates constrains from the physical workspace and virtual world into the navigation control as described in Chapter~\ref{chapter:dynamic_model}.
 
 % -------------------------------------------------------------------------------------------------
 
