@@ -4,7 +4,7 @@
 
 \textbf{Chapter Abstract}
 
-This chapter presents a novel dynamic navigation model named DYNAMIC that we designed for co-located collaboration. This model allows more advanced navigation control by integrating constrains from physical workspace and the virtual world. We first explained our motivation and different components of DYNAMIC at a conceptual level, then we presented implementation details from data structure to code organization, as well as some discussion about possible improvements.
+This chapter presents a novel dynamic navigation model named DYNAMIC that we designed for co-located collaboration. This model allows more advanced navigation control by integrating constrains from physical workspace and the virtual world. We first explained our motivation and different components of DYNAMIC at a conceptual level, then we presented implementation details from data structure to code organization, as well as some discussion about possible future improvements.
 
 \vspace*{2\baselineskip}
 
@@ -449,13 +449,17 @@ Here we give explanations to a list of main components (in form of classes) that
 % -------------------------------------------------------------------------------------------------
 
 \section{Discussion}
-Parameter Setting user perception: a common one? one for each user?
+With the conceptual framework and code structure described above, we implemented a first version of DYNAMIC with parameters that are configured empirically according to the configuration (form and size) of our immersive system. There still remains issues to be solved to achieve an efficient and robust navigation model.
 
-One user should not be disturbed by other users when in a stable state
+In term of users' comfort, an important question is that in general, how we can find appropriate parameters (e.g. gain value for the transfer function and the inverse model) for this dynamic model, considering that each user has his/her own way to use the navigation metaphor and does not have the same reaction to system-induced accelerations. So whether do we need a calibration process to identify parameters for each user, or can we find parameters that correspond to a generic model describing human reaction to accelerations? Another question is how we can limit the perceived accelerations due to obstacles in physical workspace. Can we find a threshold under which a user will not feel the additional accelerations? Or at least does not find it disturbing for the navigation control?
 
-can not distinguish the source of disturbance (virtual vs real)
+To answer these questions, follow-up user studies are needed to test different parameters under various conditions and to improve the model according to users' feedbacks.
+
+On technical side, the dynamic model provides a physicalized vehicle that is ready to include haptic feedback during navigation. Also, this model could be extended to manage the coexistence of users with other type of devices (e.g. props, haptic arms, etc.) during immersive collaboration. For example, if a user is equipped with a large scale haptic arm (Figure~\ref{fig:1_hi:scale1}), we need to extend our dynamic model to take into account this new kind of physical obstacle which is attached to one user and should be avoided by others.
 
 % -------------------------------------------------------------------------------------------------
 
 \section{Conclusion}
-We need a model of human for reaction of acceleration.
+In this last chapter, we presented a novel dynamic navigation model named DYNAMIC - an extended version of the Altered Human Joystick metaphor that we designed for co-located collaboration in multi-user immersive systems. On the one hand, this model integrates constrains from physical workspace by a potential field method to solve user cohabitation problems. On the other hand, it takes into account constrains coming from the virtual world to enable interactive control of a user's vehicle and interactions between users.
+
+This model offers a generic solution for user cohabitation in terms of user number and geometric properties of the immersive system, and enables different collaboration levels between users. Based on the current implementation, further studies can be conducted to refine this model regarding user comfort during navigation control and to include more types of devices for immersive collaboration.
