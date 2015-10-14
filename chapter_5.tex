@@ -41,7 +41,7 @@ The original human joystick metaphor and the altered versions that we present in
 \end{equation}
 \begin{equation}
 \label{eq:old_tf_r}
-\Omega_{veh}=f(\Delta q)=f(q_{u}-q_{0})
+\Omega_{veh}=f(\Delta q)=f(q_{0}^{-1} \cdot q_{u})
 \end{equation}
 
 where $p_{u}$ is user's current position and $q_{u}$ is a quaternion representing user's orientation in the real world.
@@ -145,6 +145,8 @@ We can name $sign \in \{-1, 1\}$ to indicate the rotation direction (computed us
 where $K_{R}$ is a coefficient to modulate the field power.
 
 \subsubsection{Solutions}
+\label{sec:5_solution}
+
 With the above potential fields associated with each obstacle, users will naturally keep a distance with all obstacles no matter the system configuration, which means we no longer need to specify particular working zones or shared zone for each user as we did in Chapter~\ref{chapter:user_cohab}. So now the question is how users can ``perceive" and be influenced by the potential fields.
 
 \paragraph{Optimal Configuration} In a physical workspace filled with several obstacles, the global potential field for a user is the combination of potential fields of all obstacles, and each user will have a different potential field distribution since he/she is considered as an obstacle for the other users. For each user, the superimposed potential fields result in one or several (local minimum values) special positions and orientations where the forces are neutralized. We can use optimal configuration $c_{opt}$ to denote the combination of optimal position and orientation:
@@ -316,94 +318,138 @@ Users can switch from one collaborative state to another by changing the physica
 % -------------------------------------------------------------------------------------------------
 
 \section{Implementation}
+In this section, we explained how we put concepts described above together into a functional model, and how we created specific data structure to store all kinematic information of users and their vehicles. Finally, we presented an object-oriented design of the model with detailed descriptions of main components.
+
+\subsection{Control Process}
+In virtual reality applications, the general program loop contains three steps: user input collection, logic processing and rendering update. As shown in Figure~\ref{fig:5_process}, depending on user's input, the dynamic model computes withs its three main components the accelerations to apply to the virtual vehicle.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=.9\textwidth]{figures/ch5/process}
+  \caption{\label{fig:5_process}The general control process of DYNAMIC.}
+\end{figure}
+
+Since we defined two options to integrate the influence of potential fields, there are two corresponding ways to compute the total acceleration for the vehicle. If we name $acc_{user}$ the acceleration (both linear and angular components) generated from the transfer function, $acc_{obs}$ from the potential field, and $acc_{vir}$ the one from virtual constrains, the total acceleration $acc_{total}$ for option 2 can be expressed as:
+
+\begin{equation}
+acc_{total}=acc_{user}+acc_{obs}+acc_{vir}
+\end{equation}
+
+While for option 1, the potential field scales $acc_{user}$ instead of inserting an additional acceleration, so we get:
+
+\begin{equation}
+acc_{total}=scale(acc_{user},\: (\overrightarrow{d},\theta))+acc_{vir}
+\end{equation}
+
+where $\overrightarrow{d}$ and $\theta$ represent the difference between user's current configuration and the optimal configuration decided by the potential field distribution.
+
+With the total acceleration $acc_{total}$ and the vehicle's configuration $c_{veh}$ in the previous frame, we can get a new $c_{veh}$ to correctly position user's corresponding stage and avatar in the virtual world to get proper rendering results.
+
+
 \subsection{Data Structure}
+In this dynamic model, we often need different kinds of kinematic information about an object such as its velocity and acceleration, along with its static configuration to control the virtual navigation. In 3D space, an object's kinematic state contains two parts of information respectively for translation and rotation, except for points (considered as particles) which have only positional information. 
 
-Kinematic State
-
-Kinematics is a field of study which describes the motion of points and more complex objects without consideration of the causes of motion \citep{Beggs1983Kinematics}. It is the basic component of a physics engine for virtual simulation.
-
-Instead of navigating by setting a user's position and orientation in the virtual world, we can also make use of other kinematic information such as velocity and acceleration to control user's virtual motion, especially in cases where we look for navigation sensations that are close to those we have in the physical world. 
-
-\subsubsection{Representation}
-We created a variable called \textit{kinematic state} (KS) to store all motion-related data of a given object. In 3D space, an object's KS usually contains two parts of information respectively for translation and rotation, except those of points (considered as particles) which have only positional information. Different components of an object's KS are listed in Table~\ref{tab:5_ks_components}.
+So we created a variable named KS (kinematic state) to assemble all motion-related data of a given object and implement corresponding rules to update it in each frame. Table~\ref{tab:5_ks_components} lists different components of an object's KS.
 
 \begin{table}[hbt]
 \renewcommand{\arraystretch}{1.3}
-\caption{Components of kinematic state}
+\caption{Components of an object's KS}
 \label{tab:5_ks_components}
 \centering
 \begin{tabular}{l l l}
   \hline
   Components & Translation Part & Rotation Part \\
   \hline
-  Static configuration $c(p, q)$ & Position $p(x, y, z)$ & Orientation $q(w, x, y, z)$ \\
-  Velocity $v(\overrightarrow{v}, q_{v})$ & Linear velocity $\overrightarrow{v}(v_{x}, v_{y}, v_{z})$ & Angular velocity $q_{v}$ \\
-  Acceleration $a(\overrightarrow{a}, q_{a})$ & Linear acceleration $\overrightarrow{a}(a_{x}, a_{y}, a_{z})$ & Angular acceleration $q_{a}$ \\
+  Configuration $c(p, q)$ & $p(x, y, z)$ & $q(w, x, y, z)$ \\
+  Velocity $v(\overrightarrow{v}, \omega)$ & $\overrightarrow{v}(v_{x}, v_{y}, v_{z})$ & $\omega(\omega_{x},\omega_{y},\omega_{z})$ \\
+  Acceleration $a(\overrightarrow{a}, \dot{\omega})$ & $\overrightarrow{a}(a_{x}, a_{y}, a_{z})$ & $\dot{\omega}(\dot{\omega}_{x},\dot{\omega}_{y},\dot{\omega}_{z})$ \\
   \hline
 \end{tabular}
 \end{table}
 
+The translation part $(p,\overrightarrow{v},\overrightarrow{a})$ is expressed in vectors, while we represent the rotation part by quaternion and Euler angles $(q,\omega,\dot{\omega})$. Quaternion is a convenient math tool to express spatial rotations (or orientation relative to a reference frame), but is a little complicated to get its derivatives, so instead, angular velocity and acceleration are stored using Euler angles.
 
-\subsubsection{State Update}
-An object's KS changes constantly while moving in 3D space. The current KS can be updated by providing a new acceleration, or by directly designing a new static configuration. For example, we can accelerate a virtual object by injecting an acceleration on that object, this results in a corresponding velocity and configuration change. A real world entity such as a user's physical body also has a KS,
+An object's KS changes constantly while moving in 3D space. Typically, in the virtual world, we can animate an object by injecting a new acceleration on it to modify its current KS, which will result in a corresponding velocity and configuration change. However, the KS of a real world entity located by optical tracking (e.g. a user's body) will be directly updated by getting a new static configuration.
 
- The user also has a KS that is updated by tracking information in a different way than the vehicle.
 
-\paragraph{Update by Acceleration}
-The verlet integration is used to update the KS with a new acceleration.
+\paragraph{KS Update by New Acceleration}
+The Verlet integration is used to update the KS when receiving a new acceleration.
 
-For translation:
+For translation, when we have a new $\overrightarrow{a_{1}}$, the corresponding position $p_{1}$ and velocity $\overrightarrow{v_{1}}$ are:
 
-\[
-\overrightarrow{p_{1}}=\overrightarrow{p_{0}}+\overrightarrow{v_{0}}\Delta t+\frac{1}{2}\overrightarrow{a_{0}}\Delta t^{2}
-\]
+\begin{equation}
+p_{1}=p_{0}+\overrightarrow{v_{0}}\Delta t+\frac{1}{2}\overrightarrow{a_{0}}\Delta t^{2}
+\end{equation}
 
-\[
+\begin{equation}
 \overrightarrow{v_{1}}=\overrightarrow{v_{0}}+\frac{\overrightarrow{a_{0}}+\overrightarrow{a_{1}}}{2}\Delta t
-\]
+\end{equation}
 
-And for rotation, we choose to represent the orientation in quaternion for its convenience and simplicity, while angular velocity and acceleration are expressed separately according to euler angles:
+And for rotation, giving $\dot{\omega}_{1}$, $\omega_{1}$ and $q_{1}$ are computed as:
 
-\[
-\omega_{1}=\omega_{0}+\frac{\dot{\omega_{0}}+\dot{\omega_{1}}}{2}\Delta t
-\]
+\begin{equation}
+\omega_{1}=\omega_{0}+\frac{\dot{\omega}_{0}+\dot{\omega}_{1}}{2}\Delta t
+\end{equation}
 
-\[
-q_{1}=q_{a}q_{v}q_{0}
-\]
+\begin{equation}
+q_{1}=q_{a} \cdot q_{v} \cdot q_{0}
+\end{equation}
 
-\[
+\begin{equation}
 q_{v}=\left(\cos(\frac{\Vert\omega_{0}\Vert\Delta t}{2}),\:\sin(\frac{\Vert\omega_{0}\Vert\Delta t}{2})\frac{\omega_{0}(x)}{\Vert\omega_{0}\Vert\Delta t},\:\sin(\frac{\Vert\omega_{0}\Vert\Delta t}{2})\frac{\omega_{0}(y)}{\Vert\omega_{0}\Vert\Delta t},\:\sin(\frac{\Vert\omega_{0}\Vert\Delta t}{2})\frac{\omega_{0}(z)}{\Vert\omega_{0}\Vert\Delta t}\right)
-\]
+\end{equation}
 
-\[
-q_{a}=\left(\cos(\frac{\Vert\dot{\omega_{0}}\Vert\Delta t}{2}),\:\sin(\frac{\Vert\dot{\omega_{0}}\Vert\Delta t}{2})\frac{\dot{\omega_{0}}(x)}{\Vert\dot{\omega_{0}}\Vert\Delta t},\:\sin(\frac{\Vert\dot{\omega_{0}}\Vert\Delta t}{2})\frac{\dot{\omega_{0}}(y)}{\Vert\dot{\omega_{0}}\Vert\Delta t},\:\sin(\frac{\Vert\dot{\omega_{0}}\Vert\Delta t}{2})\frac{\dot{\omega_{0}}(z)}{\Vert\dot{\omega_{0}}\Vert\Delta t}\right)
-\]
+\begin{equation}
+q_{a}=\left(\cos(\frac{\Vert\dot{\omega}_{0}\Vert\Delta t}{2}),\:\sin(\frac{\Vert\dot{\omega}_{0}\Vert\Delta t}{2})\frac{\dot{\omega}_{0}(x)}{\Vert\dot{\omega}_{0}\Vert\Delta t},\:\sin(\frac{\Vert\dot{\omega}_{0}\Vert\Delta t}{2})\frac{\dot{\omega}_{0}(y)}{\Vert\dot{\omega}_{0}\Vert\Delta t},\:\sin(\frac{\Vert\dot{\omega}_{0}\Vert\Delta t}{2})\frac{\dot{\omega}_{0}(z)}{\Vert\dot{\omega}_{0}\Vert\Delta t}\right)
+\end{equation}
+
+where $\Delta t$ is the time lapse between two consecutive frames.
+
+\paragraph{Update by New Configuration}
+When receiving a new configuration $c_{1}(p_{1},q_{1})$, new KS is computed as the follows:
+
+\begin{equation}
+\overrightarrow{v_{1}}=\frac{p_{1}-p_{0}}{\Delta t}
+\end{equation}
+
+\begin{equation}
+\overrightarrow{a_{1}}=\frac{\overrightarrow{v_{1}}-\overrightarrow{v_{0}}}{\Delta t}
+\end{equation}
+
+\begin{equation}
+\omega_{1}=\frac{Euler(q_{0}^{-1} \cdot q_{1})}{\Delta t}
+\end{equation}
+
+\begin{equation}
+\dot{\omega}_{1}=\frac{\omega_{1}-\omega_{0}}{\Delta t}
+\end{equation}
 
 
-\paragraph{Update by Configuration}
-(in form of a 4x4 matrix)
+\subsection{Components}
+We implemented a first version of DYNAMIC with Python for BlenderVR (Appendix~\ref{appendix:platform}), and it can be easily ported to other object-oriented languages. Below is a UML class diagram of DYNAMIC (omitting interfaces that communicate with codes managing user input and rendering)(Figure~\ref{fig:5_uml}).
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=.9\textwidth]{figures/ch5/uml}
+  \caption{\label{fig:5_uml}The UML class diagram of DYNAMIC.}
+\end{figure}
 
 
+Here we give explanations to a list of main components (in form of classes) that constitute the model:
 
-\subsection{Organization}
-
-python
-
-class schema
-
-sequential graph
-
-a solver
-
-An \textbf{Inverse Model} computes an acceleration based on the difference between the command point and user's current configuration which helps to lead the user to that point.
-
-
+\begin{itemize}
+\item \textit{NavManager}: The main class of the navigation model that contains a list of users and constrain solvers, it initiates calls to transfer function of each user and to functions defined in these solvers. The navigation can be activated or deactivated through a control boolean;
+\item \textit{VEntity}: A basic class used to represent a virtual entity involved in the simulation. Each virtual entity has its own KS, and eventually a mesh for visualization in the virtual world. For example, the \textit{Vehicle} and \textit{Body} (user's physical body in the real world) are all inherited classes of \textit{VEntity}. A virtual entity's initial configuration can be set by ``teleportation" without affecting other KS properties;
+\item \textit{User}: A class groups all user-related information and combines accelerations from different sources to compute a new KS for the corresponding vehicle;
+\item \textit{RealCoSolver}: A solver that manages constrains from the physical workspace by computing an optimal configuration for each user;
+\item \textit{InverseModel}: A unit contained in each user that manages the command configuration and implements option 1 or option 2 mentioned in section~\ref{sec:5_solution}.
+\item \textit{VirtualCoSolver}: A solver that processes a list of constrains defined in the virtual world. It creates or breaks the physical link between a pair of vehicles and computes accelerations accordingly. 
+\end{itemize}
 
 % -------------------------------------------------------------------------------------------------
 
 \section{Discussion}
-Parameter Setting user perception
+Parameter Setting user perception: a common one? one for each user?
 
 One user should not be disturbed by other users when in a stable state
 
