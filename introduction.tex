@@ -4,24 +4,24 @@
 %\minitoc
 \mtcaddchapter[Introduction]
 
-\section*{Context}
-Immersive projection technology, collaborative virtual environment
+\section*{Context and Motivation}
+Immersive Collaborative Virtual Environment (CVE) is developing as a convergence of research interests from Virtual Reality (VR) and Computer Supported Collaborative Work (CSCW) communities with its capacity to offer high level multi-sensory immersion for networked users. Immersive CVEs provide better support for social human communications and let users feel ``being together" in the same virtual world. 
 
-\section*{Issues and Motivation}
+Users of immersive CVEs can be geographically distributed or co-located in the same physical workspace. Compared to remote situations, co-located users collaborate in the same virtual world on top of a shared physical workspace. This physical collocation forms a mixed context where user can have direct as well as computer-mediated interaction and communication. While lots of research works focus on supporting remote collaboration by connecting several immersive systems, co-located collaboration for now receives limited attention due to the rareness of multi-user immersive systems.
 
-\section*{Approach}
+With the development of multi-user display and tracking technology, classical projection-based immersive setups (e.g. CAVE) can now support group immersion for co-located users by offering individual stereoscopic views without visual distortion. In this context, the coexistence of information from the virtual and real world, especially when users do not share a common spatial reference frame, provides users with a new kind of perceptual and cognitive experience.
+
+This PhD thesis mainly addresses perceptual and cohabitation issues that we identified in the aim of supporting safe and efficient co-located collaboration in multi-user immersive virtual environment. We are interested in how users perceive and communicate with each other to achieve a shared context for collaboration, and how we can broaden supported collaborative scenarios with more flexible viewpoint control. Moreover, as users share the same limited physical workspace, it is necessary to find solutions to properly allocate enough workspace for each user to assure their safety and immersion level while allowing them to navigate in unlimited virtual worlds.
 
 \section*{Organization of Thesis}
-This thesis contains five chapters and a general introduction and conclusion. The chapters are the following:
+This thesis contains three main parts which are divided into five chapters: Chapter~\ref{chapter:context} presents the general background, and Chapter~\ref{chapter:colocated_colab} covers concepts, issues and relevant research methods, then Chapter~\ref{chapter:expe_perception} to \ref{chapter:dynamic_model} describe in detail our research work consisting of paradigm design and user experiments.
 
-Chapter 1 gives a general description of the context and different topics related to using immersive virtual environment for collaborative work.
+Chapter~\ref{chapter:context} describes the general context of this thesis by presenting notions and state-of-the-art in Virtual Reality (VR) and Computer Supported Collaborative Work (CSCW), and different topics related to using immersive virtual environment for collaboration.
 
-Chapter 2 introduces different multi-viewer display technology and its application for co-located collaboration, then describes a case study on the perceptual conflicts during co-located collaboration in a multi-stereoscopic immersive virtual environment.
+Chapter~\ref{chapter:colocated_colab} concentrates on how co-located users collaborate inside multi-user immersive virtual environment. It begins by presenting multi-user display technology and basic notions about users' spatial organization and virtual navigation, then talks about two major issues identified during the collaboration process and research methodology that we adopted. 
 
-Chapter 3 focuses on searching for solutions to allow independent navigation for co-located users and to manage cohabitation issues in multi-viewer immersive virtual environment. We designed an Altered Human Joystick model and conducted several user studies to evaluate its contributions in term of user cohabitation.
+Chapter~\ref{chapter:expe_perception} then describes a case study on the perceptual conflicts caused by dual-presence of users during co-located collaboration in a multi-stereoscopic immersive virtual environment. We examined how perceptual conflicts would alter user communication and task performance.
 
-Chapter~\ref{chapter:user_cohab} presents the implementation of Altered Human Joystick along with metrics that we defined to evaluate cohabitation capacity in response to identified cohabitation problems. A series of experiments were carried out to test different alterations to see their influences on user distribution and to find an optimal combination.
+Chapter~\ref{chapter:user_cohab} presents the implementation of Altered Human Joystick along with metrics that we defined to evaluate cohabitation capacity in response to identified cohabitation problems. A series of experiments were carried out to test different combinations of alterations to see their impacts on users' spatial distribution in the physical workspace and navigation experience in the virtual world.
 
-Chapter 4 presents the theoretical concept and implementation of a kinematic model to support collaborative work in multi-viewer immersive virtual environment. This model allows both closely-coupled collaboration with spatial collocation between real and virtual worlds, and loosely-coupled collaboration with individual navigation control. The automatic or semi-automatic switch is also implemented to allow transitions between these two stages.
-
-Then the general conclusion summarizes contributions and future work.
+Finally Chapter~\ref{chapter:dynamic_model} presents concepts and implementations of a novel navigation model named DYNAMIC. This novel model manages user cohabitation by integrating constrains from physical workspace and allows interactive navigation control by including constrains from the virtual world, all in aim to better support collaboration in multi-user immersive virtual environment.
