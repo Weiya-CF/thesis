@@ -43,7 +43,7 @@ To achieve stereoscopic vision, we should first generate a pair of images depend
 \item Eyeglasses separation: images can be separated passively by colorimetric differentiation or polarized glasses, or actively by rapidly alternating shuttered glasses.
 \end{itemize}
 
-Each type of stereoscopic display has its advantages and inconveniences. HMD is the most straightforward way to provide two different images for the eyes and allows fully visual immersion of the user (the real world is completely blocked from user's eyes except for see-through HMDs \citep{Schmalstieg2002Stube}). However, various technical limitations like limited resolution and field of view enhance user's visual fatigue and restrain the wide use of HMDs. Unlike HMDs that are heavy to carry, eyeglasses based technology combined with large immersive projection display (e.g. image wall, CAVE, dome) gives user a more comfortable stereo experience. Auto-stereoscopic screens do not require user to equip any glasses or headgear, but have limited work range - user should stay at predefined position (at a certain distance from the screen) to correctly perceive stereo images.
+Each type of stereoscopic display has its advantages and inconveniences. HMD is the most straightforward way to provide two different images for the eyes and allows fully visual immersion of the user (the real world is completely blocked from user's eyes except for see-through HMDs \citep{Schmalstieg2002Stube}). However, various technical limitations like limited resolution and field of view enhance user's visual fatigue and restrain the wide use of HMDs. Unlike HMDs that are heavy to carry, eyeglasses based technology combined with large immersive projection display (e.g. image wall, CAVE, dome) gives user a more comfortable stereo experience. Auto-stereoscopic screens do not require users to equip any glasses or headgear, but have limited work range - users should stay at predefined positions (at a certain distance from the screen) to correctly perceive stereo images.
 
 Recent technical developments largely improved the usability of all three types of stereoscopic display. HMDs now are lighter and less expensive with more compact design, along with better resolution, larger field of view. The improvements of immersive projection technology (IPT) \citep{Bullinger1997Immersive} makes projection-based systems with eyeglasses a widespread solution both in academic institutes and industries, and they are specially useful to create large immersive virtual environment for group immersion by the combination of multiple projectors, such as CAVEs. Auto-stereoscopic screen combined with user tracking can now allow the tracked user to pass through different viewing areas without discontinuity \citep{Kooima2010Tiled}, but still requires complex hardware and software setup. So HMDs and projection-based systems become the major platform to support immersive or partially-immersive experience.
 
@@ -141,7 +141,7 @@ In 2011, \citet{Kulik2011CSS} developed a projection-based stereoscopic display 
 \citet{Dodgson2005Autostereoscopic} provided an introduction and overview of auto-stereoscopic multi-view displays. Users in this kind of multi-view system get perceive 3D objects from his/her own point of view without tracking or eyeglasses, but only inside a limited zone depending on different properties of the display. Another issue is that with increasing number of views (e.g. up to 256 views by \citet{Takaki2010Multi}), generating images in real time for dynamic interaction would be a challenge.
 
 \subsubsection{Spatial Separation}
-Instead of creating image channels, we can also take advantage of the spatial property of the display by assigning different screens or parts of a single screen to different users. For example, the ``Protein Interactive Theater" (PIT) \citep{Arthur1998PIT} uses two orthogonal screens and each user looks at only one of the screens (Figure~\ref{fig:2_sep_spatial:pit}). The IllusionHole \citep{Kitamura2001Interactive} uses a circular mask on top of a tabletop projection. By looking through the mask, users positioned around the table see their individual stereo images shown in different areas of the screen (Figure~\ref{fig:2_sep_spatial:illu}). Other systems like the Virtual Showcase \citep{Bimber2006Virtual}and Joint Space Station \citep{Mulder2004Modular} use similar mirror-based display to support multiple users. These desktop-based systems are often designed to accomplish specific collaborative tasks (e.g. 3D object visualization) and provide limited workspace with inherent spatial constrains. 
+Instead of creating image channels, we can also take advantage of the spatial property of the display by assigning different screens or parts of a single screen to different users. For example, the ``Protein Interactive Theater" (PIT) \citep{Arthur1998PIT} uses two orthogonal screens and each user looks at only one of the screens (Figure~\ref{fig:2_sep_spatial:pit}). The IllusionHole \citep{Kitamura2001Interactive} uses a circular mask on top of a tabletop projection. By looking through the mask, users positioned around the table see their individual stereo images shown in different areas of the screen (Figure~\ref{fig:2_sep_spatial:illu}). Other systems like the Virtual Showcase \citep{Bimber2006Virtual} and Joint Space Station \citep{Mulder2004Modular} use similar mirror-based display to support multiple users. These desktop-based systems are often designed to accomplish specific collaborative tasks (e.g. 3D object visualization) and provide limited workspace with inherent spatial constrains. 
 
 \begin{figure}[htb]
   \begin{subfigure}{.45\textwidth}
@@ -257,9 +257,9 @@ In projection-based immersive system, we can consider that users' physical bodie
   \caption{\label{fig:2_consistent_collab}Co-located collaborations in consistent mode.}
 \end{figure}
 
-The consistent mode is initially motivated by efforts to bring distortion-free stereoscopic view for each tracked user, and for a long time it is considered to be the default mode for co-located collaboration. This consistent mode suits well for closely-coupled collaborative tasks \citep{Simon2005First, Aguerreche2010Comparison, Martin2011Reconfigurable} (Figure~\ref{fig:2_consistent_collab:comanip} and \ref{fig:2_consistent_collab:malcomiics}) that do not require users to be or travel to different virtual places.
+The consistent mode is initially motivated by efforts to bring distortion-free stereoscopic view for each tracked user, and for a long time it is considered to be the default mode for co-located collaboration. This consistent mode suits well for closely-coupled collaborative tasks \citep{Simon2005First, Aguerreche2010Comparison, Martin2011Reconfigurable} (Figure~\ref{fig:2_consistent_collab:comanip} and \ref{fig:2_consistent_collab:malcomiics}) that do not require users to be at or travel to different virtual places.
 
-However, this spatial constrain restricts collaborative scenarios that can be supported in multi-user immersive virtual environment. Though several interaction techniques have been proposed to get around spatial constrains and to extend collaborative scenarios in consistent mode, such as the bent pick ray \citep{Riege2006Bent} and the see-through techniques \citep{Argelaguet2010STT}.
+This spatial constrain restricts collaborative scenarios that can be supported in multi-user immersive virtual environment, though several interaction techniques have been proposed to get around spatial constrains and to extend collaborative scenarios in consistent mode, such as the bent pick ray \citep{Riege2006Bent} and the see-through techniques \citep{Argelaguet2010STT}.
 
 \subsubsection{Individual Mode}
 As opposite to consistent mode, the individual mode loosens constrains applied to users' stage centers. This mode is complementary to the consistent mode and largely broadens collaborative scenarios that can be supported in the co-located use of immersive virtual environment. Collaborative scenarios can be extended in the following ways:
@@ -268,7 +268,7 @@ As opposite to consistent mode, the individual mode loosens constrains applied t
 \item Spatial distribution of users in the virtual world becomes more flexible:
 \begin{itemize}
   \item Users are distributed at remote virtual places;
-  \item Users are situated in a virtual space larger than the available physical workspace;
+  \item Users can directly see each other, but their distance in the virtual world is larger than what the available physical workspace can offer;
   \item Users are close to each other around an object of interest, but from different perspectives that they can get in consistent mode;
 \end{itemize}
 \item Artificial control of users' viewpoints:
@@ -299,7 +299,9 @@ The transition between the two modes are achieved by splitting or merging users'
 
 \section{Virtual Navigation}
 \label{sec:navigation}
-Navigation is a basic type of interaction for user to accomplish various tasks in the virtual world. A lot of navigation techniques of different nature exist to allow users to travel through large virtual space. Navigation methods used in immersive virtual environments are in general different with desktop-based ones. At least two requirements should be met when designing navigation technique in such context:
+The individual mode in multi-user immersive virtual environment supposes that users may navigate separately in the virtual world. Actually, navigation is a basic type of interaction for users to accomplish various tasks in the virtual world. This is the reason why it is time to discuss existing navigation techniques of different nature that allow users to travel through large virtual space.
+
+Navigation methods used in immersive virtual environments are in general different with desktop-based ones. At least two requirements should be met when designing navigation technique in such context:
 
 \begin{itemize}
 \item Desktop-based input devices like mouse and keyboard are not preferred as they are not compatible with behavioral interfaces;
@@ -429,11 +431,12 @@ Depending on the choice of display technology and screen configuration, not all 
 \caption{Cohabitation Issues in Multi-user Immersive Systems.}
 \label{tab:cohab_issues}
 \centering
-\begin{tabular}{l l l}
+\small
+\begin{tabular}{p{2.5cm} p{6cm} p{5.5cm}}
   \hline
    & Workspace-related & User-related \\ \hline
-  Generic & Collision with workspace border & Collision between users \\
-  System-dependent & Seeing non-projected area & User occlusion \\ \hline
+  Generic & Collision with workspace border (e.g. screen wall of CAVE, walls of the room when wearing HMD) or outside tracking zone & Collision between users \\ \hline
+  System-dependent & Seeing non-projected area (non-closed systems like image walls or open-CAVE) & User occlusion (projection-based systems) \\ \hline
 \end{tabular}
 \end{table}
 
