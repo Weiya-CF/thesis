@@ -104,8 +104,64 @@ A light-weight questionnaire for evaluating user cohabitation:
 	\item I paid attention to my partner while performing my task.
 \end{enumerate}
 
-\chapter{Publications By the Author}
+\chapter{Kinematic State Update}
+\label{appendix:ks}
 
+\section*{KS Update by New Acceleration}
+The Verlet integration is used to update the KS when receiving a new acceleration.
+
+For translation, when we have a new $\overrightarrow{a_{1}}$, the corresponding position $p_{1}$ and velocity $\overrightarrow{v_{1}}$ are:
+
+\begin{equation}
+p_{1}=p_{0}+\overrightarrow{v_{0}}\Delta t+\frac{1}{2}\overrightarrow{a_{0}}\Delta t^{2}
+\end{equation}
+
+\begin{equation}
+\overrightarrow{v_{1}}=\overrightarrow{v_{0}}+\frac{\overrightarrow{a_{0}}+\overrightarrow{a_{1}}}{2}\Delta t
+\end{equation}
+
+And for rotation, giving $\dot{\omega}_{1}$, $\omega_{1}$ and $q_{1}$ are computed as:
+
+\begin{equation}
+\omega_{1}=\omega_{0}+\frac{\dot{\omega}_{0}+\dot{\omega}_{1}}{2}\Delta t
+\end{equation}
+
+\begin{equation}
+q_{1}=q_{a} \cdot q_{v} \cdot q_{0}
+\end{equation}
+
+\begin{equation}
+q_{v}=\left(\cos(\frac{\Vert\omega_{0}\Vert\Delta t}{2}),\:\sin(\frac{\Vert\omega_{0}\Vert\Delta t}{2})\frac{\omega_{0}(x)}{\Vert\omega_{0}\Vert\Delta t},\:\sin(\frac{\Vert\omega_{0}\Vert\Delta t}{2})\frac{\omega_{0}(y)}{\Vert\omega_{0}\Vert\Delta t},\:\sin(\frac{\Vert\omega_{0}\Vert\Delta t}{2})\frac{\omega_{0}(z)}{\Vert\omega_{0}\Vert\Delta t}\right)
+\end{equation}
+
+\begin{equation}
+q_{a}=\left(\cos(\frac{\Vert\dot{\omega}_{0}\Vert\Delta t}{2}),\:\sin(\frac{\Vert\dot{\omega}_{0}\Vert\Delta t}{2})\frac{\dot{\omega}_{0}(x)}{\Vert\dot{\omega}_{0}\Vert\Delta t},\:\sin(\frac{\Vert\dot{\omega}_{0}\Vert\Delta t}{2})\frac{\dot{\omega}_{0}(y)}{\Vert\dot{\omega}_{0}\Vert\Delta t},\:\sin(\frac{\Vert\dot{\omega}_{0}\Vert\Delta t}{2})\frac{\dot{\omega}_{0}(z)}{\Vert\dot{\omega}_{0}\Vert\Delta t}\right)
+\end{equation}
+
+where $\Delta t$ is the time lapse between two consecutive frames.
+
+\section*{Update by New Configuration}
+When receiving a new configuration $c_{1}(p_{1},q_{1})$, new KS is computed as the follows:
+
+\begin{equation}
+\overrightarrow{v_{1}}=\frac{p_{1}-p_{0}}{\Delta t}
+\end{equation}
+
+\begin{equation}
+\overrightarrow{a_{1}}=\frac{\overrightarrow{v_{1}}-\overrightarrow{v_{0}}}{\Delta t}
+\end{equation}
+
+\begin{equation}
+\omega_{1}=\frac{Euler(q_{0}^{-1} \cdot q_{1})}{\Delta t}
+\end{equation}
+
+\begin{equation}
+\dot{\omega}_{1}=\frac{\omega_{1}-\omega_{0}}{\Delta t}
+\end{equation}
+
+
+
+\chapter{Publications By the Author}
 \section*{Journal Articles}
 
 \begin{itemize}

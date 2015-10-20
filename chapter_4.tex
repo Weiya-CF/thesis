@@ -4,7 +4,7 @@
 
 \textbf{Chapter Abstract}
 
-This chapter summarizes conceptual details about a navigation paradigm we designed called Altered Human Joystick metaphor. Then several user experiments that we conducted to verify the effectiveness of cohabitation control and their impacts on users' navigation performance and subjective feelings.
+This chapter summarizes conceptual details about a navigation paradigm we designed called Altered Human Joystick. Then it presents cohabitation metrics that we proposed and several user experiments to verify the effectiveness of alterations for cohabitation control and their impacts on users' navigation performance and subjective feelings.
 
 \vspace*{2\baselineskip}
 
@@ -14,12 +14,13 @@ This chapter summarizes conceptual details about a navigation paradigm we design
 \section{Introduction}
 To support safe and functional individual navigation in an multi-user IVE, traditional navigation metaphors should be adapted according to the number of co-located users and the configuration of the immersive system (size and shape of the screen walls, effective tracking space, etc.) to avoid cohabitation problems that we summarized in Chapter~\ref{chapter:colocated_colab}.
 
-This chapter consists of two sections. The first summarizes conceptual details about a navigation paradigm we designed called Altered Human Joystick metaphor. The idea of this metaphor is to let each user navigate with normal human joystick control and the system will introduce alterations to a user's navigation velocity according to his/her spatial relationship with other users and with respect to the physical workspace, in order to keep user's safety and immersion level.
+This chapter consists of two parts. The first one (section~\ref{sec:ahj}) summarizes conceptual details about a navigation paradigm we designed called Altered Human Joystick metaphor. The idea of this metaphor is to let each user navigate with normal human joystick control and the system will introduce alterations to a user's navigation velocity according to his/her spatial relationship with other users and with respect to the physical workspace, in order to keep user's safety and immersion level.
 
-The second presents several user experiments that we conducted to verify the effectiveness of cohabitation control and their impacts on users' navigation performance and subjective feelings. First, we tested several alterations accumulatively in a collaborative case study, then three refined experiments followed to give an exhaustive analysis of different combinations of these alterations respectively in translation-only, rotation-only and translation-rotation combined navigation conditions.
+The second part (section~\ref{sec:eval_framework} to \ref{sec:follow_exp}) presents several user experiments that we conducted to verify the effectiveness of cohabitation control and their impacts on users' navigation performance and subjective feelings. First, we defined a list of cohabitation metrics and tested several alterations accumulatively in a collaborative case study, then three refined experiments followed to give an exhaustive analysis of different combinations of these alterations respectively in translation-only, rotation-only and translation-rotation combined navigation conditions.
 
 
 \section{Approach - Altered Human Joystick}
+\label{sec:ahj}
 In an immersive virtual environment, the human joystick paradigm allows virtual navigation by physical movements relative to a fixed reference frame. It can not assure safe and efficient navigation because it does not take into account the spatial limitations of the physical system. Users need to make sure themselves to stay inside a safe zone without touching any physical obstacles and to stay within usable projection areas. So we proposed some alterations of the original paradigm to free user's mind from these constrains.
 
 \subsection{Basic Model}
@@ -36,7 +37,8 @@ To navigate, user first needs to choose a neutral reference frame (composed of a
 
 \begin{figure}[tb]
   \centering
-  \includegraphics[width=0.8\textwidth]{figures/ch4/HCNav}
+  \includegraphics[width=0.5\textwidth]{figures/ch4/HCNav}
+  \includegraphics[width=0.4\textwidth]{figures/ch4/hcnav_roll}
   \caption{\label{fig:4_hcnav}Head-controlled navigation paradigm.}
 \end{figure}
 
@@ -128,6 +130,7 @@ With the two categories of alterations presented above, we can create a set of s
 
 
 \section{Evaluation Framework}
+\label{sec:eval_framework}
 To evaluate the contributions of alterations described above, we defined several categories of metrics. Then we used them to compare these altered human joystick models by doing different navigation tasks within our CAVE platform.
 
 \subsection{Measures}
@@ -258,6 +261,7 @@ Moreover, the alterations tested in this experiment did not seem to provoke more
 
 
 \section{Follow-up Experiments}
+\label{sec:follow_exp}
 We conducted three additional experiments to complete previous user study. As explained above, we globally lowered the base gain value for all transfer functions. In Experiment T (Translation only) and Experiment R (Rotation only), we created two special groups of navigation conditions by cutting off respectively rotation and translation, while in Experiment TR (Translation with Rotation) we kept both. All the three groups of conditions were listed in table \ref{tab:4_combinations} and to be tested with different types of navigation tasks. 
 
 We compared these conditions in terms of navigation performance and cohabitation capacity to see the influence of each alteration and the effect of their combinations. What's different from previous user study was that participants were equipped with closed headphones to avoid perceiving the other user by audio cues (foot steps, verbal communications, etc.) since the alterations of the navigation metaphor only provided visual feedback.
@@ -368,7 +372,7 @@ To begin, participants left their departure areas and traveled to destination zo
 \subsubsection{Results}
 We first tested the effects on three independent variables: the transfer function type (linear or modified), neutral position and neutral orientation types (fixed or adaptive). Then to see interaction effects between these variables, we further compared the eight navigation techniques.
 
-\begin{sidewaystable}[hbt]
+\begin{sidewaystable}[htbp]
 \caption{Results of Experiment TR, $\varnothing$ means non significant result.}
 \label{tab:4_result_t3}
 \centering

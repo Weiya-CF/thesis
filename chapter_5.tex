@@ -4,7 +4,7 @@
 
 \textbf{Chapter Abstract}
 
-This chapter presents a novel dynamic navigation model named DYNAMIC that we designed for co-located collaboration. This model manages user cohabitation by integrating constrains from physical workspace and allows interactive navigation control by adding virtual constrains. We first explained our motivation and different components of DYNAMIC at a conceptual level, then we presented implementation details from data structure to code organization, as well as some discussions about possible future improvements.
+This chapter presents a novel dynamic navigation model that we design for co-located collaboration. This model manages user cohabitation by integrating constrains from physical workspace and allows interactive navigation control by adding virtual constrains. First we explain our motivation and different components of the dynamic model at the conceptual level, then we present implementation details from data structure to code organization, as well as some discussions about possible future improvements.
 
 \vspace*{2\baselineskip}
 
@@ -12,19 +12,18 @@ This chapter presents a novel dynamic navigation model named DYNAMIC that we des
 
 \newpage
 \section{Introduction}
-The Altered Human Joystick metaphor allows individual navigation for multiple users, however, each user is constrained in a predefined safe zone and the common workspace is shared by using a system dependent protocol (which works for cubic immersive systems). Moreover, in many rate control navigation metaphors, the virtual vehicle's velocity is exclusively controlled by user's input and can not be influenced by constrains from the virtual world (e.g. collisions with objects). 
+The Altered Human Joystick metaphor allows individual navigation for multiple users, however, each user is constrained in a predefined safe zone and the common workspace is shared by using a system dependent protocol (which works for CAVE-like immersive systems). Moreover, in many rate control navigation metaphors, the virtual vehicle's velocity is exclusively controlled by user's input and can not be influenced by constrains from the virtual world (e.g. collisions with objects). 
 
 To generalize the Altered Human Joystick metaphor and to allow interactive control of the virtual vehicle, we designed a dynamic navigation model named DYNAMIC (DYnamic NAvigation Model for Immersive Collaboration), which on the one hand, integrates real world information into the virtual navigation control to manage user cohabitation no matter the geometric properties of the immersive system, and on the other hand, takes into account influences coming from the virtual world and eventually from the vehicles of other users.
 
 This chapter mainly contains four sections. The first section explains our motivation of developing this dynamic navigation model. The second part describes core concepts of this model: the acceleration-based transfer function and how we integrate constrains coming from the physical workspace and the virtual world. Then the third section presents implementation details and the last one some related discussion about this navigation model.
-
 
 % -------------------------------------------------------------------------------------------------
 
 \section{Motivation}
 The dynamic navigation model is the result of responses to two different research questions that we are working on: how can we generalize the Altered Human Joystick metaphor to extend the number of users regardless of the geometric configuration of immersive systems? And how can we make the virtual vehicle to be responsive to constrains coming from the virtual world to achieve interactions with virtual objects and other users during navigation?
 
-In this dynamic model, the transfer functions used in human joystick metaphors are replaced by their derivatives so the vehicle is controlled by accelerations instead of specifying directly its navigation velocity. As a consequence, the virtual vehicle is transformed from a pure reference frame to a virtual entity possessing its own kinematic state, providing a uniform interface to receive inputs from various sources. First, to integrate constrains from the physical workspace, we use a potential field method which generates accelerations for the virtual vehicle in order to influence user's navigation control. Second, virtual vehicles can now react to constrains in the virtual worlds in form of physical links. We can simulate physical interactions between a vehicle and virtual objects, or directly between different users' vehicles during navigation. 
+This new model is dynamic because the transfer functions used in human joystick metaphors are replaced by their derivatives, so the vehicle is controlled by accelerations instead of setting directly its navigation velocity. As a consequence, the virtual vehicle is transformed from a pure reference frame to a virtual entity possessing its own kinematic state, providing a uniform interface to receive inputs from various sources. First, to integrate constrains from the physical workspace, we use a potential field method which generates accelerations for the virtual vehicle in order to influence user's navigation control. Second, virtual vehicles can now react to constrains in the virtual worlds in form of physical links. We can simulate physical interactions between a vehicle and virtual objects, or directly between different users' vehicles during navigation. 
 
 
 % -------------------------------------------------------------------------------------------------
@@ -33,26 +32,24 @@ In this dynamic model, the transfer functions used in human joystick metaphors a
 \section{Concepts}
 
 \subsection{Transfer Function}
-The original human joystick metaphor and the altered versions that we present in the previous chapter are based on transfer functions that map a user's relative position and orientation related to a neutral reference frame to the vehicle's translation and rotation velocities. In this case, a neutral position and orientation $(p_{0},q_{0})$ need to be defined before starting navigation. The vehicle's translation and rotation velocity are expressed as:
+The original human joystick metaphor and the altered versions that we present in the previous chapter are based on transfer functions that map a user's relative position and orientation related to a neutral reference frame in the real world to the vehicle's translation and rotation velocities. In this previous model, a neutral position and orientation $(p_{0},q_{0})$ need to be defined before starting navigation. The vehicle's translation and rotation velocity are expressed as:
 
 \begin{equation}
-\label{eq:old_tf_t}
-\overrightarrow{v_{veh}}=f(\Delta p)=f(p_{u}-p_{0})
-\end{equation}
-\begin{equation}
-\label{eq:old_tf_r}
+\begin{cases}
+\overrightarrow{v_{veh}}=f(\Delta p)=f(p_{u}-p_{0}) \\
 \Omega_{veh}=f(\Delta q)=f(q_{0}^{-1} \cdot q_{u})
+\end{cases}
 \end{equation}
 
-where $p_{u}$ is user's current position and $q_{u}$ is a quaternion representing user's orientation in the real world.
+where $p_{u}(x,y,z)$ is user's current position and $q_{u}(q_{x},q_{y},q_{z},q_{w})$ is a quaternion representing user's orientation in the real world.
 
 In the dynamic model, the virtual vehicle is not merely a spatial reference frame, but a virtual entity possessing its own kinematic state. The user input passes from $(\Delta p, \Delta q)$ to their derivatives: 
 
 \begin{equation}
-\overrightarrow{a_{veh}}=f(\overrightarrow{v_{u}}, \overrightarrow{a_{u}})
-\end{equation}
-\begin{equation}
+\begin{cases}
+\overrightarrow{a_{veh}}=f(\overrightarrow{v_{u}}, \overrightarrow{a_{u}}) \\
 \dot{\Omega}_{veh}=f(\omega_{u}, \dot{\omega}_{u})
+\end{cases}
 \end{equation}
 
 If we define a configuration \textit{c} as the following:
@@ -100,15 +97,15 @@ Instead of setting directly the vehicle's position or velocity in the virtual wo
 
 
 \subsection{Physical Workspace Constrains}
-In a multi-user immersive system, for a given user, the surrounding environment as well as other users are obstacles that should be avoided. In the domain of robotics, potential field is used to guide a robot to navigate over a field occupied by obstacles to get to a target position. Generally, two kinds of potential fields lead to two different behaviors of the robot. An attractive field generates an action vector that leads the robot toward the goal, while a repulsive field pushes the robot away from an obstacle.
+In a multi-user immersive system, for a given user, the surrounding environment as well as other users are obstacles that should be avoided. Obstacle avoidance is a classical problem in mobile robot motion planning \citep{Latombe2012Robot}. Among all existing methods to guide a robot to navigate over a field occupied by obstacles, potential field method is a commonly used reactive approach that can be easily parameterized and is suitable for real-time processes \citep{Khatib1986Real, Hellstrom2011Robot}.
 
-Here we want to use the same principle to guide users by applying repulsive fields to all obstacles in the real world (e.g. screens, walls, other users, etc.). The goal is to keep users away from all the obstacles when they move around in the physical workspace. However, the big ``problem" is that unlike motor-driven robots, users are autonomous actors that can not be directly influenced by the potential field. So, like the divergent transfer function described in the previous chapter (section~\ref{sec:altered_tf}), we modify the output of the transfer function (i.e. $\overrightarrow{a_{veh}}$) by integrating obstacles as real world constrains into the navigation control in order to influence user's input (i.e. $\overrightarrow{v_{u}}$ and $\overrightarrow{a_{u}}$).
+Generally, two kinds of potential fields lead to two different behaviors of the robot. An attractive field generates an action vector that leads the robot toward the goal, while a repulsive field pushes the robot away from an obstacle. Here we want to use the same principle to guide users by applying repulsive fields to all obstacles in the real world (e.g. screens, walls, other users, etc.). The goal is to keep users away from all the obstacles when they move around in the physical workspace. However, a major problem is that unlike motor-driven robots, users are autonomous actors that can not be directly influenced by the potential field. So, like the divergent transfer function described in the previous chapter (section~\ref{sec:altered_tf}), we modify the output of the transfer function (i.e. $\overrightarrow{a_{veh}}$) by integrating obstacles as real world constrains into the navigation control in order to influence user's input (i.e. $\overrightarrow{v_{u}}$ and $\overrightarrow{a_{u}}$).
 
 
 \subsubsection{Potential Field}
 To achieve the above objective, obstacles generate one potential field for a user's translational movements and another for rotations. The workspace borders are usually fixed while the users are mobile entities, so the global potential fields change dynamically according to users' positions in the physical workspace.
 
-\paragraph{Translational Field}
+\paragraph{Translation}
 To avoid collisions between users and to prevent them from going beyond workspace borders, each physical obstacle produces a repulsive field in which force vectors are in the direction of the surface normal, thus the distribution of potential field depends on obstacles' geometric form. For example, the potential field of a flat wall or screen generates parallel force vectors while those of a user's field (the user is simplified as a cylinder) spread outward from user's position (Figure~\ref{fig:5_pf_t}).
 
 \begin{figure}[htb]
@@ -118,7 +115,7 @@ To avoid collisions between users and to prevent them from going beyond workspac
   \caption{\label{fig:5_pf_t}The repulsive translational potential fields generated by obstacles.}
 \end{figure}
 
-If we name $\overrightarrow{n}_{i}$ as a unit surface normal vector, $d_{i}$ the distance between a user and the obstacle $i$, the force vector generated for the user $\overrightarrow{ft}_{i}$ can be expressed by a negative exponent function:
+If we name $\overrightarrow{n_{i}}$ as a unit surface normal vector, $d_{i}$ the distance between a user and the obstacle $i$, the force vector generated for the user $\overrightarrow{ft_{i}}$ can be expressed by a negative exponent function:
 
 \begin{equation}
 \overrightarrow{ft}_{i}=\overrightarrow{n}_{i} \cdot K_{T} \cdot \frac{1}{d_{i}^2}
@@ -126,14 +123,14 @@ If we name $\overrightarrow{n}_{i}$ as a unit surface normal vector, $d_{i}$ the
 
 where $K_{T}$ is a coefficient to modulate the field power.
 
-\paragraph{Rotational Field}
-In projection-based systems, the rotational potential field can help users avoid seeing empty screens and occlusions. Even with HMDs, rotational fields are still useful if we want to influence a user's orientation in the physical workspace. Rotational potential field works in a similar way as for translation, obstacles provide forces to make a user to turn towards one direction or another (clockwise or anti-clockwise). The potential fields associated with screen edges help user stay within projected area, while the potential field of a user pushes other users to look away (Figure~\ref{fig:5_pf_r}).
+\paragraph{Rotation}
+In projection-based systems, the potential field can help users avoid seeing empty screens and occlusions. Even with HMDs, angular potential fields are still useful if we want to influence a user's orientation in the physical workspace. Angular potential field works in a similar way as for translation, obstacles provide forces to make a user to turn towards one direction or another (clockwise or anti-clockwise). The potential fields associated with screen edges help user stay within projected area, while the potential field of a user pushes other users to look away (Figure~\ref{fig:5_pf_r}).
 
 \begin{figure}[htb]
   \centering
   \includegraphics[width=.49\textwidth]{figures/ch5/pf_r_wall}
   \includegraphics[width=.49\textwidth]{figures/ch5/pf_r_user}
-  \caption{\label{fig:5_pf_r}The repulsive rotational potential field generated by obstacles.}
+  \caption{\label{fig:5_pf_r}The repulsive angular potential field generated by obstacles.}
 \end{figure}
 
 We can name $sign \in \{-1, 1\}$ to indicate the rotation direction (computed using user's orientation compared to the direction vector $\overrightarrow{P_{u}P_{o}}$, $P_{u}$ and $P_{o}$ are respectively the user's and obstacle's position). $\theta_{i}$ is the angle that the user needs to cover starting from the current orientation till seeing the obstacle $i$, then the force vector generated for the user $\overrightarrow{fr}_{i}$ can be expressed by a negative exponent function:
@@ -161,7 +158,7 @@ p_{opt} \\ q_{opt}
 where
 
 \begin{equation}
-\sum \overrightarrow{ft}_{i}=(0, 0)\; and\; \sum fr_{i}=0
+\sum \overrightarrow{ft}_{i}=[0, 0]\; and\; \sum fr_{i}=0
 \end{equation}
 
 
@@ -175,7 +172,7 @@ Figure~\ref{fig:5_pf_total} shows an example inside a three-wall CAVE, the final
 \end{figure}
 
 
-To find the optimal configuration for a user in real time, we used an iterative method as presented in Algorithm~\ref{algo:optimal_point}. The idea is to create a virtual position $p$ (orientation $q$) starting from user's current position $p_{u}$ (orientation $q_{u}$) and pushed (rotated) by the sum of all force vectors step by step till we reach a certain precision $\epsilon_{T}$ ($\epsilon_{R}$) and and round number $n_{T}$ ($n_{R}$). This allows us to find the optimal position and orientation for each user during a rendering frame.
+To find the optimal configuration for a user in real time, we use an iterative method as presented in Algorithm~\ref{algo:optimal_point}. The idea is to create a virtual configuration $c(p,q)$ starting from user's current configuration $c_{u}(p_{u},q_{u})$ and is pushed by the sum of all potential fields step by step till we reach a certain precision $\epsilon_{T}$ ($\epsilon_{R}$) or a given maximum round number $n_{T}$ ($n_{R}$) - in case the algorithm does not converge in time. This allows us to find the optimal configuration for each user during a rendering frame.
 
 \begin{algorithm}[htb]
 \caption{Iterative function for optimal configuration computing.}
@@ -204,7 +201,7 @@ To find the optimal configuration for a user in real time, we used an iterative 
 \end{algorithm}
 
 
-As the potential fields constantly push users towards their optimal configurations, we can use the difference between user's current configuration and corresponding optimal configuration to modify user's navigation control. Here we got two options:
+The potential fields constantly update optimal configurations for each user, we can use the difference between user's current configuration and corresponding optimal configuration to modify user's navigation control. Here we got two options:
 
 \paragraph{Option 1: Scaling}
 We can use the difference to scale user's input. For translation, the difference can be represented by a vector $\overrightarrow{d}$ pointing from the optimal position to user's current position. By splitting user's velocity $\overrightarrow{v_{u}}$ (and acceleration $\overrightarrow{a_{u}}$) to different axis, these components can then be scaled by the corresponding components of $\overrightarrow{d}$:   
@@ -273,14 +270,18 @@ where $K_{or}$ and $B_{or}$ are respectively spring and damper coefficients, $q_
 \end{figure}
 
 \paragraph{Comparison}
-These two options give users similar navigation experiences in terms of perceived acceleration as they are both based on the difference between user's current configuration and the optimal configuration decided by the potential field distribution. The major difference is that option 2 continues to accelerate the navigation as long as the user is not at the optimal configuration, so normally users are never far away from their optimal configurations, while with option 1 the vehicle is accelerated only when the user intends to, but we can not assure that the user always stays at the optimal configuration.
+These two options give users similar navigation experiences in terms of perceived acceleration as they are both based on the difference between user's current configuration and the optimal configuration decided by the potential field distribution. The major difference is that option 2 continues to accelerate the navigation as long as the user is not at the optimal configuration, while with option 1, the vehicle is accelerated only when the user intends to move physically.
+
+The principal of option 1 is that a static user should not be ``penalized" by the variation of surrounding potential fields caused by the movements of other users. This method assures the stability of users' control of the navigation speed, however, it does not guarantee that users stay always near their optimal configurations. On the contrary, option 2 introduces accelerations to restrain users to their optimal configurations so they will hardly enter critical situations. Consequently, users are never in a stable state outside their optimal configurations.
+
+For now we keep both options in the dynamic model because they both have advantages and drawbacks. User studies are needed to identify appropriate parameters for each option and to compare their usability in terms of navigation efficiency and comfort.
 
 \subsubsection{Command Configuration}
 Since users are mobile in the physical workspace, the potential field for each user is changing all the time depending on the positions of other users, the movements of one user change instantaneously the optimal configuration of another, which will induce instability to the navigation control, especially for option 2.
 
 To reduce this instability, a possible solution is to define a command configuration $c_{command}$ as an intermediate layer between $c_{u}$ and $c_{opt}$. The $c_{command}$ indicates where the user should be in the real world and tries to join $c_{opt}$ with a certain delay. For example, we can create a mass spring damper link between $c_{command}$ and $c_{opt}$ to reduce the influence of $c_{opt}$ on the virtual vehicle.
 
-Moreover, the optimal configuration defined by the potential field may not always be the preferred destination, we may have some other real world constrains to take into account. For example, a user may need to leave more workspace for another user based on their individual task requirements. So the command configuration is useful as a higher abstraction level for us to integrate other real world constrains besides obstacles' potential fields. 
+Moreover, the optimal configuration defined by the potential field may not always be the preferred destination as we may have some other real world constrains to take into account. For example, a user may need to leave more workspace for another user based on their individual task requirements. So the command configuration is useful as a higher abstraction level for us to integrate other real world constrains besides obstacles' potential fields. 
 
 
 \subsection{Virtual World Constrains}
@@ -290,28 +291,28 @@ In most rate control navigation methods, the virtual vehicle is just a mobile re
 Various physical behaviors can be simulated when using the dynamic model to navigate in the virtual world:
 
 \begin{itemize}
-\item Viscosity of the virtual space or friction of the floor (add an acceleration in the opposite direction of the vehicle's current velocity);
-\item Attraction or repulsion fields associated with a zone or a location;
-\item Collision with certain objects (e.g. a bounding box at the boundary of the virtual scene).
+\item Viscosity of the virtual space or friction of the floor (add an acceleration in the opposite direction of the vehicle's current velocity).
+\item Attraction or repulsion fields associated with a zone or a location (e.g. to stay within the boundary of the virtual scene or to show places of interest).
+\item Collision with certain objects (e.g. a bounding box of virtual obstacles).
 \end{itemize}
 
-The dynamic model acts as a pseudo physics engine so we do not need to physicalize the whole virtual world to achieve some simple physical interactions. Otherwise, the vehicle can be integrated into a physics engine in order to get more realistic physical behaviors.
+These physical interactions can be managed directly by the dynamic model which includes a simple physics engine, so the virtual world does not need to be physicalized. Otherwise, we can also associate the virtual vehicle to an entity in a physicalized virtual world to leave physical constrains to a separate physics engine.
 
-\subsubsection{Interaction between Users}
-When multiple users navigate in the same virtual space with the dynamic model, physical links could be established between vehicles to allow different levels of collaboration:     
+\subsubsection{Interaction between Vehicles}
+When multiple users navigate in the same virtual space with the dynamic model, physical links could be established between vehicles to allow different levels of navigation control:     
 
 \begin{itemize}
-\item Closely-coupled collaboration: there is a strong physical link between vehicles, one user's move will have an instant influence on the navigation of another. This is typical for object co-manipulation - when several users move together a heavy or large object to another place;
-\item Loosely-coupled collaboration: there is a soft physical link between vehicles. For example, a user's vehicle is attached to the vehicle of another user by a spring so the former could be guided from one place to another while keeping a certain degree of autonomy;
+\item Closely-coupled navigation: there is a rigid physical link between vehicles, one user's move will have an instant influence on the navigation of another. This is typical for object co-manipulation - when several users move together a heavy or large object to another place.
+\item Loosely-coupled navigation: there is a soft physical link between vehicles. For example, a user's vehicle is attached to the vehicle of another user by a spring so the former could be guided from one place to another while keeping a certain degree of autonomy.
 \item Individual navigation: no physical constrains exist between different vehicles.
 \end{itemize}
 
-Users can switch from one collaborative state to another by changing the physical link connecting the vehicles (Figure~\ref{fig:5_user_inter}). Consequently, the dynamic navigation model broadens collaborative scenarios that can be achieved in multi-user immersive virtual environment.
+Users can switch from one navigation state to another by changing the physical link connecting the vehicles (Figure~\ref{fig:5_user_inter}). Consequently, the dynamic navigation model broadens supported collaborative scenarios in multi-user immersive virtual environment by enabling these different navigation states. Moreover, the interaction between vehicles provides an automatic way for co-located users to switch from one collaborative mode to another. For example, when users navigate to the same place from different virtual locations, soft links can be added once they arrive to help them enter consistent collaborative mode by guiding their vehicles to specific configurations.
 
 \begin{figure}[htb]
   \centering
   \includegraphics[width=.8\textwidth]{figures/ch5/user_inter}
-  \caption{\label{fig:5_user_inter}Three levels of collaboration involving user navigation activities (example of two vehicles).}
+  \caption{\label{fig:5_user_inter}Three levels of interactive navigation control (example of two vehicles).}
 \end{figure}
 
 
@@ -329,7 +330,7 @@ In virtual reality applications, the general program loop contains three steps: 
   \caption{\label{fig:5_process}The general control process of DYNAMIC.}
 \end{figure}
 
-Since we defined two options to integrate the influence of potential fields, there are two corresponding ways to compute the total acceleration for the vehicle. If we name $acc_{user}$ the acceleration (both linear and angular components) generated from the transfer function, $acc_{obs}$ from the potential field, and $acc_{vir}$ the one from virtual constrains, the total acceleration $acc_{total}$ for option 2 can be expressed as:
+Since we defined two options to integrate the influence of potential fields (section~\ref{sec:5_solution}), there are two corresponding ways to compute the total acceleration for the vehicle. If we name $acc_{user}$ the acceleration (both linear and angular components) generated from the transfer function, $acc_{obs}$ from the potential field, and $acc_{vir}$ the one from virtual constrains, the total acceleration $acc_{total}$ for option 2 can be expressed as:
 
 \begin{equation}
 acc_{total}=acc_{user}+acc_{obs}+acc_{vir}
@@ -369,64 +370,11 @@ So we created a variable named KS (kinematic state) to assemble all motion-relat
 
 The translation part $(p,\overrightarrow{v},\overrightarrow{a})$ is expressed in vectors, while we represent the rotation part by quaternion and Euler angles $(q,\omega,\dot{\omega})$. Quaternion is a convenient math tool to express spatial rotations (or orientation relative to a reference frame), but is a little complicated to get its derivatives, so instead, angular velocity and acceleration are stored using Euler angles.
 
-An object's KS changes constantly while moving in 3D space. Typically, in the virtual world, we can animate an object by injecting a new acceleration on it to modify its current KS, which will result in a corresponding velocity and configuration change. However, the KS of a real world entity located by optical tracking (e.g. a user's body) will be directly updated by getting a new static configuration.
-
-
-\paragraph{KS Update by New Acceleration}
-The Verlet integration is used to update the KS when receiving a new acceleration.
-
-For translation, when we have a new $\overrightarrow{a_{1}}$, the corresponding position $p_{1}$ and velocity $\overrightarrow{v_{1}}$ are:
-
-\begin{equation}
-p_{1}=p_{0}+\overrightarrow{v_{0}}\Delta t+\frac{1}{2}\overrightarrow{a_{0}}\Delta t^{2}
-\end{equation}
-
-\begin{equation}
-\overrightarrow{v_{1}}=\overrightarrow{v_{0}}+\frac{\overrightarrow{a_{0}}+\overrightarrow{a_{1}}}{2}\Delta t
-\end{equation}
-
-And for rotation, giving $\dot{\omega}_{1}$, $\omega_{1}$ and $q_{1}$ are computed as:
-
-\begin{equation}
-\omega_{1}=\omega_{0}+\frac{\dot{\omega}_{0}+\dot{\omega}_{1}}{2}\Delta t
-\end{equation}
-
-\begin{equation}
-q_{1}=q_{a} \cdot q_{v} \cdot q_{0}
-\end{equation}
-
-\begin{equation}
-q_{v}=\left(\cos(\frac{\Vert\omega_{0}\Vert\Delta t}{2}),\:\sin(\frac{\Vert\omega_{0}\Vert\Delta t}{2})\frac{\omega_{0}(x)}{\Vert\omega_{0}\Vert\Delta t},\:\sin(\frac{\Vert\omega_{0}\Vert\Delta t}{2})\frac{\omega_{0}(y)}{\Vert\omega_{0}\Vert\Delta t},\:\sin(\frac{\Vert\omega_{0}\Vert\Delta t}{2})\frac{\omega_{0}(z)}{\Vert\omega_{0}\Vert\Delta t}\right)
-\end{equation}
-
-\begin{equation}
-q_{a}=\left(\cos(\frac{\Vert\dot{\omega}_{0}\Vert\Delta t}{2}),\:\sin(\frac{\Vert\dot{\omega}_{0}\Vert\Delta t}{2})\frac{\dot{\omega}_{0}(x)}{\Vert\dot{\omega}_{0}\Vert\Delta t},\:\sin(\frac{\Vert\dot{\omega}_{0}\Vert\Delta t}{2})\frac{\dot{\omega}_{0}(y)}{\Vert\dot{\omega}_{0}\Vert\Delta t},\:\sin(\frac{\Vert\dot{\omega}_{0}\Vert\Delta t}{2})\frac{\dot{\omega}_{0}(z)}{\Vert\dot{\omega}_{0}\Vert\Delta t}\right)
-\end{equation}
-
-where $\Delta t$ is the time lapse between two consecutive frames.
-
-\paragraph{Update by New Configuration}
-When receiving a new configuration $c_{1}(p_{1},q_{1})$, new KS is computed as the follows:
-
-\begin{equation}
-\overrightarrow{v_{1}}=\frac{p_{1}-p_{0}}{\Delta t}
-\end{equation}
-
-\begin{equation}
-\overrightarrow{a_{1}}=\frac{\overrightarrow{v_{1}}-\overrightarrow{v_{0}}}{\Delta t}
-\end{equation}
-
-\begin{equation}
-\omega_{1}=\frac{Euler(q_{0}^{-1} \cdot q_{1})}{\Delta t}
-\end{equation}
-
-\begin{equation}
-\dot{\omega}_{1}=\frac{\omega_{1}-\omega_{0}}{\Delta t}
-\end{equation}
+An object's KS changes constantly while moving in 3D space. Typically, in the virtual world, we can animate an object by injecting a new acceleration on it to modify its current KS, which will result in a corresponding velocity and configuration change. However, the KS of a real world entity located by optical tracking (e.g. a user's body) will be directly updated by getting a new static configuration. Implementation details about KS update can be found in Appendix~\ref{appendix:ks}. 
 
 
 \subsection{Components}
-We implemented a first version of DYNAMIC with Python for BlenderVR (Appendix~\ref{appendix:platform}), and it can be easily ported to other object-oriented languages. Below is a UML class diagram of DYNAMIC (omitting interfaces that communicate with codes managing user input and rendering)(Figure~\ref{fig:5_uml}).
+We implemented a first version of DYNAMIC with Python for BlenderVR (Appendix~\ref{appendix:platform}), and it can be easily ported to other object-oriented languages. Figure~\ref{fig:5_uml} is a UML class diagram of DYNAMIC (omitting interfaces that communicate with codes managing user input and rendering).
 
 \begin{figure}[htb]
   \centering
@@ -438,28 +386,33 @@ We implemented a first version of DYNAMIC with Python for BlenderVR (Appendix~\r
 Here we give explanations to a list of main components (in form of classes) that constitute the model:
 
 \begin{itemize}
-\item \textit{NavManager}: The main class of the navigation model that contains a list of users and constrain solvers, it initiates calls to transfer function of each user and to functions defined in these solvers. The navigation can be activated or deactivated through a control boolean;
-\item \textit{VEntity}: A basic class used to represent a virtual entity involved in the simulation. Each virtual entity has its own KS, and eventually a mesh for visualization in the virtual world. For example, the \textit{Vehicle} and \textit{Body} (user's physical body in the real world) are all inherited classes of \textit{VEntity}. A virtual entity's initial configuration can be set by ``teleportation" without affecting other KS properties;
-\item \textit{User}: A class groups all user-related information and combines accelerations from different sources to compute a new KS for the corresponding vehicle;
-\item \textit{RealCoSolver}: A solver that manages constrains from the physical workspace by computing an optimal configuration for each user;
+\item \textit{NavManager}: The main class of the navigation model that contains a list of users and constrain solvers, it initiates calls to transfer function of each user and to functions defined in these solvers. The navigation can be activated or deactivated through a control boolean.
+\item \textit{VEntity}: A basic class used to represent a virtual entity involved in the simulation. Each virtual entity has its own KS, and eventually a mesh for visualization in the virtual world. For example, the \textit{Vehicle} and \textit{Body} (user's physical body in the real world) are all inherited classes of \textit{VEntity}. A virtual entity's initial configuration can be set by ``teleportation" without affecting other KS properties.
+\item \textit{User}: A class groups all user-related information and combines accelerations from different sources to compute a new KS for the corresponding vehicle.
+\item \textit{RealCoSolver}: A \textit{Real Constrain Solver} that manages constrains from the physical workspace by computing an optimal configuration for each user.
 \item \textit{InverseModel}: A unit contained in each user that manages the command configuration and implements option 1 or option 2 mentioned in section~\ref{sec:5_solution}.
-\item \textit{VirtualCoSolver}: A solver that processes a list of constrains defined in the virtual world. It creates or breaks the physical link between a pair of vehicles and computes accelerations accordingly. 
+\item \textit{VirtualCoSolver}: A \textit{Virtual Constrain Solver} that processes a list of constrains defined in the virtual world. It creates or breaks the physical link between a pair of vehicles and computes accelerations accordingly. 
 \end{itemize}
 
 % -------------------------------------------------------------------------------------------------
 
 \section{Discussion}
-With the conceptual framework and code structure described above, we implemented a first version of DYNAMIC with parameters that are configured empirically according to the configuration (form and size) of our immersive system. There still remains issues to be solved to achieve an efficient and robust navigation model.
+
+The dynamic model constitutes a framework for co-located immersive collaboration and it possesses the following characteristics:
+
+The model is \textbf{generic}. First, it can be applied to most popular immersive systems regardless of the behavioral interface instantiation: whether the visual immersion is provided by CAVE-like system or HMDs, whether the available physical workspace is large or small, etc. Second, it can also help users to avoid mobile obstacles in real time, all tracked users and objects present in the physical workspace can be integrated into the cohabitation management process. At last, the management of constrains from the physical workspace and virtual world is independent with the navigation transfer function, it can be easily adapted to work with other navigation techniques like walking or steering metaphors.
+
+The model is \textbf{extensible}. Unlike the Altered Human Joystick, this dynamic model can support from one to several users without setting specific zones for each user, users can enter or leave the immersive system during the simulation. Additionally, constrains with more degrees of freedom (DoF) can be included for 6DoF virtual navigation, for example, user's field of view should be constrained between the top and bottom borders of screens to assure visual immersion. Moreover, this model could be extended to manage the coexistence of users and robotic devices during immersive collaboration. For example, the Scale 1\texttrademark{} (Figure~\ref{fig:1_hi:scale1}) is a robotic arm that can move with the user in control to provide haptic feedback over a large workspace. Our dynamic model can not only help other co-located users to avoid colliding with the arm (the arm is considered a mobile obstacle), but also be extended to make the arm to ``be aware of" the positions of users when moving inside the shared physical workspace.
+
+With the concepts and code structure described above, we implemented a first version of DYNAMIC with parameters that are configured empirically according to the configuration (form and size) of our immersive system. Further studies are required to achieve a more efficient and robust navigation model.
 
 In term of users' comfort, an important question is that in general, how we can find appropriate parameters (e.g. gain value for the transfer function and the inverse model) for this dynamic model, considering that each user has his/her own way to use the navigation metaphor and does not have the same reaction to system-induced accelerations. So whether do we need a calibration process to identify parameters for each user, or can we find parameters that correspond to a generic model describing human reaction to accelerations? Another question is how we can limit the perceived accelerations due to obstacles in physical workspace. Can we find a threshold under which a user will not feel the additional accelerations? Or at least does not find it disturbing for the navigation control?
 
 To answer these questions, follow-up user studies are needed to test different parameters under various conditions and to improve the model according to users' feedbacks.
-
-On technical side, the dynamic model provides a physicalized vehicle that is ready to include haptic feedback during navigation. Also, this model could be extended to manage the coexistence of users with other type of devices (e.g. props, haptic arms, etc.) during immersive collaboration. For example, if a user is equipped with a large scale haptic arm (Figure~\ref{fig:1_hi:scale1}), we need to extend our dynamic model to take into account this new kind of physical obstacle which is attached to one user and should be avoided by others.
 
 % -------------------------------------------------------------------------------------------------
 
 \section{Conclusion}
 In this last chapter, we presented a novel dynamic navigation model named DYNAMIC - a generalized version of the Altered Human Joystick metaphor that we designed for co-located collaboration in multi-user immersive systems. On the one hand, this model integrates constrains from physical workspace by a potential field method to solve user cohabitation problems. On the other hand, it takes into account constrains coming from the virtual world to enable interactive control of a user's vehicle and interactions between users.
 
-This model offers a generic solution for user cohabitation in terms of user number and geometric properties of the immersive system, and enables different collaboration levels between users. Based on the current implementation, further studies can be conducted to refine this model regarding user comfort during navigation control and to include more types of devices for immersive collaboration.
+This model offers a generic solution for user cohabitation in terms of user number and geo\-metric properties of the immersive system, and enables different interactive navigation levels between users. Based on the current implementation, further studies can be conducted to refine this model regarding user comfort during navigation control and to include more types of devices for immersive collaboration.
