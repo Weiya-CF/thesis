@@ -23,7 +23,7 @@ This chapter mainly contains four sections. The first section explains our motiv
 \section{Motivation}
 The dynamic navigation model is the result of responses to two different research questions that we are working on: how can we generalize the Altered Human Joystick metaphor to extend the number of users regardless of the geometric configuration of immersive systems? And how can we make the virtual vehicle to be responsive to constrains coming from the virtual world to achieve interactions with virtual objects and other users during navigation?
 
-This new model is dynamic because the transfer functions used in human joystick metaphors are replaced by their derivatives, so the vehicle is controlled by accelerations instead of setting directly its navigation velocity. As a consequence, the virtual vehicle is transformed from a pure reference frame to a virtual entity possessing its own kinematic state, providing a uniform interface to receive inputs from various sources. First, to integrate constrains from the physical workspace, we use a potential field method which generates accelerations for the virtual vehicle in order to influence user's navigation control. Second, virtual vehicles can now react to constrains in the virtual worlds in form of physical links. We can simulate physical interactions between a vehicle and virtual objects, or directly between different users' vehicles during navigation. 
+This new model is dynamic because the transfer functions used in human joystick metaphors are replaced by their derivatives, so the vehicle is controlled by accelerations instead of setting directly its navigation velocity. As a consequence, the virtual vehicle is transformed from a pure reference frame to a virtual entity possessing its own kinematic state, providing a uniform interface to receive inputs from various sources. First, to integrate constrains from the physical workspace, we use a potential field method that generates accelerations for the virtual vehicle in order to influence user's navigation control. Second, virtual vehicles can now react to constrains in the virtual worlds in form of physical links. We can simulate physical interactions between a vehicle and virtual objects, or directly between different users' vehicles during navigation. 
 
 
 % -------------------------------------------------------------------------------------------------
@@ -296,7 +296,7 @@ Various physical behaviors can be simulated when using the dynamic model to navi
 \item Collision with certain objects (e.g. a bounding box of virtual obstacles).
 \end{itemize}
 
-These physical interactions can be managed directly by the dynamic model which includes a simple physics engine, so the virtual world does not need to be physicalized. Otherwise, we can also associate the virtual vehicle to an entity in a physicalized virtual world to leave physical constrains to a separate physics engine.
+These physical interactions can be managed directly by the dynamic model that includes a simple physics engine, so the virtual world does not need to be physicalized. Otherwise, we can also associate the virtual vehicle to an entity in a physicalized virtual world to leave physical constrains to a separate physics engine.
 
 \subsubsection{Interaction between Vehicles}
 When multiple users navigate in the same virtual space with the dynamic model, physical links could be established between vehicles to allow different levels of navigation control:     
@@ -348,7 +348,7 @@ With the total acceleration $acc_{total}$ and the vehicle's configuration $c_{ve
 
 
 \subsection{Data Structure}
-In this dynamic model, we often need different kinds of kinematic information about an object such as its velocity and acceleration, along with its static configuration to control the virtual navigation. In 3D space, an object's kinematic state contains two parts of information respectively for translation and rotation, except for points (considered as particles) which have only positional information. 
+In this dynamic model, we often need different kinds of kinematic information about an object such as its velocity and acceleration, along with its static configuration to control the virtual navigation. In 3D space, an object's kinematic state contains two parts of information respectively for translation and rotation, except for points (considered as particles) that have only positional information. 
 
 So we created a variable named KS (kinematic state) to assemble all motion-related data of a given object and implement corresponding rules to update it in each frame. Table~\ref{tab:5_ks_components} lists different components of an object's KS.
 

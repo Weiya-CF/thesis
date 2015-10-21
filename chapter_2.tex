@@ -224,7 +224,7 @@ The distribution of stage centers has a direct influence on how users interact a
 
 
 \subsubsection{Consistent Mode}
-In this mode, all users' virtual spaces are consistent with the common physical workspace which result in a shared spatial understanding of the virtual environment. In this context, users can communicate spatial information similarly as in the real world. For example, one can speak to another ``Pass me the book on your left", or point to objects or directions by deictic gestures \citep{Salzmann2009VRPointing} (Figure~\ref{fig:2_consistent_collab:pointing}). Another advantage of consistent mode is that users can make use of tangible devices (props) to get passive tactile feedback for object co-manipulation \citep{Aguerreche2009Three, Salzmann2009CIC} (Figure~\ref{fig:2_consistent_collab:tangible}) or for other specific tasks like two-user driving test \citep{Salzmann2008TUS}, etc.
+In this mode, all users' virtual spaces are consistent with the common physical workspace, which results in a shared spatial understanding of the virtual environment. In this context, users can communicate spatial information similarly as in the real world. For example, one can speak to another ``Pass me the book on your left", or point to objects or directions by deictic gestures \citep{Salzmann2009VRPointing} (Figure~\ref{fig:2_consistent_collab:pointing}). Another advantage of consistent mode is that users can make use of tangible devices (props) to get passive tactile feedback for object co-manipulation \citep{Aguerreche2009Three, Salzmann2009CIC} (Figure~\ref{fig:2_consistent_collab:tangible}) or for other specific tasks like two-user driving test \citep{Salzmann2008TUS}, etc.
 
 In projection-based immersive system, we can consider that users' physical bodies are directly ``integrated" into the virtual environment. Social cues that facilitate human communication (e.g. gestures, postures, facial expressions and gaze direction, etc.) can be conveyed without computer mediation. This is a big advantage compared to remote situations where users communicate through embodied avatars. 
 
@@ -286,7 +286,7 @@ In fact, individual mode puts users in an intermediate state between remote coll
 \subsubsection{Mode Switching}
 Multi-user immersive virtual environments should support both consistent and individual collaborative modes to cover as more collaborative scenarios as possible, and also to integrate advanced viewpoint control that facilitate user communication and understanding of the situation.
 
-The transition between the two modes are achieved by splitting or merging users' stages through automatic or guided virtual navigation and viewpoint control. Here we summarize different ways to activate mode switching:
+The transitions between the two modes are achieved by splitting or merging users' stages through automatic or guided virtual navigation and viewpoint control. Here we summarize different ways to activate mode switching:
 
 \begin{itemize}
 \item User initiated commands (e.g. button, gesture or vocal command, etc.);
@@ -322,7 +322,7 @@ Some navigation metaphors such as the bubble technique \citep{Dominjon2005Bubble
 
 
 \subsection{Virtual Vehicle}
-To better describe rate control navigation technique, we proposed a virtual vehicle model. The virtual vehicle is a special type of conveyor (mentioned in section~\ref{sec:stage}) that is superimposed with user's avatar in the virtual world, so from user's first person viewpoint, the vehicle is always situated underneath user's current location, or we can say that the user is on board his/her personal vehicle in the virtual world in order to navigate. As illustrated in Figure~\ref{fig:2_vehicle}, the user navigates as the vehicle moves forward in the virtual world (the stage is ``carried" by the vehicle). The vehicle has a constant orientation offset with the stage, but the position offset changes as the user moves in the real environment. In this way the rotation is always centered around user's avatar position no matter his/her location with respect to the physical workspace.
+To better describe rate control navigation technique, we proposed a virtual vehicle model. The virtual vehicle is a special type of conveyor (mentioned in section~\ref{sec:stage}) that is superimposed with user's avatar in the virtual world, so from user's first person viewpoint, the vehicle is always situated underneath user's current location, or we can say that the user is on board his/her personal vehicle in the virtual world in order to navigate. As illustrated in Figure~\ref{fig:2_vehicle}, the user navigates as the vehicle moves forward in the virtual world (the stage is ``carried" by the vehicle). The vehicle has a constant orientation offset with the stage, but the position offset changes as the user moves in the real environment. In this way the rotation is always centered on user's avatar position no matter his/her location with respect to the physical workspace.
 
 \begin{figure}[htb]
   \centering
@@ -332,7 +332,7 @@ To better describe rate control navigation technique, we proposed a virtual vehi
 
 We name this reference frame as a vehicle instead of conveyor mainly for two reasons: first, rate control navigation techniques provide similar navigation experience as we drive or pilot vehicles in the real world; second, we can reproduce some ``realistic" vehicle-based navigation behaviors (e.g. collisions, frictions) by adding constrains to the virtual vehicle without physicalize the whole virtual scene.
 
-As a summary, the virtual vehicle provides a standard abstraction which facilitates the design of rate control navigation techniques, we just need to concentrate on how to control the vehicle. This conceptual model also makes it easier to understand user's velocity perception within immersive displays. When the user can move in the physical workspace, the navigation velocity perceived by the user is the sum of the virtual vehicle's velocity and user's velocity in the real workspace: 
+As a summary, the virtual vehicle provides a standard abstraction that facilitates the design of rate control navigation techniques, we just need to concentrate on how to control the vehicle. This conceptual model also makes it easier to understand user's velocity perception within immersive displays. When the user can move in the physical workspace, the navigation velocity perceived by the user is the sum of the virtual vehicle's velocity and user's velocity in the real workspace: 
 
 \begin{equation}
 \overrightarrow{v_{perceived}} = \overrightarrow{v_{vehicle}} + \overrightarrow{v_{user}}
@@ -366,13 +366,13 @@ The virtual vehicle along with the IIVC model can be easily adapted to manage mu
   \caption{\label{fig:2_multi_vehicle}Illustration of virtual vehicle based navigation.}
 \end{figure}
 
-In individual mode, individual navigation can be achieved by providing independent navigation metaphors for each user which gives users full control on their own virtual locations. However, using navigation metaphors based on users' physical movements may be problematic as users share the same physical workspace. Thus multi-user navigation models with individual navigation control should comply with user cohabitation constrains that will be discussed in the following section.
+In individual mode, individual navigation can be achieved by providing independent navigation metaphors for each user that gives users full control on their own virtual locations. However, using navigation metaphors based on users' physical movements may be problematic as users share the same physical workspace. Thus multi-user navigation models with individual navigation control should comply with user cohabitation constrains that will be discussed in the following section.
 
 
 % -------------------------------------------------------------------------------------------------
 
 \section{Addressed Issues}
-As presented above, co-located collaboration in IVE contains two different collaborative modes: the consistent mode and individual mode. In consistent mode, users have a distribution of virtual spaces that are coherent with their physical workspace, which offers a similar interaction experience as in real world. On the contrary, users in individual mode have independent viewpoints which broadens supported collaborative scenarios with more flexible viewpoint control.
+As presented above, co-located collaboration in IVE contains two different collaborative modes: the consistent mode and individual mode. In consistent mode, users have a distribution of virtual spaces that are coherent with their physical workspace, which offers a similar interaction experience as in real world. On the contrary, users in individual mode have independent viewpoints, which broadens supported collaborative scenarios with more flexible viewpoint control.
 
 However, due to the inconsistency between users' spatial distributions in the virtual world and real workspace, the individual mode provides users with a new kind of perceptual immersion and related cognitive experiences as they need to handle information from both real world and the virtual scene at the same time. We identified two main categories of spatial issues: perceptual conflicts during user communication and interaction, and user cohabitation in limited physical workspace. These issues should be studied if we want to validate the use of individual mode for co-located collaboration in IVEs. 
 
@@ -460,4 +460,4 @@ At last, by taking into account feedbacks of previous studies, we continue to ma
 \section{Conclusion}
 The research described in this thesis consists of investigating how to enable individual mode to better support co-located collaboration in multi-user IVEs. The first part of this chapter outlines motivations and techniques to create immersive systems for co-located collaboration, and the second part presents notions around spatial organization of users' workspaces and how we navigate in IVEs. Then the last part summarizes issues related to spatial aspects of co-located use of IVE, it also presents research efforts that we made to study these issues and to propose solutions accordingly.
 
-In following chapters, we present separately our studies on perceptual and cohabitation issues that we identified in the aim of building a general framework for co-located collaboration in IVE which allows both consistent and individual modes.
+In following chapters, we present separately our studies on perceptual and cohabitation issues that we identified in the aim of building a general framework for co-located collaboration in IVE that allows both consistent and individual modes.
