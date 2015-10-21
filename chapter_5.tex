@@ -322,7 +322,7 @@ Users can switch from one navigation state to another by changing the physical l
 In this section, we explained how we put concepts described above together into a functional model, and how we created specific data structure to store all kinematic information of users and their vehicles. Finally, we presented an object-oriented design of the model with detailed descriptions of main components.
 
 \subsection{Control Process}
-In virtual reality applications, the general program loop contains three steps: user input collection, logic processing and rendering update. As shown in Figure~\ref{fig:5_process}, depending on user's input, the dynamic model computes withs its three main components the accelerations to apply to the virtual vehicle.
+In virtual reality applications, the general program loop contains three steps: user input collection, logic processing and rendering update. As shown in Figure~\ref{fig:5_process}, depending on user's input, the dynamic model computes with its three main components the accelerations to apply to the virtual vehicle.
 
 \begin{figure}[htb]
   \centering
@@ -406,9 +406,7 @@ The model is \textbf{extensible}. Unlike the Altered Human Joystick, this dynami
 
 With the concepts and code structure described above, we implemented a first version of DYNAMIC with parameters that are configured empirically according to the configuration (form and size) of our immersive system. Further studies are required to achieve a more efficient and robust navigation model.
 
-In term of users' comfort, an important question is that in general, how we can find appropriate parameters (e.g. gain value for the transfer function and the inverse model) for this dynamic model, considering that each user has his/her own way to use the navigation metaphor and does not have the same reaction to system-induced accelerations. So whether do we need a calibration process to identify parameters for each user, or can we find parameters that correspond to a generic model describing human reaction to accelerations? Another question is how we can limit the perceived accelerations due to obstacles in physical workspace. Can we find a threshold under which a user will not feel the additional accelerations? Or at least does not find it disturbing for the navigation control?
-
-To answer these questions, follow-up user studies are needed to test different parameters under various conditions and to improve the model according to users' feedbacks.
+In term of users' comfort, an important question is that in general, how we can find appropriate parameters (e.g. gain value for the transfer function and the inverse model) for this dynamic model, considering that each user has his/her own way to use the navigation metaphor and does not have the same reaction to system-induced accelerations. So whether do we need a calibration process to identify parameters for each user, or can we find parameters that correspond to a generic model describing human reaction to accelerations? Another question is how we can limit the perceived accelerations due to obstacles in physical workspace. Can we find a threshold under which a user will not feel the additional accelerations? Or at least does not find it disturbing for the navigation control? To answer these questions, follow-up user studies are needed to test different parameters under various conditions and to improve the model according to users' feedbacks.
 
 % -------------------------------------------------------------------------------------------------
 
