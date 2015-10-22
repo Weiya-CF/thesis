@@ -4,7 +4,7 @@
 
 \textbf{Chapter Abstract}
 
-This chapter presents a novel dynamic navigation model that we design for co-located collaboration. This model manages user cohabitation by integrating constrains from physical workspace and allows interactive navigation control by adding virtual constrains. First we explain our motivation and different components of the dynamic model at the conceptual level, then we present implementation details from data structure to code organization, as well as some discussions about possible future improvements.
+This chapter presents a novel dynamic navigation model that we design for co-located collaboration. This model manages user cohabitation by integrating constrains from physical workspace and allows interactive navigation control by adding virtual constrains. First we explain our motivation and different components of the dynamic model at the conceptual level, then we present implementation details from data structure to code organization. At last, we discuss about different advantages brought by the model as well as possible future improvements.
 
 \vspace*{2\baselineskip}
 
@@ -16,7 +16,7 @@ The Altered Human Joystick metaphor allows individual navigation for multiple us
 
 To generalize the Altered Human Joystick metaphor and to allow interactive control of the virtual vehicle, we designed a dynamic navigation model named DYNAMIC (DYnamic NAvigation Model for Immersive Collaboration), which on the one hand, integrates real world information into the virtual navigation control to manage user cohabitation no matter the geometric properties of the immersive system, and on the other hand, takes into account influences coming from the virtual world and eventually from the vehicles of other users.
 
-This chapter mainly contains four sections. The first section explains our motivation of developing this dynamic navigation model. The second part describes core concepts of this model: the acceleration-based transfer function and how we integrate constrains coming from the physical workspace and the virtual world. Then the third section presents implementation details and the last one some related discussion about this navigation model.
+This chapter mainly contains four sections. The first section explains our motivation of developing this dynamic navigation model. The second part describes core concepts of this model: the acceleration-based transfer function and how we integrate constrains coming from the physical workspace and the virtual world. Then the third section presents implementation details and the last one some related discussion about contributions of this navigation model.
 
 % -------------------------------------------------------------------------------------------------
 
@@ -76,6 +76,7 @@ to have a uniform representation of linear and angular information, where $\dot{
 \end{equation}
 
 \begin{equation}
+\label{eq:transfer_func}
 \begin{bmatrix}
 \overrightarrow{a_{veh}} \\ \dot{\omega}_{veh}
 \end{bmatrix}=
@@ -124,7 +125,7 @@ If we name $\overrightarrow{n_{i}}$ as a unit surface normal vector, $d_{i}$ the
 where $K_{T}$ is a coefficient to modulate the field power.
 
 \paragraph{Rotation}
-In projection-based systems, the potential field can help users avoid seeing empty screens and occlusions. Even with HMDs, angular potential fields are still useful if we want to influence a user's orientation in the physical workspace. Angular potential field works in a similar way as for translation, obstacles provide forces to make a user to turn towards one direction or another (clockwise or anti-clockwise). The potential fields associated with screen edges help user stay within projected area, while the potential field of a user pushes other users to look away (Figure~\ref{fig:5_pf_r}).
+In projection-based systems, the potential field can help users avoid seeing empty screens and occlusions. Even with HMDs, angular potential fields are still useful if we want to influence a user's orientation in the physical workspace. Angular potential field works in a similar way as for translation, obstacles provide forces to make a user to turn towards one direction or another (clockwise or anti-clockwise). The potential fields associated with screen edges help user stay within projected area, while the potential field of a user makes other users to look away (Figure~\ref{fig:5_pf_r}).
 
 \begin{figure}[htb]
   \centering
@@ -207,6 +208,7 @@ The potential fields constantly update optimal configurations for each user, we 
 We can use the difference to scale user's input. For translation, the difference can be represented by a vector $\overrightarrow{d}$ pointing from the optimal position to user's current position. By splitting user's velocity $\overrightarrow{v_{u}}$ (and acceleration $\overrightarrow{a_{u}}$) to different axis, these components can then be scaled by the corresponding components of $\overrightarrow{d}$:   
 
 \begin{equation}
+\label{eq:option1_t}
 \overrightarrow{v'_{ui}}=\overrightarrow{v_{ui}} \cdot (1+\frac{\overrightarrow{v_{ui}} \cdot \overrightarrow{d_{i}}}{|\overrightarrow{v_{ui}} \cdot \overrightarrow{d_{i}}|} \cdot K_{ot} \cdot |\overrightarrow{d_{i}}|), \;i\in\{x ,y\}
 \end{equation}
 
@@ -215,6 +217,7 @@ where $K_{ot}$ is a coefficient to increase or reduce the influence of potential
 Similarly, for rotational control, we use $\theta$ to represent the angle between user's optimal orientation $q_{opt}$ and current orientation $q_{u}$. The angular velocity will be amplified if the user turns away from $q_{opt}$, otherwise it is reduced to encourage user's turn faster towards $q_{opt}$ (Figure~\ref{fig:5_option1:r}).
 
 \begin{equation}
+\label{eq:option1_r}
 \omega'_{u}=\omega_{u} \cdot (1+sign \cdot K_{or} \cdot \theta),\;sign \in \{-1, 1\} 
 \end{equation}
 
@@ -240,6 +243,7 @@ where $sign$ is computed depending on the relationship between user's angular ve
 Instead of scaling user's input, we can also insert additional accelerations to ``pull" users towards the optimal configuration. We can consider that the user and optimal configuration are connected by a mass spring damper system (a PD system in automatics which is useful to represent interconnection between two mobile entities). For translation, the total acceleration is the sum of acceleration coming from the transfer function $\overrightarrow{a_{u}}$ and $\overrightarrow{a_{o}}$ generated by the optimal position (Figure~\ref{fig:5_option2:t}). $\overrightarrow{a_{o}}$ is expressed as follows:
 
 \begin{equation}
+\label{eq:option2_t}
 \overrightarrow{a_{o}}=K_{ot} \cdot (p_{u}-p_{o})+ B_{ot} \cdot (\overrightarrow{v_{u}}-\overrightarrow{v_{o}})
 \end{equation}
 
@@ -248,6 +252,7 @@ where $K_{ot}$ and $B_{ot}$ are respectively spring and damper coefficients, $p_
 For rotation, the total angular acceleration $\dot{\omega}_{total}$ is the sum of $\dot{\omega}_{u}$ and $\dot{\omega}_{o}$ (Figure~\ref{fig:5_option2:r}). $\dot{\omega}_{o}$ is expressed as follows:
 
 \begin{equation}
+\label{eq:option2_r}
 \dot{\omega}_{o}=K_{or} \cdot (q_{u}-q_{o})+ B_{or} \cdot (\omega_{u}-\omega_{o})
 \end{equation}
 
@@ -277,6 +282,7 @@ The principal of option 1 is that a static user should not be ``penalized" by th
 For now we keep both options in the dynamic model because they both have advantages and drawbacks. User studies are needed to identify appropriate parameters for each option and to compare their usability in terms of navigation efficiency and comfort.
 
 \subsubsection{Command Configuration}
+\label{sec:command_config}
 Since users are mobile in the physical workspace, the potential field for each user is changing all the time depending on the positions of other users, the movements of one user change instantaneously the optimal configuration of another, which will induce instability to the navigation control, especially for option 2.
 
 To reduce this instability, a possible solution is to define a command configuration $c_{command}$ as an intermediate layer between $c_{u}$ and $c_{opt}$. The $c_{command}$ indicates where the user should be in the real world and tries to join $c_{opt}$ with a certain delay. For example, we can create a mass spring damper link between $c_{command}$ and $c_{opt}$ to reduce the influence of $c_{opt}$ on the virtual vehicle.
@@ -302,12 +308,12 @@ These physical interactions can be managed directly by the dynamic model that in
 When multiple users navigate in the same virtual space with the dynamic model, physical links could be established between vehicles to allow different levels of navigation control:     
 
 \begin{itemize}
-\item Closely-coupled navigation: there is a rigid physical link between vehicles, one user's move will have an instant influence on the navigation of another. This is typical for object co-manipulation - when several users move together a heavy or large object to another place.
-\item Loosely-coupled navigation: there is a soft physical link between vehicles. For example, a user's vehicle is attached to the vehicle of another user by a spring so the former could be guided from one place to another while keeping a certain degree of autonomy.
+\item Navigation with rigid link: there is a rigid physical link between pairs of vehicles, one user's move will have an instant influence on the navigation of another. This is typical for object co-manipulation - when several users move together a heavy or large object to another place.
+\item Navigation with soft link: there is a soft physical link between pairs of vehicles. For example, a user's vehicle is attached to the vehicle of another user by a spring so the former could be guided from one place to another while keeping a certain degree of autonomy.
 \item Individual navigation: no physical constrains exist between different vehicles.
 \end{itemize}
 
-Users can switch from one navigation state to another by changing the physical link connecting the vehicles (Figure~\ref{fig:5_user_inter}). Consequently, the dynamic navigation model broadens supported collaborative scenarios in multi-user immersive virtual environment by enabling these different navigation states. Moreover, the interaction between vehicles provides an automatic way for co-located users to switch from one collaborative mode to another. For example, when users navigate to the same place from different virtual locations, soft links can be added once they arrive to help them enter consistent collaborative mode by guiding their vehicles to specific configurations.
+Users can switch from one navigation state to another by changing the physical link connecting the vehicles (Figure~\ref{fig:5_user_inter}). Consequently, the dynamic navigation model broadens supported collaborative scenarios in multi-user immersive virtual environment by enabling these different navigation states.
 
 \begin{figure}[htb]
   \centering
@@ -327,7 +333,7 @@ In virtual reality applications, the general program loop contains three steps: 
 \begin{figure}[htb]
   \centering
   \includegraphics[width=.9\textwidth]{figures/ch5/process}
-  \caption{\label{fig:5_process}The general control process of DYNAMIC.}
+  \caption{\label{fig:5_process}The control process of DYNAMIC for each user.}
 \end{figure}
 
 Since we defined two options to integrate the influence of potential fields (section~\ref{sec:5_solution}), there are two corresponding ways to compute the total acceleration for the vehicle. If we name $acc_{user}$ the acceleration (both linear and angular components) generated from the transfer function, $acc_{obs}$ from the potential field, and $acc_{vir}$ the one from virtual constrains, the total acceleration $acc_{total}$ for option 2 can be expressed as:
@@ -374,6 +380,7 @@ An object's KS changes constantly while moving in 3D space. Typically, in the vi
 
 
 \subsection{Components}
+\label{sec:components}
 We implemented a first version of DYNAMIC with Python for BlenderVR (Appendix~\ref{appendix:platform}), and it can be easily ported to other object-oriented languages. Figure~\ref{fig:5_uml} is a UML class diagram of DYNAMIC (omitting interfaces that communicate with codes managing user input and rendering).
 
 \begin{figure}[htb]
@@ -398,19 +405,81 @@ Here we give explanations to a list of main components (in form of classes) that
 
 \section{Discussion}
 
-The dynamic model constitutes a framework for co-located immersive collaboration and it possesses the following characteristics:
+The dynamic model constitutes a framework for co-located immersive collaboration by providing a generic and extensible way to manage constrains from different sources. Here is a detailed discussion of its various advantages:
 
-The model is \textbf{generic}. First, it can be applied to most popular immersive systems regardless of the behavioral interface instantiation: whether the visual immersion is provided by CAVE-like system or HMDs, whether the available physical workspace is large or small, etc. Second, it can also help users to avoid mobile obstacles in real time, all tracked users and objects present in the physical workspace can be integrated into the cohabitation management process. At last, the management of constrains from the physical workspace and virtual world is independent with the navigation transfer function, it can be easily adapted to work with other navigation techniques like walking or steering metaphors.
+\subsection{Generic Control Process}
 
-The model is \textbf{extensible}. Unlike the Altered Human Joystick, this dynamic model can support from one to several users without setting specific zones for each user, users can enter or leave the immersive system during the simulation. Additionally, constrains with more degrees of freedom (DoF) can be included for 6DoF virtual navigation, for example, user's field of view should be constrained between the top and bottom borders of screens to assure visual immersion. Moreover, this model could be extended to manage the coexistence of users and robotic devices during immersive collaboration. For example, the Scale 1\texttrademark{} (Figure~\ref{fig:1_hi:scale1}) is a robotic arm that can move with the user in control to provide haptic feedback over a large workspace. Our dynamic model can not only help other co-located users to avoid colliding with the arm (the arm is considered a mobile obstacle), but also be extended to make the arm to ``be aware of" the positions of users when moving inside the shared physical workspace.
+The dynamic model has a generic control process thanks to the potential field method, which is compatible with different types of immersive systems and various number of users.
 
-With the concepts and code structure described above, we implemented a first version of DYNAMIC with parameters that are configured empirically according to the configuration (form and size) of our immersive system. Further studies are required to achieve a more efficient and robust navigation model.
+The dynamic model can be applied to most popular immersive systems regardless of their shape, size and behavioral interface instantiation. For example, whether the visual immersion is provided by screens with retro-projection as in CAVE-like systems, or directly by HMDs, whether we have large or relatively limited workspace, whether the tracking is assured by optical cameras or accelerometers, the potential field method can always propose an optimal configuration for each user according to the boundary of physical workspace. Another advantage of potential field method is that mobile obstacles can also be included, and the global potential field is updated in real time according to the positions of mobile obstacles within the workspace boundary. This allows several (from 1 to N, N depends on the total available workspace) tracked users to share the same immersive device. And unlike with Altered Human Joystick, since users do not have specific private zones, the reallocation of workspace takes effect automatically as users join or leave the common workspace. 
 
-In term of users' comfort, an important question is that in general, how we can find appropriate parameters (e.g. gain value for the transfer function and the inverse model) for this dynamic model, considering that each user has his/her own way to use the navigation metaphor and does not have the same reaction to system-induced accelerations. So whether do we need a calibration process to identify parameters for each user, or can we find parameters that correspond to a generic model describing human reaction to accelerations? Another question is how we can limit the perceived accelerations due to obstacles in physical workspace. Can we find a threshold under which a user will not feel the additional accelerations? Or at least does not find it disturbing for the navigation control? To answer these questions, follow-up user studies are needed to test different parameters under various conditions and to improve the model according to users' feedbacks.
+When there is only one user in the immersive system, the dynamic model reduces to a single user version that is similar to other navigation techniques, while the management of physical workspace and virtual world constrains remains active (Figure~\ref{fig:5_process_single}). Moreover, as we can manage users situated in the same physical workspace, we can also extend the dynamic model to cover multiple networked workspaces, so both co-located and remote users could collaborate in the same virtual world via a uniform navigation model. Figure~\ref{fig:5_process_remote} shows an example of the control process where four users from two distinct physical workspaces connected via different immersive systems collaborate in the same virtual world. Two of them (user A and B) share the same CAVE while the other two (user C and D) wear HMDs. Each user has an independent vehicle controlled by corresponding transfer function. In this situation, the \textit{Navigation Manager} (section~\ref{sec:components}) has more than one processing units for physical workspace constrains (one for each connected physical workspace) with a single processing unit for virtual world constrains.   
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=.9\textwidth]{figures/ch5/process_single}
+  \caption{\label{fig:5_process_single}The control process of DYNAMIC for a single user.}
+\end{figure}
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=.9\textwidth]{figures/ch5/process_remote}
+  \caption{\label{fig:5_process_remote}An example of control process of DYNAMIC for co-located and remote users.}
+\end{figure}
+
+Besides serving multiple users, this model could also be extended to manage the coexistence of users and robotic devices during immersive collaboration. For example, the Scale 1\texttrademark{} (Figure~\ref{fig:1_hi:scale1}) is a robotic arm that can move with the user in control to provide haptic feedback over a large workspace. Our dynamic model can not only help other co-located users to avoid colliding with the arm (the arm is considered a mobile obstacle), but also be extended to make the arm to ``be aware of" the positions of users when moving inside the shared physical workspace.
+
+
+\subsection{Flexible Metaphor Integration}
+
+The transfer function used in the dynamic model is a modified version of human joystick that is based on user's movements in the physical workspace. Since the management of constrains from physical workspace and virtual world is independent with the navigation transfer function, different navigation metaphors can replace the initial human joystick metaphor. In other words, the model can be easily adapted to work with other navigation techniques like walking or steering metaphors.
+
+For example, when several users equipped with HMDs walk inside the same room, the dynamic model can achieve the ``Redirected Walking" effect by using a transfer function that maps user's position to a certain vehicle configuration $c(p,q)$ (not velocity or acceleration). With appropriate redirections, it is not only possible to restrict users in a limited workspace, but also to avoid user collisions. It is also interesting to combing the work from \citet{Kohli2005Combining} that allows to redirect users to provide proper passive haptic feedback. We can imagine that users can be guided to meet each other in the physical workspace and in the virtual world the same time (users pass from individual mode to consistent mode).
+
+With flexible metaphor integration, a user can switch from one navigation metaphor to another depending on the size of the virtual scene and task requirements (e.g. users walk in a virtual room and then ``fly" to another place). Also, several metaphors can be used at the same time by users in collaboration to achieve each user's different task role.
+
+
+\subsection{Mode Switching}
+
+The dynamic model provides better support for collaborative work as it enables virtual constrains on vehicles, which could be helpful for collaborative mode switching. To pass from individual mode to consistent mode, users need to reach specific positions in the physical workspace and their avatars should be seen as superimposed with the real person from other users' perspective. With the dynamic model, users can be guided to special locations in the physical workspace by imposing command configurations (section~\ref{sec:command_config}), and we can add attractive potential field to destinations in the virtual world so vehicles (under the avatars) could be well positioned in order to merge different \textit{stages}. For example, in Figure~\ref{fig:5_mode_switch}, two users collaborate in the same physical workspace. They first concentrate on individual tasks, and then navigate to a common place of interest for \textit{closely-coupled} collaboration (section~\ref{sec:collab_chara}). The dynamic model can make sure that they enter predefined special positions and soft links between vehicles can be added once they arrive to help them stay in consistent collaborative mode.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=.9\textwidth]{figures/ch5/mode_switch}
+  \caption{\label{fig:5_mode_switch}An example of collaborative mode switching: users pass from individual mode to consistent mode (from phase 1 to 3). Users' \textit{stages} are represented by dotted rectangles.}
+\end{figure}
+
+\subsection{Adaptive Parameter Settings}
+\label{sec:para_set}
+
+The dynamic model contains a list of parameters as shown in equation~\ref{eq:transfer_func} and from equation~\ref{eq:option1_t} to \ref{eq:option2_r}. These parameters can be configured in advance or adapted in real time according to user-related or task-related factors. Here is a list of factors that we identified:
+
+\begin{itemize}
+\item User-related factors:
+  \begin{itemize}
+    \item User's profile: age, sex, height \& weight, game experience, familiarity to VR interfaces, etc.
+    \item User's state: motivation, fatigue, cybersickness, etc.
+  \end{itemize}
+\item Task-related factors:
+  \begin{itemize}
+    \item Requirements of interaction devices (e.g. whether props or haptic devices are involved).
+    \item Requirements of the size of virtual space (i.e. whether users always stay at the same place, or they need to travel across a medium or large distance).
+  \end{itemize}
+\end{itemize}
+
+All these factors influence users' dynamics inside the physical workspace. Having adaptive parameters allows the dynamic model to support various use cases under heterogeneous system settings.
+
+\subsection{Summary}
+
+These advantages make the dynamic model a powerful conceptual framework for supporting collaborative work in immersive virtual environment, and especially, it can be adapted to work with other existing navigation metaphors with minimal efforts.
+
+With the concepts and code structure described above, we implemented a first version of DYNAMIC with parameters that are set empirically according to the configuration (form and size) of our immersive system. Further studies are required to find rules to model collaborative mode transitions and to define proper parameters to improve navigation control.
 
 % -------------------------------------------------------------------------------------------------
 
 \section{Conclusion}
 In this last chapter, we presented a novel dynamic navigation model named DYNAMIC - a generalized version of the Altered Human Joystick metaphor that we designed for co-located collaboration in multi-user immersive systems. On the one hand, this model integrates constrains from physical workspace by a potential field method to solve user cohabitation problems. On the other hand, it takes into account constrains coming from the virtual world to enable interactive control of a user's vehicle and interactions between users.
 
-This model offers a generic solution for user cohabitation in terms of user number and geo\-metric properties of the immersive system, and enables different interactive navigation levels between users. Based on the current implementation, further studies can be conducted to refine this model regarding user comfort during navigation control and to include more types of devices for immersive collaboration.
+This dynamic model offers a generic solution for user cohabitation in terms of supported number of user and type of immersive systems, and it allows flexible instantiation of transfer functions as well as adaptive parameter settings. It enriches collaborative scenarios by enabling collaborative modes switching and it could also be extended to support collaboration between remote sites.
+
+Based on the current implementation, further studies can be conducted to refine this model regarding user comfort during navigation control and to include more advanced viewpoint control to better support immersive collaboration.
